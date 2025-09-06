@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('GP RANKING 검색머신', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}"/>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/gp_ranking', '2')}"/>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>GP RANKING 검색머신</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">GP RANKING 검색머신에 검색할 블로그 URL 을 넣고 검색해주세요. Good, SoSo, Bad 로 구분해줍니다.</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputBlogId" class="col-sm-3 col-form-label">블로그 ID</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-group">
+                                                        <input type="text" name="blogId" id="inputBlogId"
+                                                               class="form-control" placeholder="검색어 입력 (blogId)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputCategoryNo"
+                                                       class="col-sm-3 col-form-label">카테고리번호</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-group">
+                                                        <input type="text" name="categoryNo" id="inputCategoryNo"
+                                                               class="form-control" placeholder="(Option)블로그 카테고리번호">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="card-body">
+                                            <div class="text-right">
+                                                <button class="btn btn-primary" type="button" id="search">검색하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+                    <div id="loadingMessage" style="display: none; text-align: center;">
+                        <h3>검색 중...</h3>
+                    </div>
+                    <div id="tableContainer">
+                        <table id="list" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>블로그아이디</th>
+                                <th>블로그 URL</th>
+                                <th>타이틀</th>
+                                <th>생성일</th>
+                                <th>상태</th>
+                                <th>키워드 검색</th>
+                                <th>순위</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}"/>
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+    $(function () {
+        let table = $('#list').DataTable({
+            "pagingType": "full_numbers",
+            "processing": true,
+            "serverSide": true, // 서버사이드 페이징 설정
+            "ordering": false,
+            "stateSave": false,
+            "searching": false,
+            "lengthChange": false,
+            "pageLength": 10,
+            "autoWidth": false,
+            "info": true,
+            "destroy": true,
+            "paging": true,
+            "columnDefs": [
+                {width: '10%', targets: [0]},
+                {width: '20%', targets: [1]},
+                {width: '20%', targets: [2]},
+                {width: '10%', targets: [3]},
+                {width: '10%', targets: [4]},
+                {width: '30%', targets: [5]},
+                {width: '10%', targets: [6]},
+            ],
+            "columns": [
+                {data: 'blogId'},
+                {
+                    data: 'url',
+                    render: function (data, type, row, meta) {
+                        return `<a target="_blank" href="${data}">${data}</a>`;
+                    }
+                },
+                {data: 'title'},
+                {
+                    data: 'postedAt',
+                    render: function (data, type, row, meta) {
+                        return data.replace("T", " ");
+                    }
+                },
+                {
+                    data: 'status',
+                    render: function (data, type, row, meta) {
+                        if (data === 'Good') {
+                            return '<button class="btn btn-sm btn-success">Good</button>';
+                        } else if (data === 'SoSo') {
+                            return '<button class="btn btn-sm btn-warning">SoSo</button>';
+                        } else {
+                            return '<button class="btn btn-sm btn-danger">Bad</button>';
+                        }
+                    }
+                },
+                {
+                    data: 'title',
+                    render: function (data, type, row, meta) {
+                        return `
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" id="inputKeyword_${meta.row}" class="form-control" placeholder="검색어">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary search-item-btn" type="button" data-url="${row.url}" data-row="${meta.row}">검색하기</button>
+                                </div>
+                            </div>`;
+                    }
+                },
+                {
+                    data: 'ranking',
+                    render: function (data, type, row, meta) {
+                        return `<div class="ranking-label badge badge-success p-2" id="rankingDisplay_${meta.row}" style="font-size: 1rem;"></div>`;
+                    }
+                }
+            ],
+            "ajax": function (data, callback) {
+                $('#search').prop('disabled', true);
+                $('#tableContainer').hide();
+                $('#loadingMessage').show();
+
+                // 서버에 데이터 요청하는 함수
+                $.ajax({
+                    url: "/gp_ranking",
+                    type: "POST",
+                    data: {
+                        "blogId": $("#inputBlogId").val(),
+                        "categoryNo": $("#inputCategoryNo").val(),
+                        "countPerPage": data.length,  // 한 페이지당 데이터 수
+                        "currentPage": data.start / data.length + 1,  // 현재 페이지 번호
+                        "draw": data.draw  // DataTables의 요청 횟수 추적용
+                    },
+                    success: function (res) {
+                        callback({
+                            recordsTotal: res.recordsTotal,  // 전체 데이터 개수
+                            recordsFiltered: res.recordsFiltered,  // 필터된 데이터 개수
+                            data: res.data.list,  // 실제 데이터 목록
+                            draw: res.draw,  // DataTables에 전달된 draw 값
+                        });
+                        console.log('info: ', table.page.info());
+                    },
+                    error: function (request, status, error) {
+                        console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    },
+                    complete: function () {
+                        // 검색중 메시지 숨기고 테이블 다시 표시
+                        $('#search').prop('disabled', false);
+                        $('#loadingMessage').hide();
+                        $('#tableContainer').show();
+                    }
+                });
+            }
+        });
+
+        $('#search').on('click', function () {
+            // 테이블 다시 로드 (필터 조건 적용)
+            table.ajax.reload();
+        });
+
+        $('#list').on('click', '.search-item-btn', function() {
+            let row = $(this).data('row');
+            let blogUrl = $(this).data('url');
+            let keyword = $(`#inputKeyword_${row}`).val();
+            let rankingLabel = $(`#rankingDisplay_${row}`);
+
+            // 만약 검색어가 없으면 API를 호출하지 않음
+            if (keyword.trim() === '') {
+                alert('검색어를 입력해주세요.');
+                return;
+            }
+
+            // API 호출 (예시 URL, 실제 URL과 매개변수에 맞게 수정해야 함)
+            $.ajax({
+                url: '/gp_keyword_ranking',
+                type: 'POST',
+                data: {
+                    "keyword": keyword,
+                    "blogUrl": blogUrl
+                },
+                success: function (response) {
+                    var ranking = response.data.ranking;  // API에서 반환된 등수 (예: {ranking: 12})
+
+                    // 등수 표시 업데이트
+                    if(!ranking) {
+                        rankingLabel.text('순위권밖');
+                    } else {
+                        if (ranking === 0) {
+                            rankingLabel.text('순위권밖');
+                        } else {
+                            rankingLabel.text(ranking + '위');
+                        }
+                    }
+                    rankingLabel.show();  // 검색 결과가 있으면 등수 표시
+
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error occurred: " + error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

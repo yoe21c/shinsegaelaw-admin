@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('GPSCV 수정', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/feed/url/list', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>GPSCV [[${feedUrl == null ? '등록' : '수정'}]]</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">각 항목을 입력하여 Feed url 정보를 등록 및 수정할 수 있습니다.</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal" id="upsertForm">
+
+                                <input type="hidden" th:value="${feedUrl?.seq}" name="seq" id="seq">
+
+                                <div class="col">
+
+                                    <!-- 등록 -->
+                                    <div id="registDiv">
+
+<!--                                        <div class="col-md-10">-->
+<!--                                            <div class="card-body">-->
+<!--                                                <div class="form-group row">-->
+<!--                                                    <label for="scrapMethod" class="col-sm-2 col-form-label">스크랩 방식</label>-->
+<!--                                                    <div class="col-sm-10">-->
+<!--                                                        &lt;!&ndash; 스크랩 방식 &ndash;&gt;-->
+<!--                                                        <div class="form-group row" id="scrapMethod">-->
+<!--                                                            <div class="form-check mr-3">-->
+<!--                                                                <input class="form-check-input" type="radio" name="methodRadio" id='immediately' value="immediately" checked>-->
+<!--                                                                <label class="form-check-label" for="immediately">즉시</label>-->
+<!--                                                            </div>-->
+<!--                                                            <div class="form-check">-->
+<!--                                                                <input class="form-check-input" type="radio" name="methodRadio" id="reservation" value="reservation">-->
+<!--                                                                <label class="form-check-label" for="reservation">예약</label>-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+
+<!--                                                        &lt;!&ndash; 예약 시간 설정 &ndash;&gt;-->
+<!--                                                        <div class="form-group row" id="reservationInput" style="display: none">-->
+<!--                                                            <label for="startAt" class="col-sm-1 col-form-label">시작 시간</label>-->
+<!--                                                            <div class="col-sm-5 form-group mr-6">-->
+<!--                                                                <input type="datetime-local" name="startAt" id="startAt" class="form-control" placeholder="시작 시간" step="10">-->
+<!--                                                            </div>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
+                                      <!-- 목표 스크랩 수 -->
+                                      <div class="col-md-10">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="blogUrl" class="col-sm-2 col-form-label">블로그 URL</label>
+                                                <div class="col-sm-10 form-group">
+                                                    <input type="text" name="blogUrl" id="blogUrl" class="form-control" th:value="${feedUrl?.blogUrl}">
+                                                </div>
+                                            </div>
+
+                                          <div class="form-group row">
+                                            <label for="targetScrapCount" class="col-sm-2 col-form-label">포스팅 당 스크랩 수</label>
+                                            <div class="col-sm-6 form-group">
+                                              <input type="text" name="targetScrapCount" id="targetScrapCount" class="form-control" th:value="${feedUrl?.targetScrapCount}">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group row">
+                                            <label for="monitoringCount" class="col-sm-2 col-form-label">스크랩 대상 포스팅 수</label>
+                                            <div class="col-sm-6 form-group">
+                                              <input type="text" name="monitoringCount" id="monitoringCount" class="form-control" th:value="${feedUrl?.monitoringCount}">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group row">
+                                              <label for="reservedAt" class="col-sm-2 col-form-label">예약일시</label>
+                                              <div class="col-sm-6 form-group">
+                                                  <input type="datetime-local" name="reservedAt" id="reservedAt" class="form-control" th:value="${feedUrl?.reservedAt}">
+                                              </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- 목록, 저장 버튼 -->
+                            <div class="text-right">
+                                <button class="btn btn-secondary" type="button" id="cancel">목록</button>
+                                <button class="btn btn-primary" type="button" id="submit">저장</button>
+                            </div>
+
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+    let feedUrl = [[${feedUrl}]];
+</script>
+
+<script>
+
+    //저장
+    $("#submit").on("click", function () {
+        let form = $("#upsertForm");
+        let data = form.serializeObject();
+
+        $.ajax({
+            url: "/feed/url/upsert",
+            type:"POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            success:function(result){
+                console.log("url upsert result : ", result);
+                // const newSeq = result.data.newSeq;
+                myScript.Toast.fire({
+                    icon: 'success',
+                    title: '저장 성공!'
+                }).then(function () {
+                    location.href = '/feed/url';
+                })
+            },
+            error:function(response, status, error){
+                let errorMessage = response.status;
+                if(response.responseJSON.message != undefined) {
+                    errorMessage = response.responseJSON.message;
+                }
+                myScript.Toast5Sec.fire({
+                    icon: 'error',
+                    title: '저장 실패! [' + errorMessage + ']'
+                });
+            },
+        });
+    });
+
+    $("#cancel").on("click", function () {
+        location.href = '/feed/url';
+    })
+
+</script>
+</body>
+</html>

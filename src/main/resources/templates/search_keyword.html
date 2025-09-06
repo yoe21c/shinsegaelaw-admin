@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('키워드 검색 - 검색 결과', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}"/>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/search_keyword', '2')}"/>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>검색 결과</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center">
+                            <label for="teamSelect" class="mr-2 mb-0">키워드 그룹 선택</label>
+                            <select id="teamSelect" class="form-control mr-2" style="width: auto;">
+                                <option th:each="team : ${teams}" th:value="${team.seq}" th:text="${team.teamName}" th:selected="${team.seq == selectedTeamSeq}">
+                                    키워드 그룹 이름
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- 상태 필터 버튼 그룹과 새로고침 버튼 -->
+                        <div class="d-flex align-items-center">
+                            <div class="btn-group mr-2">
+                                <button type="button" class="btn btn-default status-filter active" data-status="all">
+                                    전체 <span class="badge badge-light" id="total-count">0</span>
+                                </button>
+                                <button type="button" class="btn btn-secondary status-filter" data-status="WAITING">
+                                    대기중 <span class="badge badge-light" id="waiting-count">0</span>
+                                </button>
+                                <button type="button" class="btn btn-primary status-filter" data-status="PROCESSING">
+                                    진행중 <span class="badge badge-light" id="processing-count">0</span>
+                                </button>
+                                <button type="button" class="btn btn-success status-filter" data-status="COMPLETE">
+                                    완료 <span class="badge badge-light" id="complete-count">0</span>
+                                </button>
+                                <button type="button" class="btn btn-danger status-filter" data-status="INVALID">
+                                    알수없음 <span class="badge badge-light" id="invalid-count">0</span>
+                                </button>
+                            </div>
+                            <button id="refreshTable" class="btn btn-info mr-2" style="display: none;">
+                                <i class="fas fa-sync-alt"></i> 새로고침(<span id="refreshCountdown">30</span>초)
+                            </button>
+                            <button id="downloadScreenshotsBtn" class="btn btn-primary">스크린샷 다운로드</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 상태 표시 영역 추가 -->
+                <div id="statusBar" class="alert alert-info mx-3 mt-3" style="display: none;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span id="statusMessage">진행 상태를 확인중입니다...</span>
+                        <span id="remainingTime"></span>
+                    </div>
+                    <div class="progress mt-2" style="height: 5px;">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="keywordTable" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>키워드</th>
+                            <th>상태</th>
+                            <th>순위</th>
+                            <th>마지막 검색</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- 키워드 데이터가 동적으로 추가될 예정 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+
+    <div class="modal fade" id="screenshotModal" tabindex="-1" role="dialog" aria-labelledby="screenshotModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document"> <!-- 모달 크기를 크게 설정 -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">스크린샷 파일 목록</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span> <!-- 닫기 버튼 -->
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- 스크린샷 파일 목록이 여기에 동적으로 추가됩니다 -->
+                    <ul id="screenshotList" class="list-group">
+                        <!-- 파일 항목 예시 -->
+                        <!--
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                          파일명.zip
+                          <button class="btn btn-sm btn-primary">다운로드</button>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}"/>
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let selectedTeamSeq = [[${team?.seq}]]; // 기본값 설정
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const teamSelect = document.getElementById("teamSelect");
+
+        // 선택된 값이 있으면 저장
+        teamSelect.addEventListener("change", function () {
+            selectedTeamSeq = this.value ? parseInt(this.value) : null;
+            console.log('selectedTeamSeq: ' + selectedTeamSeq);
+            // 팀 선택 변경 시 데이터 새로 불러오기
+            reloadData();
+        });
+    });
+
+    function reloadData() {
+        // 선택한 키워드 그룹이 없으면 전체 데이터를 다시 불러옴
+        const queryParam = selectedTeamSeq ? `?teamSeq=${selectedTeamSeq}` : "";
+        window.location.href = `/search_keyword${queryParam}`;
+    }
+    /*]]>*/
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let keywordTable;
+        let currentStatus = 'all';
+        let autoRefreshTimer;
+        let refreshCountdownTimer;
+        let refreshCountdown = 30;
+        let estimatedEndTime = null;
+        let lastProgress = 0;  // 이전 진행률 저장
+        let lastUpdateTime = null;  // 마지막 업데이트 시간 저장
+
+        // 상태 업데이트 함수 수정
+        function updateStatus(counts) {
+            const statusBar = $('#statusBar');
+            const statusMessage = $('#statusMessage');
+            const remainingTime = $('#remainingTime');
+            const progressBar = $('#progressBar');
+            const refreshTable = $('#refreshTable');
+
+            const total = counts.total || 0;
+            const waiting = counts.WAITING || 0;
+            const processing = counts.PROCESSING || 0;
+            const complete = counts.COMPLETE || 0;
+            const invalid = counts.INVALID || 0;
+
+            if (processing > 0) {
+                statusBar.show().removeClass('alert-success alert-warning').addClass('alert-info');
+                refreshTable.show(); // 진행중일 때만 새로고침 버튼 표시
+                const currentProgress = (complete / total) * 100;
+                progressBar.css('width', `${currentProgress}%`);
+
+                // 진행 속도 계산 및 예상 시간 업데이트
+                const now = new Date();
+                if (lastUpdateTime && lastProgress < currentProgress) {
+                    const timeElapsed = (now - lastUpdateTime) / 1000; // 초 단위
+                    const progressDiff = currentProgress - lastProgress;
+                    const progressPerSecond = progressDiff / timeElapsed;
+                    const remainingProgress = 100 - currentProgress;
+                    const estimatedSeconds = remainingProgress / progressPerSecond;
+                    estimatedEndTime = new Date(now.getTime() + (estimatedSeconds * 1000));
+                } else if (!estimatedEndTime) {
+                    // 초기 예상 시간 설정 (완료된 항목 기준)
+                    const avgTimePerItem = 30; // 가정: 한 항목당 평균 30초
+                    const remainingItems = total - complete;
+                    const estimatedSeconds = remainingItems * avgTimePerItem;
+                    estimatedEndTime = new Date(now.getTime() + (estimatedSeconds * 1000));
+                }
+
+                // 진행 상태 저장
+                lastProgress = currentProgress;
+                lastUpdateTime = now;
+
+                // 남은 시간 표시 업데이트
+                if (estimatedEndTime) {
+                    const remainingMinutes = Math.ceil((estimatedEndTime - now) / (1000 * 60));
+                    const remainingHours = Math.floor(remainingMinutes / 60);
+                    
+                    let timeDisplay;
+                    if (remainingHours > 0) {
+                        const mins = remainingMinutes % 60;
+                        timeDisplay = `약 ${remainingHours}시간 ${mins}분 남음`;
+                    } else {
+                        timeDisplay = `약 ${remainingMinutes}분 남음`;
+                    }
+                    
+                    statusMessage.text(`검색이 진행중입니다. (${complete}/${total} 완료)`);
+                    remainingTime.text(timeDisplay);
+                } else {
+                    statusMessage.text(`검색이 진행중입니다. (${complete}/${total} 완료)`);
+                    remainingTime.text('시간 계산중...');
+                }
+
+                // 자동 새로고침 설정
+                if (!autoRefreshTimer) {
+                    autoRefreshTimer = setInterval(() => {
+                        refreshTableData();
+                    }, 30000);
+                }
+            } else if (waiting > 0) {
+                resetStatus('warning', '검색 대기중입니다.');
+                refreshTable.hide(); // 대기중일 때는 새로고침 버튼 숨김
+            } else if (complete === total && total > 0) {
+                resetStatus('success', '모든 검색이 완료되었습니다.');
+                refreshTable.hide(); // 완료되었을 때는 새로고침 버튼 숨김
+            } else {
+                statusBar.hide();
+                refreshTable.hide(); // 그 외의 경우 새로고침 버튼 숨김
+                resetTimers();
+            }
+        }
+
+        // 상태 초기화 함수
+        function resetStatus(type, message) {
+            const statusBar = $('#statusBar');
+            const statusMessage = $('#statusMessage');
+            const remainingTime = $('#remainingTime');
+            const progressBar = $('#progressBar');
+
+            statusBar.show()
+                .removeClass('alert-success alert-info alert-warning')
+                .addClass(`alert-${type}`);
+            statusMessage.text(message);
+            remainingTime.text('');
+            progressBar.css('width', type === 'success' ? '100%' : '0%');
+            resetTimers();
+        }
+
+        // 타이머 초기화 함수
+        function resetTimers() {
+            clearInterval(autoRefreshTimer);
+            autoRefreshTimer = null;
+            estimatedEndTime = null;
+            lastProgress = 0;
+            lastUpdateTime = null;
+        }
+
+        // 테이블 새로고침 함수
+        function refreshTableData() {
+            $('#refreshTable i').addClass('fa-spin');
+            const currentPage = keywordTable.page();
+            keywordTable.ajax.reload(function() {
+                $('#refreshTable i').removeClass('fa-spin');
+                keywordTable.page(currentPage).draw('page'); // 현재 페이지로 복귀
+                myScript.Toast.fire({
+                    icon: 'success',
+                    title: '데이터를 새로고침했습니다.'
+                });
+                // 새로고침 후 카운트다운 재설정
+                resetRefreshCountdown();
+            }, false); // false를 추가하여 페이지 정보 유지
+        }
+
+        // 카운트다운 리셋 함수
+        function resetRefreshCountdown() {
+            clearInterval(refreshCountdownTimer);
+            refreshCountdown = 30;
+            $('#refreshCountdown').text(refreshCountdown);
+            
+            refreshCountdownTimer = setInterval(() => {
+                refreshCountdown--;
+                $('#refreshCountdown').text(refreshCountdown);
+                
+                if (refreshCountdown <= 0) {
+                    refreshTableData();
+                }
+            }, 1000);
+        }
+
+        // 새로고침 버튼 클릭 이벤트
+        $('#refreshTable').on('click', function() {
+            refreshTableData();
+        });
+
+        // DataTables 초기화 함수 수정
+        function initializeTable(teamSeq, status) {
+            if (keywordTable) {
+                keywordTable.destroy();
+            }
+
+            keywordTable = $('#keywordTable').DataTable({
+                processing: true,
+                serverSide: true,
+                paging: true,
+                searching: false,
+                ajax: {
+                    url: `/get_search_keywords_paging`,
+                    type: 'GET',
+                    data: function (d) {
+                        d.teamSeq = teamSeq;
+                        d.page = Math.floor(d.start / d.length);
+                        d.size = d.length;
+                        d.status = status === 'all' ? null : status;
+                    },
+                    dataSrc: function (json) {
+                        updateStatusCounts(json.data.statusCounts);
+                        updateStatus(json.data.statusCounts);
+                        return json.data.list;
+                    }
+                },
+                columns: [
+                    { data: 'keyword' },
+                    { 
+                        data: 'status',
+                        title: '상태',
+                        render: function(data) {
+                            const statusMap = {
+                                'WAITING': '대기중',
+                                'PROCESSING': '진행중',
+                                'COMPLETE': '완료',
+                                'INVALID': '알수없음'
+                            };
+                            const statusClass = {
+                                'WAITING': 'badge badge-secondary',
+                                'PROCESSING': 'badge badge-primary',
+                                'COMPLETE': 'badge badge-success',
+                                'INVALID': 'badge badge-danger'
+                            };
+                            return `<span class="${statusClass[data] || 'badge badge-warning'}">${statusMap[data] || data}</span>`;
+                        }
+                    },
+                    {
+                        data: 'ranking',
+                        title: '순위',
+                        render: function (data, type, row) {
+                            if(data !== null) {
+                                return data === 0 ? ' ' : `${data}위`;
+                            }else {
+                                return '';
+                            }
+                        }
+                    },
+                    { 
+                        data: 'lastSearchedAt', 
+                        render: function (data) {
+                            if (data) {
+                                // T를 공백으로 변경
+                                return data.replace('T', ' ');
+                            }
+                            return 'N/A';
+                        }
+                    }
+                ]
+            });
+        }
+
+        // 상태별 카운트 업데이트 함수
+        function updateStatusCounts(counts) {
+            $('#total-count').text(counts.total);
+            $('#waiting-count').text(counts.WAITING);
+            $('#processing-count').text(counts.PROCESSING);
+            $('#complete-count').text(counts.COMPLETE);
+            $('#invalid-count').text(counts.INVALID || 0);
+        }
+
+        // 상태 필터 버튼 클릭 이벤트
+        $('.status-filter').on('click', function() {
+            $('.status-filter').removeClass('active');
+            $(this).addClass('active');
+            currentStatus = $(this).data('status');
+            initializeTable(selectedTeamSeq, currentStatus);
+        });
+
+        // 초기 테이블 로드
+        initializeTable(selectedTeamSeq, 'all');
+        resetRefreshCountdown(); // 초기 카운트다운 시작
+
+        const downloadScreenshotsBtn = document.getElementById('downloadScreenshotsBtn');
+        const screenshotModal = $('#screenshotModal');
+        const screenshotList = document.getElementById('screenshotList');
+
+        downloadScreenshotsBtn.addEventListener('click', function () {
+            // 서버로부터 스크린샷 파일 목록 가져오기
+            fetch(`/screenshots_list?teamSeq=${selectedTeamSeq}`)
+                .then(response => response.json())
+                .then(data => {
+                    // 모달에 파일 목록 표시
+                    populateScreenshotModal(data.data.result);
+                    // 모달 열기
+                    screenshotModal.modal('show');
+                })
+                .catch(error => {
+                    console.error('스크린샷 목록을 가져오는 데 실패했습니다:', error);
+                    alert('스크린샷 목록을 가져오는 데 실패했습니다.');
+                });
+        });
+
+        function populateScreenshotModal(files) {
+            // 기존 목록 제거
+            screenshotList.innerHTML = '';
+            if (!Array.isArray(files) || files.length === 0) {
+                const noFilesItem = document.createElement('li');
+                noFilesItem.className = 'list-group-item';
+                noFilesItem.textContent = '스크린샷 파일이 없습니다.';
+                screenshotList.appendChild(noFilesItem);
+                return;
+            }
+
+            files.forEach(fileName => {
+                const listItem = document.createElement('li');
+                listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+
+                // 파일명 표시
+                const fileNameSpan = document.createElement('span');
+                fileNameSpan.textContent = fileName;
+                listItem.appendChild(fileNameSpan);
+
+                // 다운로드 버튼 생성
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'btn btn-sm btn-primary';
+                downloadBtn.textContent = '다운로드';
+                downloadBtn.addEventListener('click', function () {
+                    downloadFile(fileName);
+                });
+
+                listItem.appendChild(downloadBtn);
+                screenshotList.appendChild(listItem);
+            });
+        }
+
+        function downloadFile(fileName) {
+            if (!selectedTeamSeq || !fileName) {
+                alert('키워드 그룹 또는 파일명이 유효하지 않습니다.');
+                return;
+            }
+
+            // 파일 다운로드 URL 생성
+            const downloadUrl = `/download_screenshots?teamSeq=${selectedTeamSeq}&fileName=${encodeURIComponent(fileName)}`;
+
+            // 파일 다운로드
+            window.location.href = downloadUrl;
+        }
+
+        // 페이지 이탈 시 자동 새로고침 중지
+        window.addEventListener('beforeunload', function() {
+            if (autoRefreshTimer) {
+                clearInterval(autoRefreshTimer);
+            }
+            if (refreshCountdownTimer) {
+                clearInterval(refreshCountdownTimer);
+            }
+        });
+    });
+</script>
+
+<style>
+.status-filter {
+    margin-right: 5px;
+}
+
+.status-filter .badge {
+    margin-left: 5px;
+}
+
+.btn-group .btn.active {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+
+/* 기존 스타일에 추가 */
+.fa-spin {
+    animation: fa-spin 2s infinite linear;
+}
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#refreshTable {
+    transition: all 0.3s ease;
+}
+
+#refreshTable:hover {
+    transform: scale(1.05);
+}
+
+/* 추가 스타일 */
+.progress-bar-animated {
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+#statusBar {
+    transition: all 0.3s ease;
+    border-radius: 0;
+    margin: 0 1rem;
+    padding: 1rem;
+}
+
+.progress {
+    height: 6px;
+    border-radius: 3px;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.progress-bar {
+    transition: width 0.5s ease;
+}
+
+#remainingTime {
+    font-weight: 500;
+    color: #fff;
+}
+</style>
+</body>
+</html>

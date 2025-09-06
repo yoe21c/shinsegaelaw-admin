@@ -1,0 +1,13 @@
+package com.tbm.admin.model.message;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class RepairAgentJoinMessage implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private String ip;
+    private String mac;
+}

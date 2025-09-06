@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('메인 메시지 수정', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/main_hello', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">메인 메시지(공지)를 수정할 수 있습니다.</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal" id="upsertForm">
+
+                                <div class="col">
+
+                                    <div id="modifyDiv">
+
+                                        <!-- 네이버 아이디 -->
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="mainHello" class="col-sm-1 col-form-label">메인 메시지 </label>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                              <textarea rows="10" name="message" id="mainHello" class="form-control" th:utext="${message}" placeholder="메인 페이지에 보여줄 메시지를 적어주세요."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </form>
+
+                            <!-- 목록, 저장 버튼 -->
+                            <div class="text-right">
+                                <button class="btn btn-secondary" type="button" id="cancel">목록</button>
+                                <button class="btn btn-primary" type="button" id="submit">저장</button>
+                            </div>
+
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+
+    //저장
+    $("#submit").on("click", function () {
+
+        let form = $("#upsertForm");
+        data = form.serializeObject();
+
+        $.ajax({
+            url: "/main_hello/update",
+            type:"POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            success:function(result){
+                console.log("account upsert result : ", result);
+                // const newSeq = result.data.newSeq;
+                myScript.Toast.fire({
+                    icon: 'success',
+                    title: '저장 성공!'
+                }).then(function () {
+                    location.href = '/';
+                })
+            },
+            error:function(response, status, error){
+                let errorMessage = response.status;
+                if(response.responseJSON.message != undefined) {
+                    errorMessage = response.responseJSON.message;
+                }
+                myScript.Toast5Sec.fire({
+                    icon: 'error',
+                    title: '저장 실패! [' + errorMessage + ']'
+                });
+            },
+        });
+    });
+
+    $("#cancel").on("click", function () {
+        location.href = '/scrap/account';
+    })
+
+</script>
+</body>
+</html>

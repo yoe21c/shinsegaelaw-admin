@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('리페어 스케줄 목록', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/repair_agent_queue_list', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>리페어 스케줄 목록</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">리페어 스케줄 목록을 조회합니다. 아이디를 눌러 계정 정보를 수정할 수 있습니다.</h3>
+
+                    <div class="card-tools">
+                        <input type="file" id="repairFile"/>
+                        <button id="upload_list" class="btn btn-sm btn-warning">리페어스케줄 목록 업로드</button>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputStatus" class="col-sm-5 col-form-label">필터링</label>
+                                                <div class="col-sm-7">
+                                                    <div class="form-group">
+                                                        <select name="status" id="inputStatus" class="form-control">
+                                                            <option value="all" selected>전체</option>
+                                                            <option value="reserved">예약</option>
+                                                            <option value="processing">진행중</option>
+                                                            <option value="completed">성공</option>
+                                                            <option value="failed">실패</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputKeyword" class="col-sm-3 col-form-label">검색 키워드</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-group">
+                                                        <input type="text" name="keyword" id="inputKeyword" class="form-control" placeholder="검색어 입력 (블로그아이디, 타이틀, IP주소)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="text-right">
+                                                <button class="btn btn-primary" type="button" id="add" onclick="location.href='/repair_agent_queue_create'">추가</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+
+                    <table id="list" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>블로그아이디</th>
+                            <th>블로그URL</th>
+                            <th>타이틀</th>
+                            <th>상태</th>
+                            <th>IP주소</th>
+                            <th>예약일시</th>
+<!--                            <th>예약남은/초과시간</th>-->
+                            <th>성공일시</th>
+                            <th>실패일시</th>
+                            <th>기능</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="uploadResultModal" tabindex="-1" role="dialog" aria-labelledby="uploadResultModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadResultModalLabel">업로드 결과</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="uploadResultContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-primary" id="confirmUpload">그대로 진행하겠습니다.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+    $(function () {
+        let table = $('#list').DataTable({
+            "pagingType": "full_numbers",
+            "processing": true,
+            "serverSide": true,
+            "ordering": false,
+            "stateSave": true,
+            "searching": false,   // Search 인풋 박스
+            "lengthChange": false,  // pagination length 셀렉트박스 없애기.
+            "pageLength": 10,
+            "info": true,   // 테이블 하단에 총 아이템수 등이 표기된다. "Showing 1 to 8 of 8 entries"
+            destroy: true,
+            paging: true,
+            "autoWidth": true, // 너비 자동 조정 활성화
+            columnDefs: [
+                { width: '5%', targets : [0] },
+                { width: '10%', targets : [1] },
+                { width: '20%', targets : [2] },
+                { width: '10%', targets : [3] },
+                { width: '10%', targets : [4] },
+                { width: '10%', targets : [5] },
+                // { width: '10%', targets : [6] },
+                { width: '10%', targets : [6] },
+                { width: '10%', targets : [7] },
+                { width: '10%', targets : [8] },
+                { width: '5%', targets : [9] },
+            ],
+            // fixedColumns: true,
+            // "dom": 'lftipr',
+            // info : false,  // entries 삭제.
+            "ajax": {
+                "url": "/repair_agent_queue_list",
+                "type": "POST",
+                "data": function ( d ) {  // 커스텀 파라미터를 넣을 수 있다.
+                    return $.extend( {}, d, {
+                        "status": $("#inputStatus option:selected").val(),
+                        "keyword": $("#inputKeyword").val(),
+                    } );
+                },
+                "dataSrc": function(res) {
+                    console.log(res);
+                    return res.data.repairAgentQueues.content;
+                },error:function(request, status, error){
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            },
+            "columns" : [
+                { data : 'seq' },
+                { data : 'blogId',
+                    render: function (data, type, row, meta) {
+                        return `<a href="/repair_agent_queue/${row.seq}">${data}</a>`
+                    }
+                },
+                { data : 'blogUrl',
+                    render: function (data, type, row, meta) {
+                      return `<a href="/repair_agent_queue/${row.seq}">${data}</a>`
+                    }
+                },
+                { data : 'title' },
+                { data : 'status',
+                    render: function (data, type, row, meta) {
+                      let status;
+                      if (data === 'reserved') { status = '<button class="btn btn-sm btn-info">예약</button>'; }
+                      else if (data === 'processing') { status = '<button class="btn btn-sm btn-warning">실행중</button>'}
+                      else if (data === 'failed') { status = '<button class="btn btn-sm btn-danger">실패</button>'}
+                      else if (data === 'completed') { status = '<button class="btn btn-sm btn-success">성공</button>'}
+                      else if (data === 'deleted') { status = '<button class="btn btn-sm btn-danger">삭제</button>'}
+                      else { status = '<button class="btn btn-sm btn-success">-</button>'; }
+                      return `<a href="/repair_agent_queue/${row.seq}">${status}</a>`
+                    }
+                },
+                { data : 'ipAddress' },
+                { data : 'reservedAt',
+                    render: function (data, type, row, meta) {
+                        return data.replace("T", " ")
+                    }
+                },
+                // { data : 'reservedAtDiff' },
+                { data : 'completedAt',
+                    render: function (data, type, row, meta) {
+                        if(data === null) return '';
+                        return data.replace("T", " ")
+                    }
+                },
+                { data : 'failedAt',
+                    render: function (data, type, row, meta) {
+                        if(data === null) return '';
+                        return data.replace("T", " ")
+                    }
+                },
+                { data : 'failedAt',
+                    render: function (data, type, row, meta) {
+                        return `<button class="btn btn-sm btn-info" onclick="location.href='/repair_agent_queue_create?seq=${row['seq']}'">복제</button>`;
+                    }
+                },
+            ],
+        });
+
+        $('#inputStatus').on('change', function () {
+            table.search('markerValue', true, false, true).draw();
+        });
+
+        $('#inputKeyword').on('input', function () {
+            let keyword = $(this).val(); // 입력된 값을 가져옴
+            console.log('keyword: ', keyword);
+            table.search('markerValue', true, false, true).draw();
+        });
+
+        // 파일 업로드
+        $("#upload_list").on('click', function () {
+
+          let companySeq = $("#inputCompanySeq option:selected").val();
+          if(companySeq === '0') {
+            alert("회사를 선택해주세요.");
+            return;
+          }
+
+          const fileInput = $('#repairFile')[0];
+          if (fileInput.files.length === 0) {
+            alert("Please select a file to upload.");
+            return;
+          }
+
+          let formData = new FormData();
+          formData.append("file", fileInput.files[0]);
+          formData.append("companySeq", companySeq);
+
+          $.ajax({
+            url: "/import_repairs",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+
+                const displayUploadResult = (result) => {
+                    uploadResultData = result; // 업로드 결과 데이터를 저장
+
+                    let content = "<h5>기존 저장 내용(없어지는 내용):</h5><ul>";
+                    // dbBlogCountMap의 키-값 쌍 순회
+                    Object.entries(result.dbBlogCountMap).forEach(([blogId, count]) => {
+                        content += `<li>${blogId} (${count}건)</li>`;
+                    });
+                    content += "</ul>";
+
+                    content += "<h5>새롭게 업데이트 하는 내용:</h5><ul>";
+                    // newBlogCountMap의 키-값 쌍 순회
+                    Object.entries(result.newBlogCountMap).forEach(([blogId, count]) => {
+                        content += `<li>${blogId} (${count}건)</li>`;
+                    });
+                    content += "</ul>";
+
+                    document.getElementById("uploadResultContent").innerHTML = content;
+                    $('#uploadResultModal').modal('show');
+                };
+
+              displayUploadResult(response.data); // 업로드 결과 표시
+            },
+            error: function(xhr, status, error) {
+              let response = JSON.parse(xhr.responseText);
+              let errorMessage = response.message ? response.message : "File upload failed.";
+              alert("Error: " + errorMessage);
+            }
+          });
+        });
+
+        $("#confirmUpload").on('click', function () {
+
+            const fileInput = $('#repairFile')[0];
+            if (fileInput.files.length === 0) {
+                alert("Please select a file to upload.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            // 여기서 최종 반영을 위한 AJAX 요청을 추가할 수 있습니다.
+            // 예시로 아래와 같이 최종 반영 요청을 할 수 있습니다.
+            $.ajax({
+                url: "/finalize_import_repairs",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#repairFile').val(''); // 파일 입력 필드를 비웁니다.
+                    alert("최종 반영이 완료되었습니다.");
+                    $('#uploadResultModal').modal('hide');
+                    // 필요한 경우 테이블 갱신 로직을 추가합니다.
+                },
+                error: function(xhr, status, error) {
+                    alert("최종 반영에 실패하였습니다.");
+                }
+            });
+        });
+
+    });
+</script>
+</body>
+</html>

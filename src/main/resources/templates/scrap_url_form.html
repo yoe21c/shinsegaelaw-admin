@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('블로그 URL 수정', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/scrap/url/list', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>블로그 URL [[${url == null ? '등록' : '수정'}]]</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">각 항목을 입력하여 블로그 url 정보를 등록 및 수정할 수 있습니다.</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal" id="upsertForm">
+
+                                <input type="hidden" th:value="${url?.seq}" name="seq" id="seq">
+
+                                <div class="col">
+
+                                    <!-- 등록 -->
+                                    <div id="registDiv" th:if="${url?.seq == null}">
+
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="scrapMethod" class="col-sm-2 col-form-label">스크랩 방식</label>
+                                                    <div class="col-sm-10">
+                                                        <!-- 스크랩 방식 -->
+                                                        <div class="form-group row" id="scrapMethod">
+                                                            <div class="form-check mr-3">
+                                                                <input class="form-check-input" type="radio" name="methodRadio" id='immediately' value="immediately" checked>
+                                                                <label class="form-check-label" for="immediately">즉시</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="methodRadio" id="reservation" value="reservation">
+                                                                <label class="form-check-label" for="reservation">예약</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- 예약 시간 설정 -->
+                                                        <div class="form-group row" id="reservationInput" style="display: none">
+                                                            <label for="startAt" class="col-sm-1 col-form-label">시작 시간</label>
+                                                            <div class="col-sm-5 form-group mr-6">
+                                                                <input type="datetime-local" name="startAt" id="startAt" class="form-control" placeholder="시작 시간" step="10">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                      <!-- 목표 스크랩 수 -->
+                                      <div class="col-md-10">
+                                        <div class="card-body">
+                                          <div class="form-group row">
+                                            <label for="targetCount" class="col-sm-2 col-form-label">가용한 합계 스크랩 수</label>
+                                            <div class="col-sm-4 form-group">
+                                              <input type="text" name="available" id="availableSumOfTargetCount" class="form-control" th:value="|${availableCount}|" readonly>
+                                            </div>
+                                            <div class="col-sm-5 form-group">
+                                              <label class="font-italic col-form-label-sm">금일 남아있는 모든 계정들의 스크랩수의 합계 &nbsp;(00시에 다시 reset 됨) </label>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group row">
+                                            <label for="targetCount" class="col-sm-2 col-form-label">목표 스크랩 수</label>
+                                            <div class="col-sm-4 form-group">
+                                              <input type="text" name="targetCount" id="targetCount" class="form-control" value="0">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group row">
+                                            <label for="targetCount" class="col-sm-2 col-form-label">총 스크랩 수 (자동계산)</label>
+                                            <div class="col-sm-4 form-group">
+                                              <input type="text" id="sumOrTargetCount" class="form-control" value="1" readonly>
+                                            </div>
+                                            <div class="col-sm-5 form-group">
+                                              <label class="font-italic col-form-label-sm">총스크랩 수 &nbsp; = &nbsp; 목표 스크랩 수 &nbsp; X &nbsp; URL수</label>
+                                            </div>
+                                          </div>
+
+                                        </div>
+                                      </div>
+
+                                      <div class="col-sm-5 form-group">
+                                        <label id="waringMessage" class="alert-default-danger font-italic col-form-label-sm"></label>
+                                      </div>
+
+                                      <!-- url 목록 -->
+                                      <div class="col-md-10">
+                                          <div class="card-body">
+                                              <div class="form-group row">
+                                                  <label for="urlList" class="col-sm-2 col-form-label">URL 목록</label>
+                                                  <div class="col-sm-10 form-group">
+                                                      <textarea rows="10" name="urlList" id="urlList" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- 수정 -->
+                                    <div id="modifyDiv" th:if="${url?.seq != null}">
+                                        <!-- 예약 시간 -->
+                                        <div class="col-md-10">
+                                            <div class="card-body col">
+                                                <div class="form-group row">
+                                                    <label for="startAt" class="col-sm-1 col-form-label">시작 시간</label>
+                                                    <div class="col-sm-3 mr-4">
+                                                        <div class="form-group">
+                                                            <input type="datetime-local" name="startAt" id="startAt" class="form-control" placeholder="시작 시간" step="10"
+                                                                   th:value="${#temporals.format(url?.startAt, 'yyyy-MM-dd HH:mm:ss')}">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 블로그 URL -->
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="blogUrl" class="col-sm-1 col-form-label">블로그 URL</label>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group">
+                                                            <input type="text" name="blogUrl" id="blogUrl" class="form-control" th:value="${url?.blogUrl}" placeholder="블로그 URL">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 활성화 여부 -->
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-1 col-form-label">활성화 여부</label>
+                                                    <div class="col-sm-4">
+                                                        <div class="form-group row">
+                                                            <div class="form-check mr-3">
+                                                                <input class="form-check-input" type="radio" name="activate" id='Y' value="Y" th:checked="not ${url} or ${#strings.equals(url?.activate, 'Y')}">
+                                                                <label class="form-check-label" for="Y">스크랩 활성화(Y)</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="activate" id="N" value="N" th:checked="${#strings.equals(url?.activate, 'N')}">
+                                                                <label class="form-check-label" for="N">스크랩 비활성화(N)</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 스크랩 횟수 -->
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="count" class="col-sm-1 col-form-label">스크랩 횟수</label>
+                                                    <div class="col-sm-4 form-group">
+                                                        <input type="text" name="count" id="count" class="form-control" th:value="${url?.count}" placeholder="스크랩 횟수" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- 목표 스크랩 수 -->
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="targetCount" class="col-sm-1 col-form-label">목표 스크랩 수</label>
+                                                    <div class="col-sm-4 form-group">
+                                                        <input type="text" name="targetCount" id="targetCount" class="form-control" th:value="${url?.targetCount}" placeholder="목표 스크랩 횟수" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+
+                            <!-- 목록, 저장 버튼 -->
+                            <div class="text-right">
+                                <button class="btn btn-secondary" type="button" id="cancel">목록</button>
+                                <button class="btn btn-primary" type="button" id="submit">저장</button>
+                            </div>
+
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+    let scrapUrl = [[${url}]];
+</script>
+
+<script>
+    // 스크랩 방식 선택
+    $("input[name='methodRadio']").on("change", function () {
+        if ($("input[name='methodRadio']:checked").val() === 'reservation') {
+            $("#reservationInput").css("display", "flex");
+        } else {
+            $("#reservationInput").css("display", "none");
+        }
+    });
+
+    function getCurrentKSTISOString() {
+      const now = new Date();
+      const offset = 9 * 60; // KST는 UTC보다 9시간 앞서 있으므로 -9시간을 뺀 값
+
+      // UTC 시간에 오프셋을 적용하여 KST 시간을 얻음
+      const kstTime = new Date(now.getTime() + offset * 60 * 1000);
+
+      // ISO 문자열로 변환하여 반환
+      return kstTime.toISOString();
+    }
+
+
+    //저장
+    $("#submit").on("click", function () {
+        let url;
+        let data;
+
+        if($("#targetCount").val() === '' || $("#targetCount").val() === '0') {
+            myScript.Toast.fire({
+                icon: 'error',
+                title: '목표 스크랩 수를 입력해주세요.'
+            });
+            return;
+        }
+
+        // 등록
+        if (scrapUrl == null) {
+            url = "/scrap/url-list/upsert"
+
+            data = [];
+            let urlList = $("#urlList").val();
+            let line = urlList.split("\n");
+
+            // 스크랩 방식 > '즉시' 선택
+            if ($("input[name='methodRadio']:checked").val() === 'immediately') {
+                for (let i=0; i < line.length; i++) {
+                    let obj = {};
+                    obj.seq = null;
+                    obj.startAt = getCurrentKSTISOString();
+                    obj.blogUrl = line[i];
+                    obj.targetCount = $("#targetCount").val();
+
+                    data.push(obj);
+                }
+
+            // 스크랩 방식 > '예약' 선택
+            } else {
+                for (let i=0; i < line.length; i++) {
+                    let obj = {};
+                    obj.seq = null;
+                    obj.startAt = $("#startAt").val();
+                    obj.blogUrl = line[i];
+                    obj.targetCount = $("#targetCount").val();
+
+                    data.push(obj);
+                }
+
+            }
+
+        // 수정
+        } else {
+            url = "/scrap/url/upsert"
+
+            let form = $("#upsertForm");
+            data = form.serializeObject();
+
+        }
+
+        $.ajax({
+            url: url,
+            type:"POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            success:function(result){
+                console.log("url upsert result : ", result);
+                // const newSeq = result.data.newSeq;
+                myScript.Toast.fire({
+                    icon: 'success',
+                    title: '저장 성공!'
+                }).then(function () {
+                    location.href = '/scrap/url';
+                })
+            },
+            error:function(response, status, error){
+                let errorMessage = response.status;
+                if(response.responseJSON.message != undefined) {
+                    errorMessage = response.responseJSON.message;
+                }
+                myScript.Toast5Sec.fire({
+                    icon: 'error',
+                    title: '저장 실패! [' + errorMessage + ']'
+                });
+            },
+        });
+    });
+
+    $("#cancel").on("click", function () {
+        location.href = '/scrap/url';
+    })
+
+    $('#urlList').on('blur', function(event) {
+      let lines = $(this).val().split('\n');
+      let nonEmptyLines = lines.filter(function(line) {
+        return line.trim() !== ''; // 빈 줄은 무시합니다.
+      });
+      let lineCount = nonEmptyLines.length;
+
+      let availableSumOfTargetCount = $('#availableSumOfTargetCount').val();
+      let targetCount = $('#targetCount').val();
+
+      $('#sumOrTargetCount').val(lineCount * targetCount);
+
+      console.log('availableSumOfTargetCount : ', availableSumOfTargetCount);
+      console.log('lineCount : ', lineCount);
+      console.log('targetCount : ', targetCount);
+
+      if(availableSumOfTargetCount < (lineCount * targetCount)) {
+        $('#waringMessage').text('가용한 합계 스크랩 수가 부족합니다.');
+      }
+    });
+
+</script>
+</body>
+</html>

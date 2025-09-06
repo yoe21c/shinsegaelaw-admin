@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('계정 목록', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/scrap/account', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>계정 목록</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">계정 목록을 조회합니다. 아이디를 눌러 계정 정보를 수정할 수 있습니다.</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputStatus" class="col-sm-5 col-form-label">필터링</label>
+                                                <div class="col-sm-7">
+                                                    <div class="form-group">
+                                                        <select name="status" id="inputStatus" class="form-control">
+                                                            <option value="all" selected>전체</option>
+                                                            <option value="active">활동중</option>
+                                                            <option value="inactive">비활성화</option>
+                                                        </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputKeyword" class="col-sm-3 col-form-label">검색 키워드</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-group">
+                                                        <input type="text" name="keyword" id="inputKeyword" class="form-control" placeholder="검색어 입력 (계정 아이디, ip 주소)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="text-right">
+                                                <button class="btn btn-primary" type="button" id="add" onclick="location.href='/scrap/account/form'">추가</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+
+                    <table id="list" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>활동 여부</th>
+                            <th>계정 아이디</th>
+                            <th>ip 주소</th>
+                            <th>일일 스크랩 수</th>
+                            <th>스크랩 이력</th>
+                            <th>생성일시</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+    $(function () {
+        let table = $('#list').DataTable({
+            "pagingType": "full_numbers",
+            "processing": true,
+            "serverSide": true,
+            "ordering": false,
+            "stateSave": true,
+            "searching": false,   // Search 인풋 박스
+            "lengthChange": false,  // pagination length 셀렉트박스 없애기.
+            "pageLength": 10,
+            "info": true,   // 테이블 하단에 총 아이템수 등이 표기된다. "Showing 1 to 8 of 8 entries"
+            destroy: true,
+            paging: true,
+            columnDefs: [
+                { width: '5%', targets : [0] },
+                { width: '10%', targets : [1] },
+                { width: '15%', targets : [2] },
+                { width: '15%', targets : [3] },
+                { width: '15%', targets : [4] },
+                { width: '15%', targets : [5] },
+                { width: '15%', targets : [6] },
+            ],
+            fixedColumns: true,
+            // "dom": 'lftipr',
+            // info : false,  // entries 삭제.
+            "ajax": {
+                "url": "/scrap/account",
+                "type": "POST",
+                "data": function ( d ) {  // 커스텀 파라미터를 넣을 수 있다.
+                    return $.extend( {}, d, {
+                        "status": $("#inputStatus option:selected").val(),
+                        "keyword": $("#inputKeyword").val(),
+                    } );
+                },
+                "dataSrc": function(res) {
+                    console.log(res);
+                    return res.data.accountInfo.content;
+                },error:function(request, status, error){
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            },
+            "columns" : [
+                { data : 'seq' },
+                { data : 'assignment',
+                    render: function (data, type, row, meta) {
+                        if (data === '활동중') { return '<button class="btn btn-sm btn-success">' + data + '</button>'; }
+                        else { return '<button class="btn btn-sm btn-warning">' + data + '</button>'; }
+                    }
+                },
+                { data : 'id',
+                    render: function (data, type, row, meta) {
+                        return `<a href="/scrap/account/form/${row.seq}">${data}</a>`
+                    }},
+                // { data : 'password' },
+                { data : 'ipAddress' },
+                { data : 'dailyCount' },
+                { data : 'id',
+                    render: function (data, type, row, meta){
+                        if (row.ipAddress === null) { return `` }
+                        else { return `<a href="/scrap/history/${data}">조회</a>` }
+                    }},
+                { data : 'createdAt',
+                    render: function (data, type, row, meta) {
+                        return data.replace("T", " ")
+                    }},
+            ],
+        });
+
+        $('#inputStatus,#inputType').on('change', function () {
+            table.search('markerValue', true, false, true).draw();
+        });
+
+        $('#inputKeyword').on('keyup', function () {
+            table.search('markerValue', true, false, true).draw();
+        });
+
+    });
+</script>
+</body>
+</html>

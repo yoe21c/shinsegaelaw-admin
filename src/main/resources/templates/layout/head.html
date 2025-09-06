@@ -1,0 +1,94 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(title, links)">
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title th:utext="${title}">Law v1 | Admin</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome-free/css/all.css}">
+
+    <!-- daterange picker -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/daterangepicker/daterangepicker.css}">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css}">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css}">
+    <!-- Select2 -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/select2/css/select2.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css}">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css}">
+    <!-- BS Stepper -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/bs-stepper/css/bs-stepper.min.css}">
+    <!-- dropzonejs -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/dropzone/min/dropzone.min.css}">
+    <!-- Theme style -->
+    <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
+
+    <!-- jQuery UI -->
+    <link rel="stylesheet" th:href="@{/assets/plugins/jquery-ui/jquery-ui.css}">
+
+    <link rel="stylesheet" th:href="@{/custom/my.css}">
+
+  <!-- 웹폰트 적용 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      /* Custom styling for the sortable list */
+      #sortable-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sortable-item {
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin: 5px;
+        cursor: grab;
+        background-color: #e9ecef;
+      }
+
+      /* Dotted border style for the sortable items */
+      .sortable-item {
+        border: 1px dotted #999;
+      }
+
+      .custom-font-size {
+          font-size: .65rem;
+      }
+
+      /* 폰트를 지정해보자. */
+      /*html {*/
+      /*  font-family: "Noto Serif KR", serif;*/
+      /*}*/
+
+
+    </style>
+
+    <style>
+      #loading {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+       .loading-gif {
+         /*display: none;*/
+         width: 20px;
+         height: 20px;
+       }
+    </style>
+</head>
+
+</html>

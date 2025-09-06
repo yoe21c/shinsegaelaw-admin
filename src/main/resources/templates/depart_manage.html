@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/head :: head('부서 관리', '')}"></head>
+
+<body class="hold-transition sidebar-mini">
+
+<div class="wrapper">
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}"/>
+
+    <!-- Sidebar -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/depart_manage', '2')}"/>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Page Header -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>부서 관리</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="row">
+                <!-- Department List -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">부서 목록</h3>
+                            <div class="ml-auto d-flex align-items-center">
+                                <button class="btn btn-success btn-sm mr-2" onclick="openAddDepartModal()">부서 추가</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="departTable" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>부서명</th>
+                                    <th>생성일</th>
+                                    <th>수정일</th>
+                                    <th>관리</th>
+                                </tr>
+                                </thead>
+                                <tbody th:if="${departs != null and not #lists.isEmpty(departs)}">
+                                <tr th:each="depart, iter : ${departs}" th:id="'departRow-' + ${depart.seq}">
+                                    <td th:text="${depart.seq}"></td>
+                                    <td th:text="${depart.departName}"></td>
+                                    <td th:text="${#temporals.format(depart.createdAt, 'yyyy-MM-dd')}"></td>
+                                    <td th:text="${#temporals.format(depart.updatedAt, 'yyyy-MM-dd')}"></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-warning btn-sm" th:onclick="editDepart([[${depart.seq}]])">수정</button>
+                                        <button class="btn btn-danger btn-sm" th:onclick="deleteDepart([[${depart.seq}]])">삭제</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+</div>
+
+<div class="modal" id="departModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">부서 추가</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="departSeq">
+                <label>부서명</label>
+                <input type="text" id="departName" class="form-control" maxlength="20" required>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="saveDepartBtn" onclick="saveDepart()">저장</button>
+                <button type="button" class="btn btn-secondary" onclick="closeDepartModal()">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}"/>
+<script src="/custom/my-script.js"></script>
+
+<script>
+    $(document).ready(function() {
+        loadDeparts();
+    });
+
+    function loadDeparts() {
+        $.get("/depart_manage/departs", function(data) {
+            let tableBody = "";
+            // Page 객체에서 직접 content를 접근
+            if (data.content && data.content.length > 0) {
+                data.content.forEach((depart) => {
+                    const createdAt = new Date(depart.createdAt).toLocaleDateString('ko-KR');
+                    const updatedAt = new Date(depart.updatedAt).toLocaleDateString('ko-KR');
+                    tableBody += `<tr>
+                        <td>${depart.seq}</td>
+                        <td>${depart.departName}</td>
+                        <td>${createdAt}</td>
+                        <td>${updatedAt}</td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm" onclick="editDepart(${depart.seq})">수정</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteDepart(${depart.seq})">삭제</button>
+                        </td>
+                    </tr>`;
+                });
+            } else {
+                tableBody = `<tr><td colspan="5" class="text-center">등록된 부서가 없습니다.</td></tr>`;
+            }
+            $("#departTable tbody").html(tableBody);
+        });
+    }
+
+    $(document).ready(function() {
+        $('#departTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "paging": true,  // 페이징 활성화
+            "lengthChange": true,  // 페이지 크기 변경 가능
+            "searching": false,  // 검색 기능 제거
+            "ordering": false,  // 정렬 기능 제거
+            "info": true,  // 정보 표시 활성화
+            "ajax": function(data, callback, settings) {
+                let page = data.start / data.length;  // DataTables의 start를 page index로 변환
+                let size = data.length;
+
+                $.get(`/depart_manage/departs?page=${page}&size=${size}`, function(response) {
+                    callback({
+                        recordsTotal: response.totalElements,  // 총 데이터 개수
+                        recordsFiltered: response.totalElements,  // 필터링된 데이터 개수
+                        data: response.content  // 실제 데이터 리스트
+                    });
+
+                    // 페이지네이션 정보 수동 업데이트
+                    $("#currentPage").text(response.number + 1);
+                    $("#totalPages").text(response.totalPages);
+                });
+            },
+            "columns": [
+                { "data": "seq" },
+                { "data": "departName" },
+                { 
+                    "data": "createdAt",
+                    "render": function(data, type, row) {
+                        return new Date(data).toLocaleDateString('ko-KR');
+                    }
+                },
+                { 
+                    "data": "updatedAt",
+                    "render": function(data, type, row) {
+                        return new Date(data).toLocaleDateString('ko-KR');
+                    }
+                },
+                {
+                    "data": "seq",
+                    "render": function(data, type, row) {
+                        return `
+                        <div class="text-center">
+                        <button class="btn btn-warning btn-sm" onclick="editDepart(${data})">수정</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteDepart(${data})">삭제</button>
+                    </div>
+                    `;
+                    }
+                }
+            ]
+        });
+    });
+
+        function openAddDepartModal() {
+            $("#modalTitle").text("부서 추가");
+            $("#departSeq").val("");
+            $("#departName").val("");
+            $("#departModal").modal("show");
+        }
+
+    function editDepart(seq) {
+        $.get(`/depart_manage/depart?seq=${seq}`, function(response) {
+            $("#modalTitle").text("부서 수정");
+            $("#departSeq").val(response.data.depart.seq);
+            $("#departName").val(response.data.depart.departName);
+            $("#departModal").modal("show");
+        });
+    }
+
+    function saveDepart() {
+        let seq = $("#departSeq").val();
+        let departData = {
+            seq,
+            departName: $("#departName").val().trim()
+        };
+
+        if (!departData.departName) {
+            alert("부서명을 입력해주세요.");
+            return;
+        }
+
+        let url = seq ? "/depart_manage/modify_depart" : "/depart_manage/add_depart";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(departData),
+            success: function(response) {
+                if(seq) {
+                    alert("수정되었습니다.");
+                } else {
+                    alert("추가되었습니다.");
+                }
+                $("#departModal").modal("hide");
+                loadDeparts();
+            },
+            error: function(err) {
+                if(seq) {
+                    alert("수정에 실패하였습니다.");
+                } else {
+                    alert("등록에 실패하였습니다.");
+                }
+            }
+        });
+    }
+
+    function deleteDepart(seq) {
+        if (!confirm("정말 삭제하시겠습니까?")) return;
+        let data = {
+            seq,
+        };
+
+        $.ajax({
+            url: "/depart_manage/delete_depart",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(response) {
+                alert("삭제되었습니다.");
+                loadDeparts();
+            },
+            error: function(err) {
+                alert("삭제에 실패하였습니다.");
+            }
+        });
+    }
+
+    function closeDepartModal() {
+        $("#departModal").modal("hide"); // Bootstrap 모달 닫기
+    }
+    </script>
+</body>
+</html> 

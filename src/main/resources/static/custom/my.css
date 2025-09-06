@@ -1,0 +1,9 @@
+.sortable-item .form-group {
+    margin-bottom: 0;
+}
+/* DataTables 에서 autoWidth 를 활성화학기 위한 추가적인 CSS 처리 */
+#list {
+    width: 100% !important;
+    max-width: 100%;
+    overflow-x: auto;
+}

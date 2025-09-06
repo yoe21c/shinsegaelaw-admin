@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('배경이미지 병합하기', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/image_combine', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h1>이미지 병합하기</h1>
+                  </div>
+                  <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                      <li class="breadcrumb-item"><a href="/">홈</a></li>
+                    </ol>
+                  </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+          <div class="container-fluid">
+
+            <form id="form">
+
+              <div class="row">
+
+                <!-- left column -->
+                <div class="col-md-6">
+                  <!-- general form elements -->
+                  <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">이미지 선택</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                      <!-- Filter 영역 시작 -->
+                      <section class="content">
+                        <div class="container-fluid">
+                          <form class="form-horizontal" id="upsertForm">
+                            <div id="modifyDiv">
+                              <div class="col-md-10">
+                                <div class="card-body">
+                                  <div type="file" class="form-group row">
+                                    <label class="col-sm-12 col-form-label">썸네일 이미지 <span class="font-weight-bold col-form-label btn-light">: 가로 세로 동일한 사이즈의 png 이미지(투명해야하므로)</span></label>
+                                    <div class="col-sm-12">
+                                        <input type="file" class="form-control" id="thumbnailImage" name="thumbnailImage" accept="image/*" multiple>
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-sm-12 col-form-label" for="transparency">투명도(0~100): 낮을수록 투명, 높을수록 불투명</label>
+                                    <input class="form-control" type="number" id="transparency" max="100" min="0" value="80">
+                                  </div>
+                                  <div class="form-group">
+                                    <label class="col-sm-12 col-form-label" for="margin">마진(px): 가로,세로의 일정한 px을 띄움</label>
+                                    <input class="form-control" type="number" id="margin" max="200" min="0" value="50">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+
+                          <!-- 목록, 저장 버튼 -->
+                          <div class="text-right">
+                            <button class="btn btn-success" type="button" id="downloadBtn">다운로드(.zip)</button>
+                          </div>
+
+                        </div>
+                      </section>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer"></div>
+
+                  </div>
+
+                </div>
+
+                <!-- right column -->
+                <div class="col-md-6">
+
+                  <!-- general form elements -->
+                  <div class="card card-success">
+                    <div class="card-header">
+                      <h3 class="card-title">결과 샘플</h3>
+
+                      <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="font-weight-light">배경이미지는 <span class="font-weight-bold col-form-label btn-light">740 x 740 사이즈의 jpg 고정 이미지</span> 입니다.</div>
+                      <br/>
+                      <section class="content">
+                        <div class="container-fluid">
+                          <img id="result-image" src="public-api/v1/get-image-test" width="100%;">
+                        </div>
+                      </section>
+                    </div>
+
+                    <!-- /.card-body -->
+                    <div class="card-footer"></div>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </form>
+
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+
+        <div id="loading">
+<!--          <img src="/assets/images/image_processing.gif" alt="Loading...">-->
+          <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!sw800" alt="Loading...">
+        </div>
+
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+
+  // $('#thumbnailImage').change(function () {
+  //   let formData = new FormData();
+  //   let fileInput = $('#thumbnailImage')[0].files[0];
+  //   let transparency = $('#transparency').val();
+  //   let margin = $('#margin').val();
+  //
+  //   formData.append('thumbnail', fileInput);
+  //   formData.append('transparency', transparency);
+  //   formData.append('margin', margin);
+  //
+  //   $.ajax({
+  //     url: '/public-api/v1/image-combine', // 스프링 컨트롤러의 엔드포인트 URL
+  //     type: 'POST',
+  //     data: formData,
+  //     processData: false,
+  //     contentType: false,
+  //     success: function (response) {
+  //       // 성공 시 처리할 내용
+  //       myScript.Toast.fire({
+  //         icon: 'success',
+  //         title: '업로드 성공!'
+  //       })
+  //     },
+  //     error: function (jqXHR, textStatus, errorThrown) {
+  //       // 에러 시 처리할 내용
+  //       alert('이미지 업로드 실패!');
+  //       $('#thumbnailImage').val('');
+  //     }
+  //   });
+  // });
+
+  $('#downloadBtn').on('click', function () {
+    let formData = new FormData();
+    let fileInput = $('#thumbnailImage')[0];
+    let transparency = $('#transparency').val();
+    let margin = $('#margin').val();
+
+    for (const file of fileInput.files) {
+      formData.append('thumbnails', file);
+    }
+    formData.append('transparency', transparency);
+    formData.append('margin', margin);
+
+    $('#loading').show();
+
+    $.ajax({
+      url: '/public-api/v1/image-combine-download-zip', // 스프링 컨트롤러의 엔드포인트 URL
+      type: 'POST',
+      timeout: 180000, // 타임아웃 시간 설정 (3분 = 180000 밀리초)
+      data: formData,
+      processData: false,
+      contentType: false,
+      xhrFields: {
+        responseType: 'blob'
+      },
+      success: function (response) {
+
+        $('#loading').hide();
+
+        // 성공 시 처리할 내용
+        let blob = new Blob([response], { type: 'application/zip' });
+        let link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'mergedImages.zip';
+        link.click();
+
+        $('#thumbnailImage').val('');
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+
+        $('#loading').hide();
+
+        // 에러 시 처리할 내용
+        alert('이미지 업로드 실패!');
+      }
+    });
+  });
+
+  $("#transparency,#margin").on("keyup", function () {
+    // alert("keyup");
+    $("#result-image").attr("src", "/public-api/v1/get-image-test?transparency=" + $("#transparency").val() + "&margin=" + $("#margin").val());
+      // location.href = '/scrap/account';
+  })
+
+</script>
+</body>
+</html>

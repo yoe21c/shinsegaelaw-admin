@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('키워드 검색 - 팀/키워드 관리', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}"/>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/search_keyword_teams', '2')}"/>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>키워드 그룹/키워드 관리</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <!-- Left 50%: Team 목록 테이블 -->
+                <div class="col-md-7">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">키워드 그룹 목록</h3>
+                            <div class="ml-auto d-flex align-items-center">
+                                <button class="btn btn-success btn-sm mr-2" onclick="addTeam()">키워드 그룹 추가</button>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <!-- departs가 없을 때 안내 문구 -->
+                            <div th:if="${adminMember.role != 'superadmin' and (adminMember.depart == null or adminMember.depart.isEmpty())}" class="text-center py-5">
+                                <p class="text-muted mb-0">키워드 그룹이 설정되어있지않습니다.<br>관리자에게 요청하세요</p>
+                            </div>
+                            
+                            <table id="teamTable" class="table table-bordered table-hover" th:if="${adminMember.role == 'superadmin' or (adminMember.depart != null and not adminMember.depart.isEmpty())}">
+                                <thead>
+                                <tr>
+                                    <th style="width: 40%;">키워드 그룹 이름</th>
+                                    <th style="width: 10%;">활성화</th>
+                                    <th style="width: 25%;">검색 이미지</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="team : ${teams}" th:id="'teamRow-' + ${team.seq}">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span th:text="${team.teamName}" th:id="'teamName-' + ${team.seq}">팀 이름</span>
+                                                <input type="text" class="form-control d-none" th:id="'teamInput-' + ${team.seq}" th:value="${team.teamName}">
+                                                <div class="button-group ml-2">
+                                                    <button class="btn btn-warning btn-sm" th:onclick="'editTeam(' + ${team.seq} + ')'" th:id="'editTeamBtn-' + ${team.seq}">수정</button>
+                                                    <button class="btn btn-danger btn-sm" th:onclick="'deleteTeam(' + ${team.seq} + ')'">삭제</button>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <!-- 활성화 토글 버튼 -->
+                                        <td class="text-center">
+                                            <label class="switch">
+                                                <input type="checkbox" th:checked="${team.isActive}" th:onchange="toggleTeamStatus([[${team.seq}]], this.checked)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="custom-file-upload">
+                                                <label th:for="'imageUpload-' + ${team.seq}" class="btn btn-secondary btn-sm">이미지 선택</label>
+                                                <input type="file" class="form-control-file" th:id="'imageUpload-' + ${team.seq}" accept="image/*" th:onchange="uploadImage([[${team.seq}]])" style="display: none;">
+                                            </div>
+                                            <div class="mt-2">
+                                                <!-- 이미지가 없을 때 표시할 메시지 추가 -->
+                                                <p th:if="${team.searchThumbnailUrl == null || team.searchThumbnailUrl.isEmpty()}" 
+                                                   class="text-muted small mt-1">등록된 이미지 없음</p>
+                                                <!-- 이미지가 있을 때만 이미지 태그 표시 -->
+                                                <img th:if="${team.searchThumbnailUrl != null && !team.searchThumbnailUrl.isEmpty()}"
+                                                     class="searchImage" 
+                                                     width="200px;" 
+                                                     th:src="${team.searchThumbnailUrl}"
+                                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                                <p class="text-muted small mt-1" style="display: none;">이미지를 불러올 수 없습니다</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <!-- 키워드 관리 섹션 -->
+                    <div class="card mb-4">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">키워드 목록</h3>
+                            <div class="ml-auto d-flex align-items-center">
+                                <input type="file" id="excelUploadInput" accept=".xlsx, .xls" style="display: none;" onchange="uploadExcelFile()" />
+                                <span id="lastUploadFileNameLabel" style="margin-right: 10px;"></span>
+                                <button id="excelUploadButton" class="btn btn-info btn-sm mr-2" onclick="triggerExcelUpload()" style="display: none;">엑셀 업로드</button>
+                                <button id="addKeywordButton" class="btn btn-success btn-sm" style="display: none;">키워드 추가</button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                            <!-- 키워드 그룹 선택 전 메시지 -->
+                            <div id="keywordEmptyState" class="text-center py-5">
+                                <p class="text-muted mb-0">왼쪽에서 키워드 그룹을 선택해주세요.</p>
+                            </div>
+                            <!-- 키워드 테이블 (초기에는 숨김) -->
+                            <div id="keywordTableContainer" style="display: none;">
+                                <p id="keywordCount" class="mb-3">총 키워드 수: 0</p>
+                                <table id="keywordTable" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 60%;">키워드 이름</th>
+                                        <th style="width: 40%; text-align: center;">작업</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 스케줄 관리 섹션 -->
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">스케줄 목록</h3>
+                            <div class="ml-auto">
+                                <button id="addScheduleButton" class="btn btn-success btn-sm" onclick="addSchedule()" style="display: none;">스케줄 추가</button>
+                            </div>
+                        </div>
+                        <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                            <!-- 키워드 그룹 선택 전 메시지 -->
+                            <div id="scheduleEmptyState" class="text-center py-5">
+                                <p class="text-muted mb-0">왼쪽에서 키워드 그룹을 선택해주세요.</p>
+                            </div>
+                            <!-- 스케줄 테이블 (초기에는 숨김) -->
+                            <div id="scheduleTableContainer" style="display: none;">
+                                <table id="scheduleTable" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>검색 시간</th>
+                                        <th style="width: 20%; text-align: center;">작업</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="scheduleModal" class="modal" tabindex="-1" role="dialog" style="display: none;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">스케줄 추가</h5>
+                                <button type="button" class="close" onclick="closeScheduleModal()" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="scheduleForm">
+                                    <div class="form-group">
+                                        <label for="scheduleTimeInput">검색 시간:</label>
+                                        <input type="time" id="scheduleTimeInput" class="form-control" required>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="saveScheduleBtn" onclick="saveSchedule()">저장</button>
+                                <button type="button" class="btn btn-secondary" onclick="closeScheduleModal()">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}"/>
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    const memberSeq = [[${adminMember.seq}]];
+    /*]]>*/
+</script>
+
+<script>
+
+    function closeKeywordSection() {
+        $('#keywordSection').hide();  // 키워드 목록 섹션 숨기기
+    }
+
+    function addTeam() {
+        const teamName = prompt("추가할 키워드 그룹 이름을 입력하세요:");
+
+        if (teamName && teamName.trim() !== "") {
+            $.ajax({
+                url: '/add_team',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ teamName: teamName.trim() }),
+                success: function (response) {
+                    let team = response.data.result;
+                    let isActive = team.active ? 'checked' : '';
+                    
+                    let newRow = `
+                        <tr id="teamRow-${team.seq}">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <span id="teamName-${team.seq}">${team.teamName}</span>
+                                    <input type="text" class="form-control d-none w-50" id="teamInput-${team.seq}" value="${team.teamName}">
+                                    <div class="button-group ml-2">
+                                        <button class="btn btn-warning btn-sm" onclick="editTeam(${team.seq})" id="editTeamBtn-${team.seq}">수정</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteTeam(${team.seq})">삭제</button>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <label class="switch">
+                                    <input type="checkbox" ${isActive} onclick="toggleTeamStatus(${team.seq}, this.checked)">
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                <div class="custom-file-upload">
+                                    <label for="imageUpload-${team.seq}" class="btn btn-secondary btn-sm">이미지 선택</label>
+                                    <input type="file" class="form-control-file" id="imageUpload-${team.seq}" accept="image/*" onchange="uploadImage(${team.seq})" style="display: none;">
+                                </div>
+                                <div class="mt-2">
+                                    <!-- 이미지가 없을 때 표시할 메시지 추가 -->
+                                    <p th:if="${team.searchThumbnailUrl == null || team.searchThumbnailUrl.isEmpty()}" 
+                                       class="text-muted small mt-1">등록된 이미지 없음</p>
+                                    <!-- 이미지가 있을 때만 이미지 태그 표시 -->
+                                    <img th:if="${team.searchThumbnailUrl != null && !team.searchThumbnailUrl.isEmpty()}"
+                                         class="searchImage" 
+                                         width="200px;" 
+                                         th:src="${team.searchThumbnailUrl}"
+                                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <p class="text-muted small mt-1" style="display: none;">이미지를 불러올 수 없습니다</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    $('#teamTable tbody').append(newRow);
+                    myScript.Toast.fire({icon: 'success', title: '키워드 그룹이 추가되었습니다.'});
+                },
+                error: function (error) {
+                    console.error("Error adding team:", error);
+                    myScript.Toast.fire({icon: 'error', title: '키워드 그룹 추가에 실패했습니다.'});
+                }
+            });
+        } else {
+            alert("키워드 그룹 이름을 입력하세요.");
+        }
+    }
+
+    function editTeam(teamSeq) {
+        // 팀 이름을 input으로 변경
+        $(`#teamName-${teamSeq}`).addClass('d-none');  // 텍스트 숨기기
+        $(`#teamInput-${teamSeq}`).removeClass('d-none').addClass('w-50');  // 입력 필드 보이기, 너비 50%로 설정
+        
+        // 삭제 버튼 비활성화
+        $(`#teamRow-${teamSeq} .btn-danger`).prop('disabled', true);
+        
+        // 수정 버튼을 저장/취소 버튼으로 변경
+        let editButton = $(`#editTeamBtn-${teamSeq}`);
+        editButton.text("저장");
+        editButton.attr("onclick", `saveTeam(${teamSeq})`);
+        editButton.after(`<button class="btn btn-secondary btn-sm ml-2" id="cancelTeamBtn-${teamSeq}" onclick="cancelTeamEdit(${teamSeq})">취소</button>`);
+    }
+
+    function saveTeam(teamSeq) {
+        let newTeamName = $(`#teamInput-${teamSeq}`).val();
+
+        $.ajax({
+            url: '/modify_team_name',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ teamSeq: teamSeq, newTeamName: newTeamName }),
+            success: function () {
+                restoreTeamEditButtons(teamSeq, newTeamName);
+                myScript.Toast.fire({icon: 'success', title: '키워드 그룹 이름이 변경되었습니다.'});
+            },
+            error: function () {
+                myScript.Toast.fire({icon: 'error', title: '키워드 그룹 이름 변경에 실패했습니다.'});
+            }
+        });
+    }
+
+    function cancelTeamEdit(teamSeq) {
+        // 원래 값으로 복원
+        let originalName = $(`#teamName-${teamSeq}`).text();
+        restoreTeamEditButtons(teamSeq, originalName);
+    }
+
+    function restoreTeamEditButtons(teamSeq, teamName) {
+        // 텍스트 업데이트 및 input 숨기기
+        $(`#teamName-${teamSeq}`).text(teamName).removeClass('d-none');
+        $(`#teamInput-${teamSeq}`).addClass('d-none').removeClass('w-50');  // 너비 클래스 제거
+        
+        // 삭제 버튼 활성화
+        $(`#teamRow-${teamSeq} .btn-danger`).prop('disabled', false);
+        
+        // 버튼 상태 복원
+        let editButton = $(`#editTeamBtn-${teamSeq}`);
+        editButton.text("수정");
+        editButton.attr("onclick", `editTeam(${teamSeq})`);
+        
+        // 취소 버튼 제거
+        $(`#cancelTeamBtn-${teamSeq}`).remove();
+    }
+
+    function deleteTeam(teamSeq) {
+        const confirmDelete = confirm("정말 삭제하시겠습니까?");
+        if (confirmDelete) {
+            $.ajax({
+                url: '/delete_team',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ teamSeq: teamSeq }),
+                success: function () {
+                    $(`#teamRow-${teamSeq}`).remove();
+                    myScript.Toast.fire({icon: 'success', title: '키워드 그룹이 삭제되었습니다.'});
+                },
+                error: function () {
+                    myScript.Toast.fire({icon: 'error', title: '키워드 그룹 삭제에 실패했습니다.'});
+                }
+            });
+        }
+    }
+
+    function toggleTeamStatus(teamSeq, isActive) {
+        $.ajax({
+            url: '/change_team_active',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ teamSeq: teamSeq }),
+            success: function () {
+                myScript.Toast.fire({icon: 'success', title: '키워드 그룹 활성화 상태가 변경되었습니다.'});
+            },
+            error: function () {
+                myScript.Toast.fire({icon: 'error', title: '키워드 그룹 활성화 상태 변경에 실패했습니다.'});
+            }
+        });
+    }
+
+    function uploadImage(teamSeq) {
+        const fileInput = $(`#imageUpload-${teamSeq}`)[0];
+        const file = fileInput.files[0];
+        if (!file) {
+            alert("이미지를 선택하세요.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("teamSeq", teamSeq);
+
+        // 이미지 업로드 API 호출
+        $.ajax({
+            url: '/upload_search_image',
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                myScript.Toast.fire({icon: 'success', title: '이미지가 업로드 되었습니다.'});
+                $('.searchImage').attr('src', response.data.result).show();
+            },
+            error: function (error) {
+                console.error("Error uploading image:", error);
+                myScript.Toast.fire({icon: 'error', title: '이미지 업로드가 실패되었습니다.'});
+            }
+        });
+    }
+
+    let currentTeamSeq = null;
+    const excelUploadButton = document.getElementById('excelUploadButton');
+    const lastUploadFileNameLabel = document.getElementById('lastUploadFileNameLabel');
+    document.addEventListener('DOMContentLoaded', function () {
+        const dynamicSection = document.getElementById('dynamicSection');
+        const dynamicTitle = document.getElementById('dynamicTitle');
+        const addDynamicButton = document.getElementById('addDynamicButton');
+        const keywordList = document.getElementById('keywordList');
+        const scheduleList = document.getElementById('scheduleList');
+        const keywordTable = document.getElementById('keywordTable').querySelector('tbody');
+        const scheduleTable = document.getElementById('scheduleTable').querySelector('tbody');
+
+        // 페이지 로드 시 첫 번째 키워드 그룹 자동 선택
+        const firstTeamRow = $('#teamTable tbody tr:first');
+        if (firstTeamRow.length > 0) {
+            firstTeamRow.addClass('selected-row');
+            const teamSeq = firstTeamRow.attr('id').split('-')[1];
+            loadTeamData(teamSeq);
+        }
+
+        // 키워드 관리 버튼 클릭
+        window.manageKeywords = function (teamSeq, lastUploadFileName) {
+            currentTeamSeq = teamSeq;
+
+            if (!lastUploadFileName) {
+                // 버튼의 data 속성에서 lastUploadFileName 가져오기
+                const button = document.querySelector(`button[data-team-seq='${teamSeq}']`);
+                lastUploadFileName = button ? button.getAttribute('data-last-upload-file-name') || '업로드된 파일 없음' : '업로드된 파일 없음';
+            }
+
+            showDynamicSection('키워드 목록', '키워드 추가', () => addKeyword(teamSeq), lastUploadFileName);
+            scheduleList.style.display = 'none'; // 스케줄 목록 숨기기
+            keywordList.style.display = 'block'; // 키워드 목록 보이기
+
+            // 키워드 목록 가져오기
+            fetch(`/get_search_keywords?teamSeq=${teamSeq}`)
+                .then(response => response.json())
+                .then(data => {
+                    keywordTable.innerHTML = ''; // 기존 데이터 초기화
+                    data.data.result.forEach(keyword => {
+                        const row = `<tr id="keywordRow-${keyword.seq}">
+                                    <td id="keywordName-${keyword.seq}">${keyword.keyword}</td>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <button class="btn btn-warning btn-sm edit-btn mr-2" data-seq="${keyword.seq}" id="editKeywordBtn-${keyword.seq}">수정</button>
+                                            <button class="btn btn-danger btn-sm delete-btn" data-seq="${keyword.seq}">삭제</button>
+                                        </div>
+                                    </td>
+                                 </tr>`;
+                        keywordTable.insertAdjacentHTML('beforeend', row);
+                    });
+                    $('#keywordCount').text('총 키워드 수: ' + data.data.result.length);
+                })
+                .catch(error => console.error('Error fetching keywords:', error));
+        };
+
+        // 스케줄 관리 버튼 클릭
+        window.manageSchedules = function (teamSeq) {
+            currentTeamSeq = teamSeq;
+            showDynamicSection('스케줄 목록', '스케줄 추가', () => addSchedule(teamSeq));
+            keywordList.style.display = 'none'; // 키워드 목록 숨기기
+            scheduleList.style.display = 'block'; // 스케줄 목록 보이기
+
+            // 스케줄 목록 가져오기
+            fetch(`/get_search_team_schedules?teamSeq=${teamSeq}`)
+                .then(response => response.json())
+                .then(data => {
+                    scheduleTable.innerHTML = ''; // 기존 데이터 초기화
+                    console.log(data.result);
+                    data.data.result.forEach(schedule => {
+                        const row = `<tr>
+                                    <td>${schedule.searchTime}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-warning btn-sm" onclick="editSchedule(${schedule.seq})">수정</button>
+                                        <button class="btn btn-danger btn-sm" onclick="deleteSchedule(${schedule.seq})">삭제</button>
+                                    </td>
+                                 </tr>`;
+                        scheduleTable.insertAdjacentHTML('beforeend', row);
+                    });
+                })
+                .catch(error => console.error('Error fetching schedules:', error));
+        };
+
+        // 동적 섹션 보이기
+        function showDynamicSection(title, addButtonText, addButtonAction, lastUploadFileName) {
+            dynamicTitle.innerText = title;
+            addDynamicButton.innerText = addButtonText;
+            addDynamicButton.style.display = 'inline-block';
+            addDynamicButton.onclick = addButtonAction;
+            dynamicSection.style.display = 'block';
+            if (title === '키워드 목록') {
+                excelUploadButton.style.display = 'inline-block';
+                if(lastUploadFileName) {
+                    lastUploadFileNameLabel.innerText = `업로드 파일: ${lastUploadFileName}`;
+                }
+                lastUploadFileNameLabel.style.display = 'inline-block';
+            } else {
+                excelUploadButton.style.display = 'none';
+                lastUploadFileNameLabel.style.display = 'none';
+            }
+        }
+
+        $(document).on('click', '.edit-btn', function () {
+            let keywordSeq = $(this).data('seq');
+            editKeyword(keywordSeq);
+        });
+
+        $(document).on('click', '.delete-btn', function () {
+            let keywordSeq = $(this).data('seq');
+            const confirmDelete = confirm("정말 삭제하시겠습니까?");
+            if (confirmDelete) {
+                $.ajax({
+                    url: '/delete_keyword',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ keywordSeq: keywordSeq }),
+                    success: function(response) {
+                        $(`#keywordRow-${keywordSeq}`).remove();
+                        // 현재 키워드 수 업데이트
+                        let currentCount = parseInt($('#keywordCount').text().split(': ')[1]) || 0;
+                        $('#keywordCount').text('총 키워드 수: ' + (currentCount - 1));
+                        myScript.Toast.fire({icon: 'success', title: '키워드가 삭제되었습니다.'});
+                    },
+                    error: function(error) {
+                        console.error("Error deleting keyword:", error);
+                        myScript.Toast.fire({icon: 'error', title: '키워드 삭제에 실패했습니다.'});
+                    }
+                });
+            }
+        });
+
+        // 닫기 버튼 클릭
+        window.closeDynamicSection = function () {
+            dynamicSection.style.display = 'none';
+            keywordList.style.display = 'none';
+            scheduleList.style.display = 'none';
+        };
+
+        // 키워드 추가
+        window.addKeyword = function (teamSeq) {
+            const newKeyword = prompt("추가할 키워드를 입력하세요:");
+
+            if (newKeyword && newKeyword.trim() !== "") {
+                $.ajax({
+                    url: '/add_keyword',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ teamSeq: teamSeq, keyword: newKeyword.trim() }),
+                    success: function (response) {
+                        let newRow = `<tr id="keywordRow-${response.data.result.seq}">
+                    <td id="keywordName-${response.data.result.seq}">${response.data.result.keyword}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button class="btn btn-warning btn-sm edit-btn mr-2" data-seq="${response.data.result.seq}" id="editKeywordBtn-${response.data.result.seq}">수정</button>
+                            <button class="btn btn-danger btn-sm delete-btn" data-seq="${response.data.result.seq}">삭제</button>
+                        </div>
+                    </td>
+                </tr>`;
+                        $('#keywordTable tbody').append(newRow);
+                        // 현재 키워드 수 업데이트
+                        let currentCount = parseInt($('#keywordCount').text().split(': ')[1]) || 0;
+                        $('#keywordCount').text('총 키워드 수: ' + (currentCount + 1));
+                        myScript.Toast.fire({icon: 'success', title: '키워드가 추가되었습니다.'});
+                    },
+                    error: function (error) {
+                        console.error("Error adding keyword:", error);
+                        myScript.Toast.fire({icon: 'error', title: '키워드 추가에 실패했습니다.'});
+                    }
+                });
+            } else {
+                alert("키워드를 입력하세요.");
+            }
+        };
+
+        window.deleteKeyword = function (keywordSeq) {
+            const confirmDelete = confirm("정말 삭제하시겠습니까?");
+            if (confirmDelete) {
+                $.ajax({
+                    url: '/delete_keyword',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ keywordSeq: keywordSeq }),
+                    success: function (response) {
+                        $(`#keywordRow-${keywordSeq}`).remove();
+                        // 현재 키워드 수 업데이트
+                        myScript.Toast.fire({icon: 'success', title: '키워드가 삭제되었습니다.'});
+                    },
+                    error: function (error) {
+                        console.error("Error deleting keyword:", error);
+                        myScript.Toast.fire({icon: 'error', title: '키워드 삭제에 실패했습니다.'});
+                    }
+                });
+            }
+        }
+
+        window.editKeyword = function (keywordSeq) {
+            console.log('keywordSeq: ', keywordSeq);
+            // 키워드 셀을 input으로 변경
+            let keywordNameCell = $(`#keywordName-${keywordSeq}`);
+            let currentKeyword = keywordNameCell.text();
+            keywordNameCell.html(`<input type="text" class="form-control" id="keywordInput-${keywordSeq}" value="${currentKeyword}">`);
+
+            // 수정 버튼을 저장 버튼으로 변경
+            // 수정 버튼을 저장 버튼으로 변경
+            let editButton = $(`#editKeywordBtn-${keywordSeq}`);
+            editButton.text("저장");
+            // edit-btn 클래스를 변경하여 이벤트 핸들러가 saveKeyword를 호출하도록 함
+            editButton.removeClass('edit-btn').addClass('save-btn');
+        }
+
+        $(document).on('click', '.save-btn', function () {
+            let keywordSeq = $(this).data('seq');
+            saveKeyword(keywordSeq);
+        });
+
+        window.saveKeyword = function (keywordSeq) {
+            let newKeyword = $(`#keywordInput-${keywordSeq}`).val();
+
+            // 수정 API 호출
+            $.ajax({
+                url: '/modify_keyword',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ keywordSeq: keywordSeq, newKeyword: newKeyword }),
+                success: function (response) {
+                    // 수정이 성공하면 input을 텍스트로 변경하고, 버튼을 수정으로 되돌림
+                    $(`#keywordName-${keywordSeq}`).text(newKeyword);
+
+                    let editButton = $(`#editKeywordBtn-${keywordSeq}`);
+                    editButton.text("수정");
+                    editButton.removeClass('save-btn').addClass('edit-btn');
+                    myScript.Toast.fire({icon: 'success', title: '키워드가 수정되었습니다.'});
+                },
+                error: function (error) {
+                    console.error("Error updating keyword:", error);
+                    myScript.Toast.fire({icon: 'error', title: '키워드 수정에 실패했습니다.'});
+                }
+            });
+        }
+
+
+        // 스케줄 추가
+        window.addSchedule = function () {
+            // currentTeamSeq가 없으면 경고
+            if (!currentTeamSeq) {
+                myScript.Toast.fire({icon: 'warning', title: '키워드 그룹을 먼저 선택해주세요.'});
+                return;
+            }
+            openScheduleModal();
+        };
+
+        // 키워드 추가 버튼 클릭 이벤트 연결
+        $('#addKeywordButton').on('click', function() {
+            addKeyword(currentTeamSeq);
+        });
+    });
+
+    // 엑셀 업로드 버튼 클릭 시 파일 선택 창 열기
+    window.triggerExcelUpload = function () {
+        document.getElementById('excelUploadInput').click();
+    };
+
+    // 엑셀 파일 업로드 함수
+    window.uploadExcelFile = function () {
+        const fileInput = document.getElementById('excelUploadInput');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("엑셀 파일을 선택하세요.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("teamSeq", currentTeamSeq);
+
+        // 서버로 파일 업로드
+        $.ajax({
+            url: '/upload_keyword_file', // 서버의 업로드 엔드포인트
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                myScript.Toast.fire({icon: 'success', title: '엑셀 파일이 업로드되었습니다.'});
+                // 키워드 목록을 다시 로드합니다.
+                // teamSeq를 저장해두고 사용하거나 필요한 방법으로 호출하세요.
+                lastUploadFileNameLabel.innerText = `마지막 업로드 파일: ${response.data.result}`;
+                manageKeywords(currentTeamSeq, response.data.result);
+            },
+            error: function (error) {
+                console.error("Error uploading excel file:", error);
+                myScript.Toast.fire({icon: 'error', title: '엑셀 업로드에 실패했습니다.'});
+            }
+        });
+    };
+    function openScheduleModal(isEditMode = false) {
+        document.getElementById('scheduleTimeInput').value = '';
+        document.getElementById('scheduleModal').style.display = 'block';
+        if (!isEditMode) {
+            // 저장 버튼의 동작을 추가 모드로 설정
+            document.getElementById('saveScheduleBtn').onclick = saveSchedule;
+        }
+    }
+
+    function closeScheduleModal() {
+        document.getElementById('scheduleModal').style.display = 'none';
+        // 저장 버튼의 동작을 원래대로 복원
+        document.getElementById('saveScheduleBtn').onclick = saveSchedule;
+    }
+
+    function saveSchedule() {
+        const scheduleTime = document.getElementById('scheduleTimeInput').value;
+        
+        // 유효성 검사 추가
+        if (!scheduleTime) {
+            myScript.Toast.fire({icon: 'warning', title: '시간을 입력해주세요.'});
+            return;
+        }
+        if (!currentTeamSeq) {
+            myScript.Toast.fire({icon: 'warning', title: '키워드 그룹이 선택되지 않았습니다.'});
+            return;
+        }
+
+        console.log('스케줄 저장 시도:', {
+            teamSeq: currentTeamSeq,
+            scheduleTime: scheduleTime
+        });
+
+        // 서버로 데이터 전송
+        $.ajax({
+            url: '/add_schedule',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                teamSeq: currentTeamSeq,
+                scheduleTime: scheduleTime
+            }),
+            success: function (response) {
+                myScript.Toast.fire({icon: 'success', title: '스케줄이 추가되었습니다.'});
+                closeScheduleModal();
+                // 스케줄 목록을 다시 로드
+                loadSchedules(currentTeamSeq);
+            },
+            error: function (error) {
+                console.error('스케줄 추가 에러:', error);
+                myScript.Toast.fire({icon: 'error', title: '스케줄 추가에 실패했습니다.'});
+            }
+        });
+    }
+
+    function editSchedule(scheduleId) {
+        const row = $(`button[onclick="editSchedule(${scheduleId})"]`).closest('tr');
+        const timeCell = row.find('td:first');
+        const currentTime = timeCell.text();
+        
+        // 시간 조정을 위한 버튼 그룹과 input을 포함한 div 생성
+        timeCell.html(`
+            <div class="d-flex align-items-center">
+                <input type="time" class="form-control" value="${currentTime}" onfocus="this.showPicker()">
+                <div class="btn-group ml-2">
+                    <button class="btn btn-outline-secondary btn-sm" onclick="adjustTime(this, -1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="setCurrentTime(this)">현재</button>
+                    <button class="btn btn-outline-secondary btn-sm" onclick="adjustTime(this, 1)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        `);
+        
+        // 버튼 변경
+        const buttonCell = row.find('td:last');
+        buttonCell.html(`
+            <button class="btn btn-warning btn-sm" onclick="saveScheduleEdit(${scheduleId})">완료</button>
+            <button class="btn btn-secondary btn-sm" onclick="cancelScheduleEdit(${scheduleId}, '${currentTime}')">취소</button>
+        `);
+    }
+
+    // 시간 조정 함수
+    function adjustTime(button, minutes) {
+        const input = $(button).closest('.d-flex').find('input[type="time"]');
+        const currentValue = input.val();
+        
+        if (currentValue) {
+            const [hours, mins] = currentValue.split(':');
+            const date = new Date();
+            date.setHours(parseInt(hours));
+            date.setMinutes(parseInt(mins));
+            date.setMinutes(date.getMinutes() + minutes);
+            
+            const newHours = date.getHours().toString().padStart(2, '0');
+            const newMinutes = date.getMinutes().toString().padStart(2, '0');
+            input.val(`${newHours}:${newMinutes}`);
+        }
+    }
+
+    // 현재 시간 설정 함수
+    function setCurrentTime(button) {
+        const input = $(button).closest('.d-flex').find('input[type="time"]');
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        input.val(`${hours}:${minutes}`);
+    }
+
+    function saveScheduleEdit(scheduleId) {
+        const row = $(`button[onclick="saveScheduleEdit(${scheduleId})"]`).closest('tr');
+        const newTime = row.find('input[type="time"]').val();
+
+        if (!newTime) {
+            myScript.Toast.fire({icon: 'warning', title: '시간을 입력해주세요.'});
+            return;
+        }
+
+        $.ajax({
+            url: '/modify_schedule',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                scheduleSeq: scheduleId,
+                scheduleTime: newTime
+            }),
+            success: function(response) {
+                myScript.Toast.fire({icon: 'success', title: '스케줄이 수정되었습니다.'});
+                // 화면 업데이트
+                row.find('td:first').text(newTime);
+                row.find('td:last').html(`
+                    <button class="btn btn-warning btn-sm" onclick="editSchedule(${scheduleId})">수정</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteSchedule(${scheduleId})">삭제</button>
+                `);
+            },
+            error: function(error) {
+                console.error('Error editing schedule:', error);
+                myScript.Toast.fire({icon: 'error', title: '스케줄 수정에 실패했습니다.'});
+            }
+        });
+    }
+
+    function cancelScheduleEdit(scheduleId, originalTime) {
+        const row = $(`button[onclick="cancelScheduleEdit(${scheduleId}, '${originalTime}')"]`).closest('tr');
+        
+        // 원래 상태로 복원
+        row.find('td:first').text(originalTime);
+        row.find('td:last').html(`
+            <button class="btn btn-warning btn-sm" onclick="editSchedule(${scheduleId})">수정</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteSchedule(${scheduleId})">삭제</button>
+        `);
+    }
+
+    function deleteSchedule(scheduleId) {
+        const confirmDelete = confirm("정말 삭제하시겠습니까?");
+        if (confirmDelete) {
+            $.ajax({
+                url: '/delete_schedule',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ scheduleSeq: scheduleId }),
+                success: function(response) {
+                    myScript.Toast.fire({icon: 'success', title: '스케줄이 삭제되었습니다.'});
+                    // manageSchedules 대신 직접 데이터를 다시 로드
+                    loadTeamData(currentTeamSeq);
+                },
+                error: function(error) {
+                    console.error('Error deleting schedule:', error);
+                    myScript.Toast.fire({icon: 'error', title: '스케줄 삭제에 실패했습니다.'});
+                }
+            });
+        }
+    }
+
+    function changeDepart(teamSeq) {
+        let depart = document.getElementById(`departSelect-${teamSeq}`).value;
+
+        $.ajax({
+            url: '/set_search_keyword_team_depart',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ teamSeq: teamSeq, depart: depart }),
+            success: function (response) {
+                myScript.Toast.fire({icon: 'success', title: '부서가 변경되었습니다.'});
+            },
+            error: function (error) {
+                console.error("Error changing department:", error);
+                myScript.Toast.fire({icon: 'error', title: '부서 변경에 실패했습니다.'});
+            }
+        });
+    }
+
+    // 키워드 그룹 행 클릭 시 이벤트 처리
+    $(document).on('click', '#teamTable tbody tr', function() {
+        $('#teamTable tbody tr').removeClass('selected-row');
+        $(this).addClass('selected-row');
+        let teamSeq = $(this).attr('id').split('-')[1];
+        loadTeamData(teamSeq);
+    });
+
+    function loadTeamData(teamSeq) {
+        currentTeamSeq = teamSeq;
+        
+        // Empty state 숨기고 테이블 컨테이너 표시
+        $('#keywordEmptyState').hide();
+        $('#scheduleEmptyState').hide();
+        $('#keywordTableContainer').show();
+        $('#scheduleTableContainer').show();
+        
+        // 버튼들 활성화
+        $('#excelUploadButton').show();
+        $('#addKeywordButton').show();
+        $('#addScheduleButton').show();
+        
+        // 데이터 로드
+        loadKeywords(teamSeq);
+        loadSchedules(teamSeq);
+    }
+
+    function loadKeywords(teamSeq) {
+        fetch(`/get_search_keywords?teamSeq=${teamSeq}`)
+            .then(response => response.json())
+            .then(data => {
+                $('#keywordTable tbody').empty();
+                data.data.result.forEach(keyword => {
+                    const row = `<tr id="keywordRow-${keyword.seq}">
+                        <td id="keywordName-${keyword.seq}">${keyword.keyword}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <button class="btn btn-warning btn-sm edit-btn mr-2" data-seq="${keyword.seq}" id="editKeywordBtn-${keyword.seq}">수정</button>
+                                <button class="btn btn-danger btn-sm delete-btn" data-seq="${keyword.seq}">삭제</button>
+                            </div>
+                        </td>
+                    </tr>`;
+                    $('#keywordTable tbody').append(row);
+                });
+                $('#keywordCount').text('총 키워드 수: ' + data.data.result.length);
+            })
+            .catch(error => console.error('Error fetching keywords:', error));
+    }
+
+    function loadSchedules(teamSeq) {
+        fetch(`/get_search_team_schedules?teamSeq=${teamSeq}`)
+            .then(response => response.json())
+            .then(data => {
+                $('#scheduleTable tbody').empty();
+                data.data.result.forEach(schedule => {
+                    const row = `<tr>
+                        <td>${schedule.searchTime}</td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm" onclick="editSchedule(${schedule.seq})">수정</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSchedule(${schedule.seq})">삭제</button>
+                        </td>
+                    </tr>`;
+                    $('#scheduleTable tbody').append(row);
+                });
+            })
+            .catch(error => console.error('Error fetching schedules:', error));
+    }
+
+</script>
+</body>
+<style>
+    /* 토글 스위치 스타일 */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 20px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #4CAF50; /* 활성화 색상 */
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+
+    .custom-file-upload {
+        display: inline-block;
+    }
+
+    .custom-file-upload label {
+        cursor: pointer;
+    }
+    /* 모달 스타일 */
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-dialog {
+        margin: 100px auto;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        padding: 20px;
+    }
+
+    .selected-row {
+        background-color: #e9ecef !important;  /* 기존 #f8f9fa에서 더 진한 회색으로 변경 */
+    }
+
+    .text-muted {
+        color: #6c757d !important;
+    }
+
+    .py-5 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+
+    .btn-group .btn-outline-secondary {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .btn-group .btn-outline-secondary:hover {
+        background-color: #e9ecef;
+    }
+
+    input[type="time"] {
+        width: 240px;
+    }
+
+    /* 기존 스타일에 추가 */
+    #teamTable tbody tr {
+        cursor: pointer;
+    }
+
+    #teamTable tbody tr:hover {
+        background-color: #f5f5f5;  /* 선택적: hover 시 배경색 변경 */
+        transition: background-color 0.2s ease;  /* 선택적: 부드러운 전환 효과 */
+    }
+
+    /* hover 효과와의 구분을 위해 selected 상태에서의 hover 스타일도 추가 */
+    .selected-row:hover {
+        background-color: #dee2e6 !important;  /* selected 상태에서 hover 시 더 진한 색상 */
+    }
+</style>
+</html>

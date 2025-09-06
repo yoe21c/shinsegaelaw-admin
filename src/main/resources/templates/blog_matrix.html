@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('블로그 매트릭스', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/scrap/queue', '2')}" />
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-4">
+          <div class="col-sm-6">
+            <h1>블로그 매트릭스 한번에 조회하기</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/">홈</a></li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+      <!-- Default box -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title" th:utext="|유저정보: ${blogMatrix.userInfo}, 사용횟수: ${blogMatrix.usedCount}|">blogmatrix - 블로그 누락검사</h3>
+
+          <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <!-- Filter 영역 시작 -->
+          <section class="content">
+            <div class="container-fluid">
+              <form class="form-horizontal">
+                <div class="row">
+
+                  <div class="col-md-6">
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <label for="inputKeyword" class="col-sm-4 col-form-label">블로그아이디</label>
+                        <div class="col-sm-8">
+                          <div class="form-group">
+                            <input type="text" name="keyword" id="inputKeyword" class="form-control" placeholder="검색어 입력 (블로그아이디를 입력해주세요.)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <div class="col-sm-9">
+                          <div class="form-group">
+                            <button id="btnSearch" class="btn btn-sm btn-warning">조회하기</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </section>
+          <!-- Filter 영역 끝 -->
+
+          <table id="list" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>날짜</th>
+              <th>타이틀</th>
+              <th>URL</th>
+              <th>결과</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          Footer
+        </div>
+        <!-- /.card-footer-->
+      </div>
+      <!-- /.card -->
+
+    </section>
+
+    <div id="loading">
+      <!--          <img src="/assets/images/image_processing.gif" alt="Loading...">-->
+      <img src="https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!sw800" alt="Loading...">
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <footer class="main-footer">
+    <div class="float-right d-none d-sm-block">
+      <b>Version</b> 3.1.0
+    </div>
+    <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+  $(document).ready(function () {
+    let table;
+
+    $('#btnSearch').on('click', function (e) {
+
+      e.preventDefault();  // 기본 폼 제출 동작을 막습니다.
+
+      $('#loading').show();
+
+      if ($.fn.DataTable.isDataTable('#list')) {
+        table.destroy();
+      }
+
+      table = $('#list').DataTable({
+        "pagingType": "full_numbers",
+        "processing": true,
+        "serverSide": true,
+        "ordering": false,
+        "stateSave": true,
+        "searching": false,   // Search 인풋 박스
+        "lengthChange": false,  // pagination length 셀렉트박스 없애기.
+        "pageLength": 100,
+        "info": true,   // 테이블 하단에 총 아이템수 등이 표기된다. "Showing 1 to 8 of 8 entries"
+        "paging": true,
+        "columnDefs": [
+          { width: '20%', targets: [0] },
+          { width: '40%', targets: [1] },
+          { width: '30%', targets: [2] },
+          { width: '10%', targets: [3] },
+        ],
+        "fixedColumns": true,
+        "ajax": {
+          "url": "/blog_matrix",
+          "type": "POST",
+          "data": function (d) {  // 커스텀 파라미터를 넣을 수 있다.
+            return $.extend({}, d, {
+              "keyword": $("#inputKeyword").val(),
+            });
+          },
+          "dataSrc": function (res) {
+            console.log(res);
+            $('#loading').hide();
+            return res.data.blogMatrix.totalPostDetails;
+          },
+          "error": function (request, status, error) {
+            $('#loading').hide();
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+          }
+        },
+        "columns": [
+          { data: 'date' },
+          { data: 'title', render: function (data, type, row, meta) {
+              return '<a href="' + row.url + '" target="_blank">' + data + '</a>';
+            }
+          },
+          { data: 'url' },
+          {
+            data: 'result',
+            render: function (data, type, row, meta) {
+              if (data === 'Good') {
+                return '<button class="btn btn-sm btn-success">Good</button>';
+              } else if (data === 'SoSo') {
+                return '<button class="btn btn-sm btn-warning">SoSo</button>';
+              } else if (data === 'Bad') {
+                return '<button class="btn btn-sm btn-dark">Bad</button>';
+              } else {
+                return '<button class="btn btn-sm btn-danger">Error</button>';
+              }
+            }
+          },
+        ],
+      });
+    });
+  });
+</script>
+</body>
+</html>

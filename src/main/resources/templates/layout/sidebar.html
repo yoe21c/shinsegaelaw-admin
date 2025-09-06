@@ -1,0 +1,173 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="sidebar(adminMember, link, group)">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link" th:style="${@environment.getActiveProfiles()[1] == 'local' ? 'background-color: green' : ''}">
+      <span class="brand-text font-weight-light" th:if="${@environment.getActiveProfiles()[0] == 'admin'}">GPADMIN V1</span>
+    </a>
+
+    <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="/assets/dist/img/default-user-v1.jpeg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block" th:utext="${adminMember.getName()}">Default User</a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu : 수퍼어드민  -->
+      <nav class="mt-2"  th:if="${@environment.getActiveProfiles()[0] == 'admin'}">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+          <li class="nav-item menu-is-opening menu-open" th:if="${adminMember.isSupperAdmin()}">
+            <a href="#" class="nav-link" th:classappend="${link} == '/history' ? 'active' : ''">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                고객관리
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="padding-left: 10px;" >
+              <li class="nav-item">
+                <a href="/history" class="nav-link" th:classappend="${link} == '/history' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>어드민 이용내역조회</p>
+                </a>
+              </li>
+
+              <li class="nav-item" th:if="${adminMember.isSupperAdmin()}">
+                <a href="/team_management" class="nav-link" th:classappend="${link} == '/team_management' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>팀원 관리</p>
+                </a>
+              </li>
+
+              <li class="nav-item" th:if="${adminMember.isSupperAdmin()}">
+                <a href="/depart_manage" class="nav-link" th:classappend="${link} == '/depart_manage' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>부서 관리</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link" th:classappend="${#strings.contains(link, 'scrap')} ? 'active' : ''">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                스크랩 관리
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+
+            <ul class="nav nav-treeview" style="padding-left: 10px;" >
+              <li class="nav-item" th:if="${adminMember.isSupperAdmin()}">
+                <a href="/scrap/account" class="nav-link" th:classappend="${#strings.contains(link, '/scrap/account')} ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>계정 목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/scrap/url" class="nav-link" th:classappend="${#strings.contains(link, '/scrap/url')} ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>블로그 URL 목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/scrap/queue" class="nav-link" th:classappend="${link} == '/scrap/queue' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>스크랩 대기열 목록</p>
+                </a>
+              </li>
+              <li class="nav-item" th:if="${adminMember.isSupperAdmin()}">
+                <a href="/main_hello" class="nav-link" th:classappend="${link} == '/main_hello' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>첫화면 안내문구 수정</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/image_combine" class="nav-link" th:classappend="${link} == '/image_combine' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>배경이미지 병합하기</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/feed/url" class="nav-link" th:classappend="${#strings.contains(link, '/feed/url')} ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>GPSCV 목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/gp_ranking" class="nav-link" th:classappend="${link} == '/gp_ranking' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>GP Ranking 검색머신</p>
+                </a>
+              </li>
+            </ul>
+<!--            <ul class="nav nav-treeview">-->
+<!--              <li class="nav-item">-->
+<!--                <a href="/blog_matrix" class="nav-link" th:classappend="${link} == '/blog_matrix' ? 'active' : ''">-->
+<!--                  <i class="far fa-circle nav-icon"></i>-->
+<!--                  <p>블로그 매트릭스</p>-->
+<!--                </a>-->
+<!--              </li>-->
+<!--            </ul>-->
+          </li>
+
+          <li class="nav-item menu-is-opening menu-open" th:if="${adminMember.isSupperAdmin()}">
+            <a href="#" class="nav-link" th:classappend="${#strings.contains(link, 'repair')} ? 'active' : ''">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>리페어 에이전트 관리<i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview" style="padding-left: 10px;" th:if="${adminMember.isSupperAdmin()}">
+              <li class="nav-item">
+                <a href="/repair_agent_list" class="nav-link" th:classappend="${link} == '/repair_agent_list' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>리페어 에이전트 관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/repair_agent_queue_list" class="nav-link" th:classappend="${link} == '/repair_agent_queue_list' ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>리페어 스케줄 관리</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- 상위 메뉴: 키워드 검색 -->
+          <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link" th:classappend="${#strings.contains(link, 'search_keyword')} ? 'active' : ''">
+              <i class="nav-icon fas fa-search-dollar"></i>
+              <p>키워드 검색 <i class="right fas fa-angle-left"></i></p>
+            </a>
+
+            <!-- 하위 메뉴 -->
+            <ul class="nav nav-treeview" style="padding-left: 10px;">
+              <li class="nav-item">
+                <a href="/search_keyword_teams" class="nav-link" th:classappend="${link == '/search_keyword_teams' ? 'active' : ''}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>키워드 그룹/키워드 관리</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/search_keyword" class="nav-link" th:classappend="${link == '/search_keyword' ? 'active' : ''}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>검색 결과</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+</th:block>
+
+</html>

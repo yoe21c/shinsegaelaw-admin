@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('리페어 계정 등록', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/repair_agent_list', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <button class="btn btn-info" th:utext="|${repairAgent?.getBlogId()}|"></button>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                            <li class="breadcrumb-item active"><a href="/repair_agent_list">리페어 계정 목록</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <form id="form">
+
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-5">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">리페어 에이전트</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <!--              <form id="form">-->
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="col-form-label">에이전트 번호</label>
+                                        <input th:value="${repairAgent?.getSeq()}" name="seq" type="text" class="form-control" disabled placeholder="임직원ID 값">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">상태</label>
+                                        <div class="form-group">
+                                            <div class="icheck-blue d-inline">
+                                                <input th:checked="${repairAgent?.getSeq() == null || repairAgent?.status == 'active'}" checked type="radio" name="status" value="active" id="radioDanger1">
+                                                <label for="radioDanger1">활성화</label>
+                                            </div>
+                                            &nbsp;&nbsp;
+                                            <div class="icheck-danger d-inline">
+                                                <input th:checked="${repairAgent?.status == 'inactive'}" type="radio" name="status" value="inactive" id="radioDanger2">
+                                                <label for="radioDanger2">비활성화</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">블로그 ID</label>
+                                        <input th:value="${repairAgent?.getBlogId()}" name="blogId" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">IP주소</label>
+                                        <input th:value="${repairAgent?.getIpAddress()}" name="ipAddress" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">MAC주소</label>
+                                        <input th:value="${repairAgent?.getMacAddress()}" name="macAddress" type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputContent">메모</label>
+                                        <textarea rows="5" cols="85" th:utext="${repairAgent?.getDescription()}" name="description" class="form-control" id="inputContent"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputPingAt">최근 Heartbeat</label>
+                                        <input th:value="${#temporals.format(repairAgent?.getPingAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               name="startAt"
+                                               type="text"
+                                               class="form-control"
+                                               id="inputPingAt"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                               data-mask
+                                               disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputStartAt">생성일시</label>
+                                        <input th:value="${#temporals.format(repairAgent?.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               name="startAt"
+                                               type="text"
+                                               class="form-control"
+                                               id="inputStartAt"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                               data-mask
+                                               disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputEndAt">수정일시</label>
+                                        <input th:value="${#temporals.format(repairAgent?.getUpdatedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               name="endAt"
+                                               type="text"
+                                               class="form-control"
+                                               id="inputEndAt"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                               data-mask
+                                               disabled>
+                                    </div>
+
+                                    <!-- /.card -->
+                                    <input type="hidden" name="seq" id="seq" th:value="${repairAgent?.getSeq()}">
+                                    <input type="hidden" name="uploadImageSeq" id="uploadImageSeq">
+                                    <input type="hidden" name="imageSize" id="imageSize">
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button id="btnUpdate" th:if="${repairAgent?.getSeq() != null}" type="submit" class="btn btn-primary">수정하기</button>
+                                    <button id="btnCreate" th:if="${repairAgent?.getSeq() == null}"  type="submit" class="btn btn-danger">생성하기</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button th:if="${repairAgent?.getSeq() != null}" type="submit" class="btn btn-danger"
+                                            data-toggle="modal" data-target="#modal-warning">삭제하기</button>
+                                </div>
+
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+
+                        <div class="col-md-7">
+
+                            <!-- general form elements disabled -->
+                            <div class="card card-green">
+                                <div class="card-header">
+                                    <h3 class="card-title">리페어 내역 정보(최근 10건)</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                  <div class="row">
+
+                                    <div class="col-md-12">
+<!--                                      <button type="submit" class="btn btn-primary my-create-leader-item">전체내역 확인하기</button>-->
+                                      <a href="/repair_agent_queue_list">전체내역 확인하기</a>
+                                      <ul class="list-unstyled">
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label class="col-form-label">블로그 URL</label>
+                                          </div>
+                                          <div class="col-md-4">
+                                              <label class="col-form-label">예약일시</label>
+                                          </div>
+                                          <div class="col-md-2">
+                                            <label class="col-form-label">진행상태</label>
+                                          </div>
+                                        </div>
+                                        <li class="sortable-item" th:each="agent, stat: ${repairAgentQueues}">
+
+                                          <div class="row">
+                                            <div class="col-md-6">
+                                              <input th:value="${agent?.getBlogUrl()}" type="text" class="form-control" disabled>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <input th:value="|${#temporals.format(agent?.reservedAt, 'yyyy-MM-dd HH:mm:ss')}|" type="text" class="form-control" disabled>
+                                            </div>
+                                            <div class="col-md-2">
+                                              <th:block th:switch="${agent.status}">
+                                                <th:block th:case="'reserved'">
+                                                  <button class="btn btn-sm btn-info">예약</button>
+                                                </th:block>
+                                                <th:block th:case="'processing'">
+                                                  <button class="btn btn-sm btn-warning">실행중</button>
+                                                </th:block>
+                                                <th:block th:case="'failed'">
+                                                  <button class="btn btn-sm btn-danger">실패</button>
+                                                </th:block>
+                                                <th:block th:case="'completed'">
+                                                  <button class="btn btn-sm btn-success">성공</button>
+                                                </th:block>
+                                                <th:block th:case="'deleted'">
+                                                  <button class="btn btn-sm btn-danger">삭제</button>
+                                                </th:block>
+                                                <th:block th:case="*">
+                                                  <button class="btn btn-sm btn-secondary" disabled>-</button>
+                                                </th:block>
+                                              </th:block>
+                                            </div>
+
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
+                    </div>
+
+                </form>
+
+            <!-- /.row -->
+            </div><!-- /.container-fluid -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- modal -->
+    <th:block th:replace="~{layout/modals :: modalDeleteConfirm}" />
+    <!-- /.modal -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+
+    // window.onbeforeunload = function () {
+    //   return '';
+    // }
+
+    const repairAgent = [[${repairAgent}]];
+
+    function validationCheck() {
+
+        if($( "#form [name='title']" ).val() == '') {
+            alert('제목을 입력하세요.');
+            throw 'invalidInput';
+        }
+
+    }
+
+    $(function () {
+
+        // 1. 생성 버튼
+        $("#btnCreate").click(function (event) {
+            validationCheck();
+            myScript.create("#form", "/repair_agent_update", "/repair_agent_list");
+        });
+
+        // 2. 업데이트 버튼
+        $("#btnUpdate").click(function (event) {
+            validationCheck();
+            myScript.update("#form", "/repair_agent_update");
+        });
+
+        // 3. 삭제버튼
+        $("#btnDelete").click(function (event) {
+            myScript.deletion("/repair_agent_delete?seq=" + $('#seq').val(), "/repair_agent_list");
+        });
+
+        // 4. 수정되었다면 is-warning class 를 추가한다.
+        $('input.form-control').on('change', function () {
+            const key = $(this).attr('name');
+            const value = $(this).val();
+            const savedValue = clientEmployee[key];
+            console.log(key + ": " +  savedValue + " --> " + value);
+            if(savedValue !== value) {
+                $( this ).addClass( 'is-warning' );
+            }else {
+                $( this ).removeClass( 'is-warning' );
+            }
+        });
+
+        // 5. inputCompanySeq 클릭시 다른 select box 들의 컨텐츠가 변경되도록 해야한다.
+        $('#inputCompanySeq').on('change', function () {
+            myScript.replace("/departments?companySeq=" + $(this).val(), "#inputDepartmentSeq");
+            myScript.replace("/positions?companySeq=" + $(this).val(), "#inputPositionSeq");
+        });
+
+        // 6. inputDepartmentSeq 클릭시 다른 select box 들의 컨텐츠가 변경되도록 해야한다.
+        $('#inputDepartmentSeq').on('change', function () {
+            myScript.replace("/positions?departmentSeq=" + $(this).val(), "#inputPositionSeq");
+        });
+
+        $("#inputJobLevelSeq").on('select2:select', function (e) {
+            let data = e.params.data;
+            console.log("data -> ". data);
+        })
+
+    });
+</script>
+</body>
+</html>

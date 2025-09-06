@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/head :: head('Admin 멤버 관리', '')}"></head>
+
+<body class="hold-transition sidebar-mini">
+
+<div class="wrapper">
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}"/>
+
+    <!-- Sidebar -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/team_management', '2')}"/>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+        <!-- Page Header -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>Admin 멤버 관리</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <section class="content">
+            <div class="row">
+                <!-- Left Side: Member List -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 class="card-title">Admin 멤버 목록</h3>
+                            <div class="ml-auto d-flex align-items-center">
+                                <button class="btn btn-success btn-sm mr-2" onclick="openAddMemberModal()">멤버 추가</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="memberTable" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>이메일</th>
+                                    <th>Role</th>
+                                    <th>부서</th>
+                                    <th>관리</th>
+                                </tr>
+                                </thead>
+                                <tbody th:if="${teams != null and not #lists.isEmpty(teams)}">
+                                <tr th:each="member, iter : ${teams}" th:id="'memberRow-' + ${member.seq}">
+                                    <td th:text="${member.name}"></td>
+                                    <td th:text="${member.email}"></td>
+                                    <td th:text="${member.role}"></td>
+                                    <td th:text="${member.depart}"></td>
+                                    <td class="text-center">
+                                        <button class="btn btn-warning btn-sm" th:onclick="editMember([[${member.seq}]])">수정</button>
+                                        <button class="btn btn-danger btn-sm" th:onclick="deleteMember([[${member.seq}]])">삭제</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+</div>
+
+<div class="modal" id="memberModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">멤버 추가</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="memberSeq">
+                <label>이름</label>
+                <input type="text" id="memberName" class="form-control">
+                <label>이메일</label>
+                <input type="email" id="memberEmail" class="form-control">
+                <label>비밀번호</label>
+                <input type="password" id="memberPassword" class="form-control">
+                <label>Role</label>
+                <select id="memberRole" class="form-control">
+                    <option value="superadmin">SuperAdmin</option>
+                    <option value="user">User</option>
+                </select>
+                <label>부서</label>
+                <select id="memberDepart" class="form-control">
+                    <option value="">부서를 선택하세요</option>
+                    <option th:each="depart : ${departs}" th:value="${depart.departName}" th:text="${depart.departName}"></option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="saveMemberBtn" onclick="saveMember()">저장</button>
+                <button type="button" class="btn btn-secondary" onclick="closeMemberModal()">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}"/>
+<script src="/custom/my-script.js"></script>
+
+<script>
+    function loadMembers() {
+        $.get("/members", function(data) {
+            let tableBody = "";
+            if (data.content && data.content.length > 0) {
+                data.content.forEach((member) => {
+                    tableBody += `<tr>
+                        <td>${member.name}</td>
+                        <td>${member.email}</td>
+                        <td>${member.role}</td>
+                        <td>${member.depart || "-"}</td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm" onclick="editMember(${member.seq})">수정</button>
+                            <button class="btn btn-danger btn-sm" onclick="deleteMember(${member.seq})">삭제</button>
+                        </td>
+                    </tr>`;
+                });
+            } else {
+                tableBody = `<tr><td colspan="5" class="text-center">등록된 멤버가 없습니다.</td></tr>`;
+            }
+            $("#memberTable tbody").html(tableBody);
+        });
+    }
+
+    $(document).ready(function() {
+        $('#memberTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "paging": true,  // 페이징 활성화
+            "lengthChange": true,  // 페이지 크기 변경 가능
+            "searching": false,  // 🔥 검색 기능 제거
+            "ordering": false,  // 🔥 정렬 기능 제거 (필요하면 true)
+            "info": true,  // 정보 표시 활성화
+            "ajax": function(data, callback, settings) {
+                let page = data.start / data.length;  // DataTables의 start를 page index로 변환
+                let size = data.length;
+
+                $.get(`/members?page=${page}&size=${size}`, function(response) {
+                    callback({
+                        recordsTotal: response.totalElements,  // 총 데이터 개수
+                        recordsFiltered: response.totalElements,  // 필터링된 데이터 개수
+                        data: response.content  // 실제 데이터 리스트
+                    });
+
+                    // ✅ 페이지네이션 정보 수동 업데이트
+                    $("#currentPage").text(response.number + 1);
+                    $("#totalPages").text(response.totalPages);
+                });
+            },
+            "columns": [
+                { "data": "name" },
+                { "data": "email" },
+                { "data": "role" },
+                { "data": "depart", "defaultContent": "-" },
+                {
+                    "data": "seq",
+                    "render": function(data, type, row) {
+                        return `
+                        <div class="text-center">
+                        <button class="btn btn-warning btn-sm" onclick="editMember(${data})">수정</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteMember(${data})">삭제</button>
+                    </div>
+                    `;
+                    }
+                }
+            ]
+        });
+    });
+
+    function openAddMemberModal() {
+        $("#modalTitle").text("멤버 추가");
+        $("#memberSeq").val("");
+        $("#memberName").val("");
+        $("#memberEmail").val("");
+        $("#memberPassword").val("");
+        $("#memberRole").val("user");
+        $("#memberDepart").val("");
+        $("#memberModal").modal("show");
+    }
+
+    function editMember(seq) {
+        
+        $.get(`/member?seq=${seq}`, function(response) {
+            $("#modalTitle").text("멤버 수정");
+            $("#memberSeq").val(response.data.member.seq);
+            $("#memberName").val(response.data.member.name);
+            $("#memberEmail").val(response.data.member.email);
+            $("#memberPassword").val(response.data.member.password);
+            $("#memberRole").val(response.data.member.role);
+            $("#memberDepart").val(response.data.member.depart);
+            
+            $("#memberModal").modal("show");
+        });
+    }
+
+    function saveMember() {
+        let seq = $("#memberSeq").val();
+        let memberData = {
+            seq,
+            name: $("#memberName").val(),
+            email: $("#memberEmail").val(),
+            role: $("#memberRole").val(),
+            password: $("#memberPassword").val(),
+            depart: $("#memberDepart").val(),
+        };
+
+        let url = seq ? "/modify_member" : "/add_member";
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(memberData),
+            success: function(response) {
+                if(seq) {
+                    alert("수정되었습니다.");
+                } else {
+                    alert("추가되었습니다.");
+                }
+                $("#memberModal").modal("hide");
+                loadMembers();
+            },
+            error: function(err) {
+                if(seq) {
+                    alert("수정에 실패하였습니다.");
+                } else {
+                    alert("등록에 실패하였습니다.");
+                }
+            }
+        });
+    }
+
+    function deleteMember(seq) {
+        if (!confirm("정말 삭제하시겠습니까?")) return;
+        let data = {
+            seq,
+        };
+
+        $.ajax({
+            url: "/delete_member",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            success: function(response) {
+                alert("삭제되었습니다.");
+                loadMembers();
+            },
+            error: function(err) {
+                alert("삭제에 실패하였습니다.");
+            }
+        });
+    }
+
+    function closeMemberModal() {
+        $("#memberModal").modal("hide"); // Bootstrap 모달 닫기
+    }
+</script>
+
+</body>
+</html>

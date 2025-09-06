@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<!--<head th:replace="layout/head :: head(~{::title}, ~{::link})">-->
+<head th:replace="~{layout/head :: head('리페어 스케줄 관리', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/repair_agent_queue_list', '2')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+<!--                    <div class="col-sm-6">-->
+<!--                        <button class="btn btn-info" th:utext="|${repairAgentQueue?.getBlogId()}|"></button>-->
+<!--                    </div>-->
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                            <li class="breadcrumb-item active"><a href="/repair_agent_queue_list">리페어 스케줄 목록</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <form id="form">
+
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-4">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">리페어 기본정보</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <!--              <form id="form">-->
+                                <div class="card-body">
+                                    <div class="form-group">
+                                      <label class="col-form-label">리페어 에이전트 번호</label>
+                                      <div class="input-group">
+                                        <input th:value="${repairAgentQueue?.getAgentSeq()}" name="agentSeq" type="text" class="form-control" disabled placeholder="IP주소에 맞게 자동으로 할당이 됩니다.">
+                                        <div class="input-group-append">
+                                          <span class="input-group-text">
+                                            <a target="_blank" th:href="|/repair_agent/${repairAgentQueue?.getAgentSeq()}|">
+                                              <i class="fas fa-arrow-alt-circle-right"></i>
+                                            </a>
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">스케줄 번호</label>
+                                        <input th:value="${repairAgentQueue?.getSeq()}" name="seq" type="text" class="form-control" disabled placeholder="자동으로 생성이 됩니다.">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">블로그 ID</label>
+                                        <input th:value="${repairAgentQueue?.getBlogId()}" name="blogId" type="text" class="form-control" th:disabled="${repairAgentQueue?.getSeq() != null}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">블로그 URL</label>
+                                        <div class="input-group">
+                                          <input th:value="${repairAgentQueue?.getBlogUrl()}" name="blogUrl" type="text" class="form-control">
+                                          <div class="input-group-append">
+                                            <span class="input-group-text">
+                                              <a target="_blank" th:href="${repairAgentQueue?.getBlogUrl()}" th:disabled="${repairAgentQueue?.getSeq() != null}">
+                                                <i class="fas fa-arrow-alt-circle-right"></i>
+                                              </a>
+                                            </span>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">IP주소</label>
+                                        <input th:value="${repairAgentQueue?.getIpAddress()}" name="ipAddress" type="text" class="form-control" disabled>
+                                    </div>
+
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="col-form-label">MAC주소</label>-->
+<!--                                        <input th:value="${repairAgentQueue?.getMacAddress()}" name="macAddress" type="text" class="form-control" th:disabled="${repairAgentQueue?.getSeq() != null}">-->
+<!--                                    </div>-->
+
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputStartAt">생성일시</label>
+                                        <input th:value="${#temporals.format(repairAgentQueue?.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               name="startAt"
+                                               type="text"
+                                               class="form-control"
+                                               id="inputStartAt"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                               data-mask
+                                               disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputEndAt">수정일시</label>
+                                        <input th:value="${#temporals.format(repairAgentQueue?.getUpdatedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               name="endAt"
+                                               type="text"
+                                               class="form-control"
+                                               id="inputEndAt"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                               data-mask
+                                               disabled>
+                                    </div>
+
+                                    <!-- /.card -->
+                                    <input type="hidden" name="seq" id="seq" th:value="${repairAgentQueue?.getSeq()}">
+                                    <input type="hidden" name="uploadImageSeq" id="uploadImageSeq">
+                                    <input type="hidden" name="imageSize" id="imageSize">
+                                </div>
+                                <!-- /.card-body -->
+
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+
+                        <div class="col-md-5">
+
+                            <!-- general form elements disabled -->
+                            <div class="card card-green">
+                                <div class="card-header">
+                                    <h3 class="card-title">리페어 콘텐츠 정보</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+
+                                  <div class="form-group">
+                                    <label class="col-form-label">현재 제목 (실시간으로 불러온 제목)</label>
+                                    <input th:value="${repairAgentQueue?.getCurrentTitle()}" name="currentTitle" type="text" class="form-control" disabled>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col-form-label">업데이트할 제목 (optional)</label>
+                                    <input th:value="${repairAgentQueue?.getTitle()}" name="title" type="text" class="form-control" placeholder="여기에 업데이트할 제목을 넣어주세요.">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col-form-label">본문 시작문장</label>
+                                    <input th:value="${repairAgentQueue?.getSearchText()}" name="searchText" type="text" class="form-control" placeholder="본문 시작 문자열">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <label class="col-form-label" for="inputContent">업데이트할 본문</label>
+                                    <textarea rows="20" cols="85" th:utext="${repairAgentQueue?.getContent()}" name="content" class="form-control" id="inputContent"></textarea>
+                                  </div>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+
+                      <div class="col-md-3">
+
+                        <!-- general form elements disabled -->
+                        <div class="card card-warning">
+                          <div class="card-header">
+                            <h3 class="card-title">리페어 진행상황</h3>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body">
+
+                            <div class="form-group">
+                              <label class="col-form-label">리페어 상태</label>
+                              <div class="form-group">
+                                <div class="icheck-blue d-inline">
+                                  <input th:checked="${repairAgentQueue?.status == null || repairAgentQueue?.status == 'reserved'}" checked type="radio" name="status" value="reserved" id="radioDanger1" disabled>
+                                  <label for="radioDanger1">예약</label>
+                                </div>
+                                &nbsp;&nbsp;
+                                <div class="icheck-warning d-inline">
+                                  <input th:checked="${repairAgentQueue?.status == 'processing'}" type="radio" name="status" value="inactive" id="radioDanger2" disabled>
+                                  <label for="radioDanger2">실행중</label>
+                                </div>
+
+                                <div class="icheck-success d-inline">
+                                  <input th:checked="${repairAgentQueue?.status == 'completed'}" type="radio" name="status" value="success" id="radioDanger3" disabled>
+                                  <label for="radioDanger3">성공</label>
+                                </div>
+
+                                <div class="icheck-danger d-inline">
+                                  <input th:checked="${repairAgentQueue?.status == 'failed'}" type="radio" name="status" value="failed" id="radioDanger4" disabled>
+                                  <label for="radioDanger4">실패</label>
+                                </div>
+
+                                <div class="icheck-danger d-inline">
+                                  <input th:checked="${repairAgentQueue?.status == 'deleted'}" type="radio" name="status" value="deleted" id="radioDanger5" disabled>
+                                  <label for="radioDanger5">삭제</label>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-form-label" for="inputStartAt" th:utext="|예약일시 (${repairAgentQueue?.getReservedAtDiff()})|">예약일시</label>
+                              <input type="datetime-local" name="reservedAt" id="reservedAt" class="form-control" th:value="${repairAgentQueue?.reservedAt}">
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-form-label" for="inputProcessingAt">실행일시</label>
+                              <input th:value="${#temporals.format(repairAgentQueue?.getProcessingAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                     name="processingAt"
+                                     type="text"
+                                     class="form-control"
+                                     id="inputProcessingAt"
+                                     data-inputmask-alias="datetime"
+                                     data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                     data-mask
+                                     disabled>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-form-label" for="inputCompletedAt">성공일시</label>
+                              <input th:value="${#temporals.format(repairAgentQueue?.getCompletedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                     name="completedAt"
+                                     type="text"
+                                     class="form-control"
+                                     id="inputCompletedAt"
+                                     data-inputmask-alias="datetime"
+                                     data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                     data-mask
+                                     disabled>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-form-label" for="inputStartAt">실패일시</label>
+                              <input th:value="${#temporals.format(repairAgentQueue?.getFailedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                     name="failedAt"
+                                     type="text"
+                                     class="form-control"
+                                     id="inputFailedAt"
+                                     data-inputmask-alias="datetime"
+                                     data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                     data-mask
+                                     disabled>
+                            </div>
+
+                            <div class="form-group">
+                              <label class="col-form-label" for="inputDeletedAt">삭제일시</label>
+                              <input th:value="${#temporals.format(repairAgentQueue?.getDeletedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                     name="deletedAt"
+                                     type="text"
+                                     class="form-control"
+                                     id="inputDeletedAt"
+                                     data-inputmask-alias="datetime"
+                                     data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                     data-mask
+                                     disabled>
+                            </div>
+                          </div>
+
+                          <div class="card-footer">
+                            <label class="form-control bg-warning" th:if="${repairAgentQueue?.isDeleted()}">본 스케줄은 삭제되어 열람만 가능합니다.</label>
+                            <button id="btnUpdate" th:if="${repairAgentQueue?.getSeq() != null && ! repairAgentQueue?.isDeleted()}" type="submit" class="btn btn-primary">수정하기</button>
+                            <button id="btnCreate" th:if="${repairAgentQueue?.getSeq() == null}"  type="submit" class="btn btn-danger">생성하기</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button th:if="${repairAgentQueue?.getSeq() != null && ! repairAgentQueue?.isDeleted()}" type="submit" class="btn btn-danger"
+                                    data-toggle="modal" data-target="#modal-warning">삭제하기</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                </form>
+
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- modal -->
+    <th:block th:replace="~{layout/modals :: modalDeleteConfirm}" />
+    <!-- /.modal -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+
+    // window.onbeforeunload = function () {
+    //   return '';
+    // }
+
+    const repairAgent = [[${repairAgent}]];
+
+    function validationCheck() {
+
+        if($( "#form [name='searchText']" ).val() === '') {
+            alert('본문 시작문장을 입력하세요.');
+            throw 'invalidInput';
+        }
+
+        if($( "#form [name='content']" ).val() === '') {
+            alert('업데이트할 본문을 입력하세요.');
+            throw 'invalidInput';
+        }
+
+    }
+
+    $(function () {
+
+        // 1. 생성 버튼
+        $("#btnCreate").click(function (event) {
+            validationCheck();
+            myScript.create("#form", "/repair_agent_queue_update", "/repair_agent_queue_list");
+        });
+
+        // 2. 업데이트 버튼
+        $("#btnUpdate").click(function (event) {
+            validationCheck();
+            myScript.update("#form", "/repair_agent_queue_update");
+        });
+
+        // 3. 삭제버튼
+        $("#btnDelete").click(function (event) {
+            myScript.deletion("/repair_agent_queue_delete?seq=" + $('#seq').val(), "/repair_agent_queue_list");
+        });
+
+        // 4. 수정되었다면 is-warning class 를 추가한다.
+        $('input.form-control').on('change', function () {
+            const key = $(this).attr('name');
+            const value = $(this).val();
+            const savedValue = clientEmployee[key];
+            console.log(key + ": " +  savedValue + " --> " + value);
+            if(savedValue !== value) {
+                $( this ).addClass( 'is-warning' );
+            }else {
+                $( this ).removeClass( 'is-warning' );
+            }
+        });
+
+        // 5. inputCompanySeq 클릭시 다른 select box 들의 컨텐츠가 변경되도록 해야한다.
+        $('#inputCompanySeq').on('change', function () {
+            myScript.replace("/departments?companySeq=" + $(this).val(), "#inputDepartmentSeq");
+            myScript.replace("/positions?companySeq=" + $(this).val(), "#inputPositionSeq");
+        });
+
+        // 6. inputDepartmentSeq 클릭시 다른 select box 들의 컨텐츠가 변경되도록 해야한다.
+        $('#inputDepartmentSeq').on('change', function () {
+            myScript.replace("/positions?departmentSeq=" + $(this).val(), "#inputPositionSeq");
+        });
+
+        $("#inputJobLevelSeq").on('select2:select', function (e) {
+            let data = e.params.data;
+            console.log("data -> ". data);
+        })
+
+    });
+</script>
+</body>
+</html>
