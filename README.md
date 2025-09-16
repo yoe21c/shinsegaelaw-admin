@@ -11,3 +11,7 @@
 * gpt-oss:20b 로 요청하기
   * curl 3.38.59.217:11434/api/tags | jq .
   * legal_consultation_evaluator.json 를 실행하기.
+* 모니터링
+  * aws ec2 stop-instances --instance-ids i-064afa675153e9d4c 
+  * aws ec2 start-instances --instance-ids i-064afa675153e9d4c
+  * watch -n 1 "aws ec2 describe-instances --instance-ids i-064afa675153e9d4c --query 'Reservations[*].Instances[*].[InstanceId,State.Name]' --output table"
