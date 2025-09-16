@@ -1,0 +1,682 @@
+from faster_whisper import WhisperModel
+import time
+import torch
+import logging
+import sys
+import os
+import tempfile
+import urllib.request
+import json
+from urllib.parse import urlparse, unquote
+from pathlib import Path
+from collections import defaultdict
+import subprocess
+from datetime import datetime
+import threading
+from queue import Queue
+
+# Flask and MySQL imports
+from flask import Flask, request, jsonify
+import pymysql
+from pymysql.cursors import DictCursor
+
+# pyannote는 선택적 - 없어도 실행 가능
+try:
+    from pyannote.audio import Pipeline
+    PYANNOTE_AVAILABLE = True
+except ImportError:
+    PYANNOTE_AVAILABLE = False
+    logger = None  # 임시로 None, 나중에 설정됨
+
+# 로깅 설정
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('whisper_transcription.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Hugging Face 토큰 (화자 분리를 위해 필요)
+HF_TOKEN = os.environ.get("HF_TOKEN", "")  # 환경변수로 설정
+
+# Flask app 초기화
+app = Flask(__name__)
+
+# MySQL 설정
+MYSQL_CONFIG = {
+    'host': os.environ.get('MYSQL_HOST', 'mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com'),
+    'user': os.environ.get('MYSQL_USER', 'shinsegaelaw_admin'),
+    'password': os.environ.get('MYSQL_PASSWORD', '@@shinsegaelaw##!!'),
+    'database': os.environ.get('MYSQL_DATABASE', 'shinsegaelaw'),
+    'charset': 'utf8mb4',
+    'cursorclass': DictCursor
+}
+
+# 처리 큐 (백그라운드 처리용)
+processing_queue = Queue()
+
+# 전역 모델 초기화
+logger.info("Whisper 모델 로딩 시작...")
+whisper_model = WhisperModel(
+    "large-v2",
+    device="cuda",
+    compute_type="float16",
+    device_index=0,
+    download_root="/tmp/whisper-models"
+)
+logger.info("Whisper 모델 로딩 완료")
+
+# 화자 분리 모델 초기화
+diarization_pipeline = None
+if PYANNOTE_AVAILABLE and HF_TOKEN:
+    try:
+        logger.info("화자 분리 모델 로딩 시작...")
+        diarization_pipeline = Pipeline.from_pretrained(
+            "pyannote/speaker-diarization-3.1",
+            use_auth_token=HF_TOKEN
+        )
+        if torch.cuda.is_available():
+            diarization_pipeline.to(torch.device("cuda"))
+        logger.info("화자 분리 모델 로딩 완료")
+    except Exception as e:
+        logger.warning(f"화자 분리 모델 로딩 실패: {e}")
+        logger.warning("화자 분리 없이 진행합니다.")
+elif not PYANNOTE_AVAILABLE:
+    logger.warning("pyannote.audio가 설치되지 않음. 화자 분리 기능을 사용하려면 'pip install pyannote.audio'를 실행하세요.")
+    logger.info("화자 분리 없이 음성 인식만 진행합니다.")
+else:
+    logger.warning("HF_TOKEN이 설정되지 않음. 화자 분리를 사용하려면 환경변수를 설정하세요.")
+
+def get_db_connection():
+    """MySQL 데이터베이스 연결"""
+    return pymysql.connect(**MYSQL_CONFIG)
+
+def get_file_size_from_url(url):
+    """URL로부터 파일 크기 가져오기"""
+    try:
+        req = urllib.request.Request(url, method='HEAD')
+        response = urllib.request.urlopen(req)
+        file_size = response.headers.get('Content-Length')
+        return int(file_size) if file_size else None
+    except Exception as e:
+        logger.warning(f"파일 크기 가져오기 실패: {e}")
+        return None
+
+def parse_filename_metadata(filename):
+    """파일명에서 고객 정보 추출
+    포맷1 (언더바 1개): 고객전화번호_상담완료일시.m4a
+    포맷2 (언더바 2개): 고객이름_고객전화번호_상담완료일시.m4a
+    """
+    try:
+        # 확장자 제거
+        name_without_ext = os.path.splitext(filename)[0]
+        parts = name_without_ext.split('_')
+        
+        metadata = {}
+        
+        if len(parts) == 2:
+            # 포맷1: 고객전화번호_상담완료일시
+            phone_number = parts[0]
+            counsel_datetime_str = parts[1]
+            
+            metadata['customerPhoneNumber'] = phone_number
+            
+        elif len(parts) == 3:
+            # 포맷2: 고객이름_고객전화번호_상담완료일시
+            customer_name = parts[0]
+            phone_number = parts[1]
+            counsel_datetime_str = parts[2]
+            
+            metadata['customer'] = customer_name
+            metadata['customerPhoneNumber'] = phone_number
+        else:
+            # 예상하지 못한 포맷
+            logger.warning(f"예상하지 못한 파일명 포맷: {filename}")
+            return metadata
+        
+        # 상담완료일시 파싱 (YYYYMMDDHHmmss 형식을 datetime으로)
+        if len(parts) >= 2:
+            counsel_datetime_str = parts[-1]  # 마지막 부분이 날짜
+            try:
+                # 20250822124621 -> 2025-08-22 12:46:21
+                if len(counsel_datetime_str) == 14 and counsel_datetime_str.isdigit():
+                    year = counsel_datetime_str[0:4]
+                    month = counsel_datetime_str[4:6]
+                    day = counsel_datetime_str[6:8]
+                    hour = counsel_datetime_str[8:10]
+                    minute = counsel_datetime_str[10:12]
+                    second = counsel_datetime_str[12:14]
+                    
+                    metadata['counselAt'] = datetime(
+                        int(year), int(month), int(day),
+                        int(hour), int(minute), int(second)
+                    )
+            except Exception as e:
+                logger.warning(f"상담일시 파싱 실패: {counsel_datetime_str}, 오류: {e}")
+        
+        return metadata
+        
+    except Exception as e:
+        logger.error(f"파일명 메타데이터 파싱 실패: {e}")
+        return {}
+
+def extract_file_metadata(url):
+    """URL로부터 파일 메타데이터 추출"""
+    try:
+        parsed_url = urlparse(url)
+        encoded_filename = os.path.basename(parsed_url.path) or "audio.m4a"
+        
+        # URL 디코딩하여 한글 복원
+        filename = unquote(encoded_filename)
+        logger.info(f"디코딩된 파일명: {filename}")
+        
+        # 파일 확장자 추출
+        file_extension = os.path.splitext(filename)[1].lower()
+        if file_extension:
+            file_type = file_extension[1:]  # . 제거
+        else:
+            file_type = 'm4a'  # 기본값
+        
+        # 파일 크기 가져오기
+        file_size = get_file_size_from_url(url)
+        
+        # 파일명에서 고객 정보 추출
+        filename_metadata = parse_filename_metadata(filename)
+        
+        metadata = {
+            'fileName': filename,
+            'fileType': file_type,
+            'fileSize': file_size,
+            'url': url
+        }
+        
+        # 파일명에서 추출한 메타데이터 병합
+        metadata.update(filename_metadata)
+            
+        return metadata
+    except Exception as e:
+        logger.error(f"메타데이터 추출 실패: {e}")
+        return None
+
+@app.route('/api/health', methods=['GET'])
+def health_check():
+    """헬스 체크 API"""
+    return jsonify({"result": "ok"})
+
+@app.route('/api/counsel/add', methods=['POST'])
+def add_counsel():
+    """상담 녹취 파일 추가 API"""
+    try:
+        # 요청 데이터 파싱
+        data = request.get_json()
+        if not data or 'url' not in data:
+            return jsonify({"error": "url parameter is required"}), 400
+        
+        url = data['url']
+        
+        # URL로부터 메타데이터 추출
+        metadata = extract_file_metadata(url)
+        if not metadata:
+            return jsonify({"error": "Failed to extract file metadata"}), 500
+        
+        # DB에 초기 데이터 저장
+        conn = get_db_connection()
+        try:
+            with conn.cursor() as cursor:
+                # 동적으로 SQL 생성 (메타데이터에 따라 컬럼 추가)
+                columns = ['url', 'fileName', 'fileType', 'fileSize', 'status', 'createdAt']
+                values = [
+                    metadata['url'],
+                    metadata['fileName'],
+                    metadata['fileType'],
+                    metadata.get('fileSize'),
+                    'created',  # 초기 상태를 'created'로 설정
+                    datetime.now()
+                ]
+                
+                # 선택적 필드 추가
+                if 'customer' in metadata:
+                    columns.append('customer')
+                    values.append(metadata['customer'])
+                
+                if 'customerPhoneNumber' in metadata:
+                    columns.append('customerPhoneNumber')
+                    values.append(metadata['customerPhoneNumber'])
+                
+                if 'counselAt' in metadata:
+                    columns.append('counselAt')
+                    values.append(metadata['counselAt'])
+                
+                sql = f"""
+                INSERT INTO Counsels ({', '.join(columns)})
+                VALUES ({', '.join(['%s'] * len(columns))})
+                """
+                
+                cursor.execute(sql, values)
+                counsel_id = cursor.lastrowid
+                conn.commit()
+                
+                logger.info(f"상담 데이터 저장 완료 - ID: {counsel_id}, 파일명: {metadata['fileName']}")
+                
+                # 백그라운드에서 Whisper 처리 시작
+                processing_queue.put({
+                    'counsel_id': counsel_id,
+                    'url': url
+                })
+                
+                # 백그라운드 처리 스레드 시작 (아직 실행 중이 아니면)
+                if not hasattr(app, 'processor_thread') or not app.processor_thread.is_alive():
+                    app.processor_thread = threading.Thread(target=process_queue_items, daemon=True)
+                    app.processor_thread.start()
+                
+                return jsonify({
+                    "result": "ok",
+                    "counsel_id": counsel_id,
+                    "message": "Counsel added successfully. Processing will start soon."
+                }), 201
+                
+        finally:
+            conn.close()
+            
+    except Exception as e:
+        logger.error(f"상담 추가 실패: {e}", exc_info=True)
+        return jsonify({"error": str(e)}), 500
+
+def process_queue_items():
+    """백그라운드에서 큐 아이템 처리"""
+    while True:
+        try:
+            item = processing_queue.get(timeout=60)  # 60초 타임아웃
+            counsel_id = item['counsel_id']
+            url = item['url']
+            
+            logger.info(f"처리 시작 - Counsel ID: {counsel_id}, URL: {url}")
+            
+            # 상태를 '진행중'으로 업데이트
+            update_counsel_status(counsel_id, 'processing')
+            
+            # Whisper 처리 실행
+            result = transcribe_with_speakers(url)
+            
+            # 결과를 DB에 저장
+            save_whisper_result(counsel_id, result)
+            
+            logger.info(f"처리 완료 - Counsel ID: {counsel_id}")
+            
+        except Exception as e:
+            if 'counsel_id' in locals():
+                update_counsel_status(counsel_id, 'error')
+            logger.error(f"큐 처리 중 오류: {e}", exc_info=True)
+
+def update_counsel_status(counsel_id, status):
+    """상담 상태 업데이트"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            sql = "UPDATE Counsels SET status = %s, updatedAt = %s WHERE seq = %s"
+            cursor.execute(sql, (status, datetime.now(), counsel_id))
+            conn.commit()
+    finally:
+        conn.close()
+
+def save_whisper_result(counsel_id, result):
+    """Whisper 처리 결과 저장"""
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            # 파일 크기 계산 (다운로드된 경우)
+            file_size = None
+            if 'audio_file' in result and os.path.exists(result['audio_file']):
+                file_size = os.path.getsize(result['audio_file'])
+            
+            # duration을 밀리초로 변환
+            duration_ms = int(result.get('duration', 0) * 1000)
+            
+            # JSON 결과 준비
+            whisper_json = json.dumps(result, ensure_ascii=False)
+            
+            # fileSize가 이미 있는지 확인하고 없으면 업데이트
+            update_fields = [
+                "whisper_json = %s",
+                "whisperAt = %s",
+                "fileDurationMs = %s",
+                "status = %s",
+                "updatedAt = %s"
+            ]
+            update_values = [
+                whisper_json,
+                datetime.now(),
+                duration_ms,
+                'extracted',  # whisper 처리 완료 시 'extracted'로 설정
+                datetime.now()
+            ]
+            
+            # 파일 크기가 있으면 업데이트 (이미 없는 경우에만)
+            if file_size:
+                update_fields.append("fileSize = COALESCE(fileSize, %s)")
+                update_values.append(file_size)
+            
+            update_values.append(counsel_id)
+            
+            sql = f"""
+            UPDATE Counsels 
+            SET {', '.join(update_fields)}
+            WHERE seq = %s
+            """
+            
+            cursor.execute(sql, update_values)
+            conn.commit()
+            
+            logger.info(f"Whisper 결과 저장 완료 - Counsel ID: {counsel_id}")
+            
+    except Exception as e:
+        logger.error(f"Whisper 결과 저장 실패: {e}", exc_info=True)
+        update_counsel_status(counsel_id, 'error')
+    finally:
+        conn.close()
+
+def download_audio_from_url(url, temp_dir):
+    """URL에서 오디오 파일을 다운로드"""
+    logger.info(f"오디오 다운로드 시작: {url}")
+    
+    try:
+        parsed_url = urlparse(url)
+        encoded_filename = os.path.basename(parsed_url.path) or "audio.m4a"
+        
+        # URL 디코딩하여 한글 복원
+        filename = unquote(encoded_filename)
+        
+        if not filename.endswith('.m4a'):
+            filename = filename + '.m4a'
+        
+        temp_path = os.path.join(temp_dir, filename)
+        
+        # 다운로드 진행상황 표시
+        def download_progress(block_num, block_size, total_size):
+            if total_size > 0:
+                downloaded = block_num * block_size
+                percent = min(100, (downloaded / total_size) * 100)
+                if block_num % 100 == 0:  # 100블록마다 로그
+                    logger.info(f"다운로드 진행: {percent:.1f}%")
+        
+        urllib.request.urlretrieve(url, temp_path, reporthook=download_progress)
+        
+        file_size = os.path.getsize(temp_path) / (1024 * 1024)
+        logger.info(f"다운로드 완료: {filename} ({file_size:.2f} MB)")
+        
+        return temp_path
+    
+    except Exception as e:
+        logger.error(f"오디오 다운로드 실패: {e}")
+        raise
+
+def perform_diarization(audio_file, num_speakers=None):
+    """화자 분리 수행"""
+    if not diarization_pipeline:
+        logger.warning("화자 분리 모델이 없습니다.")
+        return None
+    
+    try:
+        logger.info("화자 분리 시작...")
+        start_time = time.time()
+        
+        # GPU 메모리 정리
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+        
+        # m4a 파일인 경우 직접 처리 (pyannote는 m4a를 직접 지원)
+        # 하지만 문제가 있으면 ffmpeg으로 변환
+        temp_wav = None
+        audio_for_diarization = audio_file
+        
+        if audio_file.lower().endswith('.m4a'):
+            try:
+                # 먼저 직접 시도
+                if num_speakers:
+                    diarization = diarization_pipeline(
+                        audio_file, 
+                        num_speakers=num_speakers
+                    )
+                else:
+                    diarization = diarization_pipeline(audio_file)
+            except Exception as e:
+                # 실패하면 ffmpeg으로 변환
+                logger.warning(f"m4a 직접 처리 실패, ffmpeg으로 변환 시도: {e}")
+                import subprocess
+                temp_wav = audio_file.replace('.m4a', '_temp.wav')
+                try:
+                    subprocess.run([
+                        'ffmpeg', '-i', audio_file, '-ar', '16000', 
+                        '-ac', '1', '-y', temp_wav
+                    ], check=True, capture_output=True)
+                    audio_for_diarization = temp_wav
+                    logger.info("wav 변환 완료")
+                    
+                    # 변환된 파일로 화자 분리 실행
+                    if num_speakers:
+                        diarization = diarization_pipeline(
+                            audio_for_diarization, 
+                            num_speakers=num_speakers
+                        )
+                    else:
+                        diarization = diarization_pipeline(audio_for_diarization)
+                except subprocess.CalledProcessError as ffmpeg_error:
+                    logger.error(f"ffmpeg 변환 실패: {ffmpeg_error}")
+                    return None
+        else:
+            # m4a가 아닌 경우 직접 처리
+            if num_speakers:
+                diarization = diarization_pipeline(
+                    audio_for_diarization, 
+                    num_speakers=num_speakers
+                )
+            else:
+                diarization = diarization_pipeline(audio_for_diarization)
+        
+        elapsed = time.time() - start_time
+        
+        # 화자별 시간 구간 정리
+        speaker_segments = defaultdict(list)
+        for turn, _, speaker in diarization.itertracks(yield_label=True):
+            speaker_segments[speaker].append({
+                "start": turn.start,
+                "end": turn.end
+            })
+        
+        num_detected_speakers = len(speaker_segments)
+        logger.info(f"화자 분리 완료: {num_detected_speakers}명 감지 (소요시간: {elapsed:.2f}초)")
+        
+        # 임시 파일 정리
+        if temp_wav and os.path.exists(temp_wav):
+            os.remove(temp_wav)
+            logger.info("임시 wav 파일 삭제")
+        
+        return diarization
+    
+    except Exception as e:
+        logger.error(f"화자 분리 실패: {e}")
+        # 임시 파일 정리
+        if 'temp_wav' in locals() and temp_wav and os.path.exists(temp_wav):
+            os.remove(temp_wav)
+        return None
+
+def assign_speaker_to_segments(segments, diarization):
+    """Whisper 세그먼트에 화자 할당"""
+    if not diarization:
+        return segments
+    
+    logger.info("세그먼트에 화자 할당 시작...")
+    
+    for segment in segments:
+        segment_start = segment.start
+        segment_end = segment.end
+        segment_mid = (segment_start + segment_end) / 2
+        
+        # 중간 지점의 화자 찾기
+        speaker = "Unknown"
+        for turn, _, label in diarization.itertracks(yield_label=True):
+            if turn.start <= segment_mid <= turn.end:
+                speaker = label
+                break
+        
+        segment.speaker = speaker
+    
+    logger.info("화자 할당 완료")
+    return segments
+
+def transcribe_with_speakers(audio_source, num_speakers=None):
+    """음성 인식 및 화자 분리 통합 처리"""
+    start_time = time.time()
+    
+    # GPU 정보 로깅
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        gpu_name = torch.cuda.get_device_name(0)
+        gpu_memory = torch.cuda.memory_allocated(0) / 1024**3
+        logger.info(f"GPU 사용: {gpu_name}")
+        logger.info(f"GPU 메모리: {gpu_memory:.2f} GB")
+    else:
+        logger.warning("GPU를 사용할 수 없습니다. CPU로 실행됩니다.")
+    
+    # URL인 경우 다운로드
+    if audio_source.startswith(('http://', 'https://')):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            audio_file = download_audio_from_url(audio_source, temp_dir)
+            return process_audio_file(audio_file, num_speakers, start_time)
+    else:
+        # 로컬 파일
+        return process_audio_file(audio_source, num_speakers, start_time)
+
+def process_audio_file(audio_file, num_speakers, start_time):
+    """실제 오디오 파일 처리"""
+    
+    # 1. 화자 분리
+    diarization = perform_diarization(audio_file, num_speakers)
+    
+    # 2. 음성 인식
+    logger.info("음성 인식 시작...")
+    transcribe_start = time.time()
+    
+    segments, info = whisper_model.transcribe(
+        audio_file,
+        language="ko",
+        beam_size=5,
+        vad_filter=True,
+        vad_parameters=dict(
+            min_silence_duration_ms=500,
+            threshold=0.5
+        ),
+        temperature=0,
+        compression_ratio_threshold=2.4,
+        log_prob_threshold=-1.0,
+        no_speech_threshold=0.6
+    )
+    
+    # segments를 리스트로 변환 (generator일 수 있음)
+    segments_list = list(segments)
+    
+    transcribe_elapsed = time.time() - transcribe_start
+    logger.info(f"음성 인식 완료 (소요시간: {transcribe_elapsed:.2f}초)")
+    
+    # 3. 화자 할당
+    if diarization:
+        segments_list = assign_speaker_to_segments(segments_list, diarization)
+    
+    # 4. 결과 저장 및 출력
+    output_data = {
+        "audio_file": audio_file,
+        "duration": info.duration,
+        "processing_time": time.time() - start_time,
+        "segments": []
+    }
+    
+    logger.info("\n=== 전사 결과 ===")
+    
+    with open("transcript_with_speakers.txt", "w", encoding="utf-8") as f:
+        current_speaker = None
+        
+        for segment in segments_list:
+            speaker = getattr(segment, 'speaker', 'Unknown')
+            
+            # 화자가 바뀔 때만 화자 표시
+            if speaker != current_speaker:
+                speaker_header = f"\n[화자 {speaker}]"
+                f.write(speaker_header + "\n")
+                logger.info(speaker_header)
+                current_speaker = speaker
+            
+            # 타임스탬프와 텍스트
+            text_line = f"  [{segment.start:.2f}s - {segment.end:.2f}s] {segment.text.strip()}"
+            f.write(text_line + "\n")
+            print(text_line)
+            
+            # JSON 데이터용
+            output_data["segments"].append({
+                "speaker": speaker,
+                "start": segment.start,
+                "end": segment.end,
+                "text": segment.text.strip()
+            })
+    
+    # JSON 파일로도 저장
+    with open("transcript_with_speakers.json", "w", encoding="utf-8") as f:
+        json.dump(output_data, f, ensure_ascii=False, indent=2)
+    
+    # 통계 정보
+    total_elapsed = time.time() - start_time
+    
+    logger.info(f"\n=== 처리 완료 ===")
+    logger.info(f"총 처리 시간: {total_elapsed:.2f}초")
+    logger.info(f"오디오 길이: {info.duration:.2f}초")
+    logger.info(f"처리 속도: {info.duration / total_elapsed:.2f}x")
+    
+    if diarization:
+        speakers = set(s.get('speaker') for s in output_data['segments'])
+        logger.info(f"감지된 화자 수: {len(speakers)}")
+    
+    # GPU 메모리 상태
+    if torch.cuda.is_available():
+        gpu_memory = torch.cuda.memory_allocated(0) / 1024**3
+        logger.info(f"최종 GPU 메모리 사용량: {gpu_memory:.2f} GB")
+    
+    logger.info(f"결과 파일 생성: transcript_with_speakers.txt, transcript_with_speakers.json")
+    
+    return output_data
+
+if __name__ == "__main__":
+    # 명령줄 인자 확인
+    if len(sys.argv) > 1:
+        # 기존 CLI 모드
+        if sys.argv[1] != '--server':
+            audio_input = sys.argv[1]
+            num_speakers = int(sys.argv[2]) if len(sys.argv) > 2 else None
+            
+            try:
+                logger.info(f"처리 시작: {audio_input}")
+                if num_speakers:
+                    logger.info(f"예상 화자 수: {num_speakers}")
+                
+                result = transcribe_with_speakers(audio_input, num_speakers)
+                
+                logger.info("모든 처리가 완료되었습니다.")
+                
+            except Exception as e:
+                logger.error(f"오류 발생: {e}", exc_info=True)
+                sys.exit(1)
+        else:
+            # Flask 서버 모드
+            logger.info("Flask API 서버 시작...")
+            port = int(os.environ.get('PORT', 5000))
+            app.run(host='0.0.0.0', port=port, debug=False)
+    else:
+        # 인자가 없으면 Flask 서버 모드로 실행
+        logger.info("Flask API 서버 시작 (기본 모드)...")
+        logger.info("CLI 모드로 실행하려면: python whisper_gpu_test.py <audio_file_or_url> [num_speakers]")
+        logger.info("서버 모드로 실행하려면: python whisper_gpu_test.py --server")
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port, debug=False)
+
+
