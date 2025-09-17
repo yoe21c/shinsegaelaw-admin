@@ -23,7 +23,6 @@ export SHELL=/bin/bash
 export PATH=/apps/whisper/.venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export HF_TOKEN=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
 
 # CUDA 환경 설정
 export CUDA_HOME=/usr/local/cuda
