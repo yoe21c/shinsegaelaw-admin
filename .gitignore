@@ -37,6 +37,6 @@ drivers/
 **/application-local.yml
 **/application-dev.yml
 *.env
-.env.*
+#.env.*
 aws-credentials.properties
 **/test/resources/application.yml
