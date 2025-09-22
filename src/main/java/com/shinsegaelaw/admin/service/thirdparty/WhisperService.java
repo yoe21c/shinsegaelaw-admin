@@ -2,6 +2,7 @@ package com.shinsegaelaw.admin.service.thirdparty;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shinsegaelaw.admin.model.dto.WhisperResponseDto;
+import com.shinsegaelaw.admin.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.shinsegaelaw.admin.utils.Utils.toJson;
 
 @Slf4j
 @Service
@@ -56,7 +59,7 @@ public class WhisperService {
     /**
      * Whisper API 호출하여 음성 파일 처리
      */
-    public WhisperResponseDto processAudioFile(String url) {
+    public String processAudioFile(String url) {
         String processUrl = whisperApiUrl + "/api/counsel/add";
 
         try {
@@ -87,8 +90,7 @@ public class WhisperService {
                             body.get("counsel_id"));
 
                     // 처리가 시작되었으므로, 일정 시간 대기 후 결과 조회
-                    Long counselId = Long.valueOf(body.get("counsel_id").toString());
-                    return waitForProcessing(counselId);
+                    return Utils.toJson(response.getBody());
                 }
             }
 
@@ -101,19 +103,4 @@ public class WhisperService {
         }
     }
 
-    /**
-     * Whisper 처리 완료 대기 및 결과 조회
-     * 백그라운드에서 처리되므로 즉시 반환
-     */
-    private WhisperResponseDto waitForProcessing(Long counselId) {
-        log.info("Whisper processing initiated for counselId: {}", counselId);
-
-        // Whisper API는 백그라운드에서 처리 후 직접 DB에 저장하므로
-        // 즉시 성공 응답 반환
-        return WhisperResponseDto.builder()
-                .result("ok")
-                .counselId(counselId)
-                .message("Processing initiated in background")
-                .build();
-    }
 }

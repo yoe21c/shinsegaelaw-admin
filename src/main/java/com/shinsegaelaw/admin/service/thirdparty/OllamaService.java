@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shinsegaelaw.admin.model.dto.OllamaResponseDto;
+import com.shinsegaelaw.admin.model.dto.WhisperResponseDto;
+import com.shinsegaelaw.admin.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,7 +64,7 @@ public class OllamaService {
     /**
      * 법률 상담 평가 실행
      */
-    public Map<String, Object> evaluateConsultation(Map<String, Object> conversationData) {
+    public Map<String, Object> evaluateConsultation(WhisperResponseDto conversationData) {
         log.info("Starting legal consultation evaluation");
 
         Map<String, Object> allResults = new HashMap<>();
@@ -94,7 +96,7 @@ public class OllamaService {
     /**
      * 특정 유형의 평가 수행
      */
-    private Map<String, Object> performEvaluation(Map<String, Object> conversationData, String evaluationType) {
+    private Map<String, Object> performEvaluation(WhisperResponseDto conversationData, String evaluationType) {
         log.info("Performing {} evaluation", evaluationType);
 
         String prompt = createPrompt(conversationData, evaluationType);
@@ -127,7 +129,7 @@ public class OllamaService {
     /**
      * 평가 프롬프트 생성
      */
-    private String createPrompt(Map<String, Object> conversationData, String evaluationType) {
+    private String createPrompt(WhisperResponseDto conversationData, String evaluationType) {
         StringBuilder prompt = new StringBuilder();
         prompt.append("중요: 반드시 유효한 JSON 형식으로만 응답하세요. 설명이나 주석 없이 JSON만 제공하세요.\n");
         prompt.append("⚠️ 매우 중요: 모든 텍스트 값은 반드시 한글로 작성하세요.\n\n");
@@ -150,13 +152,7 @@ public class OllamaService {
         }
 
         prompt.append("\n\n대화 데이터:\n");
-
-        try {
-            prompt.append(objectMapper.writeValueAsString(conversationData));
-        } catch (JsonProcessingException e) {
-            log.error("Error serializing conversation data", e);
-            prompt.append(conversationData.toString());
-        }
+        prompt.append(Utils.toJson(conversationData.getData().getSegments()));
 
         return prompt.toString();
     }

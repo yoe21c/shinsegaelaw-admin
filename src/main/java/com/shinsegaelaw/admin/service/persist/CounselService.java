@@ -8,6 +8,7 @@ import com.shinsegaelaw.admin.model.entity.Counsel;
 import com.shinsegaelaw.admin.repository.CounselRepository;
 import com.shinsegaelaw.admin.service.thirdparty.OllamaService;
 import com.shinsegaelaw.admin.service.thirdparty.WhisperService;
+import com.shinsegaelaw.admin.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
@@ -19,7 +20,10 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static com.shinsegaelaw.admin.utils.Utils.toJson;
 
 @Slf4j
 @Service
@@ -30,6 +34,10 @@ public class CounselService {
     private final WhisperService whisperService;
     private final OllamaService ollamaService;
     private final ObjectMapper objectMapper;
+
+    public List<Counsel> getCandidates() {
+        return counselRepository.findByStatusOrderBySeq("created");
+    }
 
     /**
      * 상담 처리 메인 로직
@@ -177,53 +185,68 @@ public class CounselService {
     /**
      * 비동기로 Whisper 및 Ollama 처리
      */
-    @Async
-    public void processAsync(Long counselSeq, String url) {
-        log.info("Starting async processing for counsel seq: {}", counselSeq);
+    @Transactional
+    public void processAsync(Counsel counsel) {
+
+        log.info("Starting async processing for counsel seq: {}, url: {}", counsel.getSeq(), counsel.getUrl());
 
         try {
+
+            // processing 상태로 업데이트
+            counsel.setStatus("processing");
+            counsel.setUpdatedAt(LocalDateTime.now());
+            counselRepository.save(counsel);
+
             // 1. 상태를 진행중으로 업데이트
-            updateCounselStatus(counselSeq, "processing");
+            counsel = updateCounselStatus(counsel, "processing");
 
             // 2. Whisper API 헬스체크
             if (!whisperService.checkHealth()) {
                 log.error("Whisper API is not healthy");
-                updateCounselStatus(counselSeq, "error");
+                counsel = updateCounselStatus(counsel, "error");
                 return;
             }
 
             // 3. Whisper API 호출하여 음성 처리
-            WhisperResponseDto whisperResponse = whisperService.processAudioFile(url);
+            String whisperJson = whisperService.processAudioFile(counsel.getUrl());
 
-            // 실제 Whisper API는 백그라운드로 처리되므로
-            // 일정 시간 후 DB에서 결과를 폴링하여 확인
-            String whisperJson = waitForWhisperResult(counselSeq);
+            counsel.setWhisperJson(whisperJson);
+            counsel.setWhisperAt(LocalDateTime.now());
+            counsel.setUpdatedAt(LocalDateTime.now());
+            counselRepository.save(counsel);
+
+//            String whisperJson = waitForWhisperResult(counselSeq);
+            WhisperResponseDto whisperResponse = Utils.toObject(whisperJson, WhisperResponseDto.class);
 
             if (whisperJson != null) {
-                // 4. Whisper 결과를 파싱하여 Ollama 평가용 데이터 준비
-                Map<String, Object> conversationData = objectMapper.readValue(whisperJson, Map.class);
 
                 // 5. Ollama API 호출하여 평가 실행
                 if (ollamaService.testConnection()) {
-                    Map<String, Object> evaluationResult = ollamaService.evaluateConsultation(conversationData);
+                    Map<String, Object> evaluationResult = ollamaService.evaluateConsultation(whisperResponse);
+
+                    counsel.setSummary(toJson(evaluationResult));
+                    counsel.setSummaryAt(LocalDateTime.now());
+                    counsel.setUpdatedAt(LocalDateTime.now());
+                    counselRepository.save(counsel);
+                    log.info("Ollama evaluation completed for counsel seq: {}", counsel.getSeq());
 
                     // 6. 평가 결과에서 요약 추출 및 저장
-                    updateCounselSummary(counselSeq, evaluationResult);
+//                    updateCounselSummary(counsel.getSeq(), evaluationResult);
 
-                    updateCounselStatus(counselSeq, "completed");
-                    log.info("Successfully completed all processing for counsel seq: {}", counselSeq);
+                    updateCounselStatus(counsel, "completed");
+                    log.info("Successfully completed all processing for counsel seq: {}", counsel.getSeq());
                 } else {
                     log.error("Ollama server is not connected");
-                    updateCounselStatus(counselSeq, "completed");  // Whisper만 완료된 경우도 완료로 표시
+                    updateCounselStatus(counsel, "completed");  // Whisper만 완료된 경우도 완료로 표시
                 }
             } else {
-                log.error("Failed to get Whisper result for counsel seq: {}", counselSeq);
-                updateCounselStatus(counselSeq, "error");
+                log.error("Failed to get Whisper result for counsel seq: {}", counsel.getSeq());
+                updateCounselStatus(counsel, "error");
             }
 
         } catch (Exception e) {
-            log.error("Error in async processing for counsel seq: {}", counselSeq, e);
-            updateCounselStatus(counselSeq, "error");
+            log.error("Error in async processing for counsel seq: {}", counsel.getSeq(), e);
+            updateCounselStatus(counsel, "error");
         }
     }
 
@@ -268,14 +291,11 @@ public class CounselService {
     /**
      * 상담 상태 업데이트
      */
-    @Transactional
-    public void updateCounselStatus(Long counselSeq, String status) {
-        counselRepository.findById(counselSeq).ifPresent(counsel -> {
-            counsel.setStatus(status);
-            counsel.setUpdatedAt(LocalDateTime.now());
-            counselRepository.save(counsel);
-            log.debug("Updated counsel seq: {} status to: {}", counselSeq, status);
-        });
+    public Counsel updateCounselStatus(Counsel counsel, String status) {
+        counsel.setStatus(status);
+        counsel.setUpdatedAt(LocalDateTime.now());
+        log.info("Updated counsel seq: {} status to: {}", counsel.getSeq(), status);
+        return counselRepository.save(counsel);
     }
 
     /**
@@ -346,4 +366,5 @@ public class CounselService {
     public java.util.List<Counsel> getCounselsByPhoneNumber(String phoneNumber) {
         return counselRepository.findByCustomerPhoneNumberOrderByCreatedAtDesc(phoneNumber);
     }
+
 }

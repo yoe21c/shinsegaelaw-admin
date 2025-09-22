@@ -12,7 +12,7 @@ public interface CounselRepository extends JpaRepository<Counsel, Long> {
 
     Optional<Counsel> findByCustomerPhoneNumber(String phoneNumber);
 
-    List<Counsel> findByStatus(String status);
+    List<Counsel> findByStatusOrderBySeq(String status);
 
     List<Counsel> findByCustomerPhoneNumberOrderByCreatedAtDesc(String phoneNumber);
 }

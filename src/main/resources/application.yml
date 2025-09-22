@@ -47,21 +47,20 @@ whisper:
 # Ollama API 설정
 ollama:
   api:
-    url: http://localhost:11434
+    url: http://3.38.59.217:11434
     timeout: 180000  # 3분
   model: gpt-oss:20b
-
 # Logging 설정
 logging:
   level:
     root: INFO
-    com.shinsegaelaw.admin: DEBUG
+    com.shinsegaelaw.admin: INFO
     org.springframework.web: INFO
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.SQL: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    console: "[%d{YYYY-MM-dd HH:mm:ss z, Asia/Seoul}] [%-5level] [%thread] %logger{36}:%L - %msg -- %X{log.remoteAddr}%n"
+    file: "[%d{YYYY-MM-dd HH:mm:ss z, Asia/Seoul}] [%-5level] [%thread] %logger{36}:%L - %msg -- %X{log.remoteAddr}%n"
   file:
     name: logs/shinsegaelaw-admin.log
     max-size: 10MB
@@ -73,3 +72,7 @@ spring.task.execution.pool:
   max-size: 10
   queue-capacity: 100
   thread-name-prefix: async-
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false

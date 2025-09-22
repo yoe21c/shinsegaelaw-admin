@@ -37,7 +37,7 @@ public class Counsel {
 
     @Column(length = 30, columnDefinition = "varchar(30) DEFAULT NULL COMMENT '상담 상태 (ready, 진행중, 완료)'")
     @Builder.Default
-    private String status = "ready";
+    private String status = "created";
 
     @Column(name = "whisper_json", columnDefinition = "JSON COMMENT 'Whisper 결과 JSON'")
     private String whisperJson;
