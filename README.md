@@ -15,3 +15,6 @@
   * aws ec2 stop-instances --instance-ids i-064afa675153e9d4c 
   * aws ec2 start-instances --instance-ids i-064afa675153e9d4c
   * watch -n 1 "aws ec2 describe-instances --instance-ids i-064afa675153e9d4c --query 'Reservations[*].Instances[*].[InstanceId,State.Name]' --output table"
+  * watch -n 1 "curl 3.38.59.217:5000/api/health"
+* 대화분석하기
+  * python legal_consultation_evaluator.py --host 3.38.59.217 --file conversation.json 

@@ -1,0 +1,75 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: shinsegaelaw-admin
+
+  datasource:
+    url: jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    username: shinsegaelaw_admin
+    password: '@@shinsegaelaw##!!'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+  jpa:
+    hibernate:
+      ddl-auto: validate  # 운영환경에서는 validate 사용
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+        show_sql: false
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
+
+  jackson:
+    default-property-inclusion: NON_NULL
+    serialization:
+      write-dates-as-timestamps: false
+
+# Whisper API 설정
+whisper:
+  api:
+    url: http://3.38.59.217:5000
+    timeout: 180000  # 3분
+
+# Ollama API 설정
+ollama:
+  api:
+    url: http://localhost:11434
+    timeout: 180000  # 3분
+  model: gpt-oss:20b
+
+# Logging 설정
+logging:
+  level:
+    root: INFO
+    com.shinsegaelaw.admin: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/shinsegaelaw-admin.log
+    max-size: 10MB
+    max-history: 30
+
+# Async 설정
+spring.task.execution.pool:
+  core-size: 5
+  max-size: 10
+  queue-capacity: 100
+  thread-name-prefix: async-

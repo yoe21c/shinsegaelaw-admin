@@ -1,0 +1,200 @@
+{
+  "detailed_evaluations": {
+    "business_potential": {
+      "business_score": 10,
+      "potential_revenue": "0~10만원",
+      "conversion_probability": 5,
+      "client_profile": {
+        "urgency_level": "낮음",
+        "case_complexity": "단순",
+        "payment_ability": "하",
+        "loyalty_potential": "낮음"
+      },
+      "consultant_performance": {
+        "needs_identification": 20,
+        "value_proposition": 15,
+        "closing_technique": 10,
+        "follow_up_strategy": 15
+      },
+      "critical_moments": [
+        {
+          "segment_index": 0,
+          "moment_type": "위기",
+          "description": "고객이 법률 상담이 필요하다는 의사표시가 전혀 없으며, 대화가 일상적 주제로만 진행됨",
+          "impact": "부정적"
+        }
+      ],
+      "recommendations": "현재 대화 내용으로는 법률 서비스 제공이 불필요하며, 고객과의 관계를 유지하기 위해서는 정기적인 소통 채널을 마련하고, 필요 시 법률 상담이 필요할 때 즉시 대응할 수 있는 준비를 권장한다."
+    },
+    "expertise": {
+      "expertise_score": 10,
+      "knowledge_areas": {
+        "legal_terminology": 5,
+        "case_law_knowledge": 3,
+        "procedural_understanding": 4,
+        "strategic_thinking": 6
+      },
+      "professional_indicators": [
+        {
+          "segment_index": 0,
+          "indicator_type": "비전문성",
+          "description": "법률 관련 내용이 전혀 없으며, 상담사의 전문성 발휘가 확인되지 않음",
+          "severity": "경미"
+        }
+      ],
+      "legal_errors": [],
+      "expertise_gaps": "법률 용어 이해 부족, 관련 법령 및 판례 인용 미흡, 실무 경험 부족",
+      "training_needs": "기본 법률 용어 교육, 주요 법령 및 판례 학습, 실무 사례 분석 및 전략적 사고 훈련"
+    },
+    "communication": {
+      "communication_score": 60,
+      "clarity_metrics": {
+        "simplification_ability": 80,
+        "directness": 70,
+        "structure_logic": 60,
+        "confirmation_checks": 0,
+        "action_guidance": 50
+      },
+      "communication_patterns": [
+        {
+          "segment_index": 0,
+          "pattern_type": "우수",
+          "description": "상대방에게 친근하게 인사하며 대화를 시작함",
+          "impact_on_understanding": "높음"
+        },
+        {
+          "segment_index": 30,
+          "pattern_type": "우수",
+          "description": "건강 상태를 물어보고 상대방의 체온을 확인함",
+          "impact_on_understanding": "높음"
+        },
+        {
+          "segment_index": 70,
+          "pattern_type": "우수",
+          "description": "생일 선물에 대해 구체적으로 논의하며 계획을 세움",
+          "impact_on_understanding": "높음"
+        },
+        {
+          "segment_index": 140,
+          "pattern_type": "우수",
+          "description": "다음 생일 날짜와 준비 상황을 확인함",
+          "impact_on_understanding": "높음"
+        },
+        {
+          "segment_index": 200,
+          "pattern_type": "개선필요",
+          "description": "집 수리와 관련된 업무가 복잡하게 얘기되어 이해하기 어려움",
+          "impact_on_understanding": "낮음"
+        },
+        {
+          "segment_index": 210,
+          "pattern_type": "개선필요",
+          "description": "여름과 겨울 업무 일정이 혼란스럽게 전달되어 명확하지 않음",
+          "impact_on_understanding": "낮음"
+        }
+      ],
+      "jargon_usage": [],
+      "missed_clarifications": "없음",
+      "communication_improvements": "1) 대화 중 핵심 정보를 정리해 주고, 2) 상대방이 이해했는지 확인 질문을 넣어 주고, 3) 단계별로 안내를 명확히 제시해 주면 상담 효과가 높아집니다."
+    },
+    "friendliness": {
+      "friendliness_score": 70,
+      "relationship_metrics": {
+        "empathy_level": 75,
+        "emotional_intelligence": 70,
+        "active_listening": 65,
+        "trust_building": 60,
+        "warmth_authenticity": 80
+      },
+      "emotional_moments": [
+        {
+          "segment_index": 22,
+          "emotion_type": "고객감정",
+          "description": "SPEAKER_01이 일에 대한 피로와 불만을 표현하며 ‘아이고 그냥 끊임없네 일이 그냥’이라고 말함",
+          "response_quality": "보통"
+        },
+        {
+          "segment_index": 30,
+          "emotion_type": "상담사대응",
+          "description": "SPEAKER_01이 ‘아이고 고생이 많으시네’라고 말하며 상대의 피로를 인정하고 위로함",
+          "response_quality": "우수"
+        },
+        {
+          "segment_index": 36,
+          "emotion_type": "상담사대응",
+          "description": "SPEAKER_01이 ‘그냥 축하라도 한 번’이라고 제안하며 상대의 기분을 좋게 하려 함",
+          "response_quality": "보통"
+        },
+        {
+          "segment_index": 90,
+          "emotion_type": "상담사대응",
+          "description": "SPEAKER_01이 ‘아이고 날마다 일해 지쳐서 그렇지’라고 말하며 상대의 피로를 공감함",
+          "response_quality": "우수"
+        },
+        {
+          "segment_index": 120,
+          "emotion_type": "상담사대응",
+          "description": "SPEAKER_01이 ‘아이고 고생이 많으시네’라고 다시 한 번 위로하며 신뢰를 강화함",
+          "response_quality": "우수"
+        }
+      ],
+      "rapport_indicators": [
+        {
+          "segment_index": 22,
+          "indicator": "감정 인식",
+          "strength": "중간"
+        },
+        {
+          "segment_index": 30,
+          "indicator": "공감 표현",
+          "strength": "강함"
+        },
+        {
+          "segment_index": 36,
+          "indicator": "친근한 언어 사용",
+          "strength": "중간"
+        },
+        {
+          "segment_index": 90,
+          "indicator": "신뢰 구축 시도",
+          "strength": "중간"
+        },
+        {
+          "segment_index": 120,
+          "indicator": "감정 지원",
+          "strength": "강함"
+        }
+      ],
+      "relationship_potential": "중간",
+      "customer_retention_likelihood": 65
+    }
+  },
+  "comprehensive_evaluation": {
+    "total_score": 45,
+    "summary_scores": {
+      "business_potential": 30,
+      "legal_expertise": 20,
+      "communication_clarity": 70,
+      "customer_friendliness": 80
+    },
+    "executive_summary": "본 상담은 법률 자문이 아닌 가정 대화로, 법률 전문성 및 사업적 기회가 낮음. 그러나 친밀감과 소통이 원활해 고객 만족도가 높음.",
+    "strengths": [
+      "고객과의 친밀한 소통",
+      "높은 고객 친화성"
+    ],
+    "weaknesses": [
+      "법률 전문성 부족",
+      "사업적 기회 부재"
+    ],
+    "action_items": [
+      "법률 상담 전용 스크립트 도입",
+      "고객 요구사항 파악을 위한 설문 도입"
+    ],
+    "consultant_rating": "D"
+  },
+  "evaluation_timestamp": "2025-09-18 13:05:40",
+  "conversation_info": {
+    "duration": 223.9565,
+    "segments_count": 96
+  }
+}
