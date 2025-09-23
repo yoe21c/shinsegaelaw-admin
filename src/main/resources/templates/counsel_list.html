@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/head :: head('상담내역 목록', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/counsel_list', '3')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-4">
+                    <div class="col-sm-6">
+                        <h1>상담내역 목록</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">상담내역을 조회합니다. 번호를 눌러 상담 상세 정보를 확인할 수 있습니다.</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <!-- Filter 영역 시작 -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <form class="form-horizontal">
+                                <div class="row">
+
+                                    <div class="col-md-3">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputStatus" class="col-sm-5 col-form-label">상태</label>
+                                                <div class="col-sm-7">
+                                                    <div class="form-group">
+                                                        <select name="status" id="inputStatus" class="form-control">
+                                                            <option value="all" selected>전체</option>
+                                                            <option value="created">생성됨</option>
+                                                            <option value="ready">준비</option>
+                                                            <option value="processing">처리중</option>
+                                                            <option value="completed">완료</option>
+                                                            <option value="error">에러</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputCounselType" class="col-sm-5 col-form-label">상담유형</label>
+                                                <div class="col-sm-7">
+                                                    <div class="form-group">
+                                                        <select name="counselType" id="inputCounselType" class="form-control">
+                                                            <option value="all" selected>전체</option>
+                                                            <option value="general">일반상담</option>
+                                                            <option value="legal">법률상담</option>
+                                                            <option value="repair">수리상담</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="card-body">
+                                            <div class="form-group row">
+                                                <label for="inputKeyword" class="col-sm-3 col-form-label">검색 키워드</label>
+                                                <div class="col-sm-9">
+                                                    <div class="form-group">
+                                                        <input type="text" name="keyword" id="inputKeyword" class="form-control" placeholder="검색어 입력 (고객명, 전화번호, 상담사명)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="card-body">
+                                            <div class="text-right">
+                                                <button class="btn btn-primary" type="button" id="add" onclick="location.href='/counsel_create'">추가</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                    <!-- Filter 영역 끝 -->
+
+                    <table id="list" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>고객명</th>
+                            <th>고객 전화번호</th>
+                            <th>상담사명</th>
+                            <th>상태</th>
+                            <th>상담일시</th>
+                            <th>요약</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                    Footer
+                </div>
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script>
+    $(function () {
+        let table = $('#list').DataTable({
+            "pagingType": "full_numbers",
+            "processing": true,
+            "serverSide": true,
+            "ordering": false,
+            "stateSave": true,
+            "searching": false,   // Search 인풋 박스
+            "lengthChange": false,  // pagination length 셀렉트박스 없애기.
+            "pageLength": 10,
+            "info": true,   // 테이블 하단에 총 아이템수 등이 표기된다. "Showing 1 to 8 of 8 entries"
+            destroy: true,
+            paging: true,
+            columnDefs: [
+                { width: '8%', targets : [0] },
+                { width: '12%', targets : [1] },
+                { width: '12%', targets : [2] },
+                { width: '12%', targets : [3] },
+                { width: '10%', targets : [4] },
+                { width: '16%', targets : [5] },
+                { width: '30%', targets : [6] },
+            ],
+            fixedColumns: true,
+            "ajax": {
+                "url": "/counsel_list",
+                "type": "POST",
+                "data": function ( d ) {  // 커스텀 파라미터를 넣을 수 있다.
+                    return $.extend( {}, d, {
+                        "status": $("#inputStatus option:selected").val(),
+                        "counselType": $("#inputCounselType option:selected").val(),
+                        "keyword": $("#inputKeyword").val(),
+                    } );
+                },
+                "dataSrc": function(res) {
+                    console.log(res);
+                    return res.data.counsels.content;
+                },error:function(request, status, error){
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            },
+            "columns" : [
+                { data : 'seq',
+                    render: function (data, type, row, meta) {
+                        return `<a href="/counsel/${data}">${data}</a>`
+                    }
+                },
+                { data : 'customer',
+                    render: function (data, type, row, meta) {
+                        if(data === null || data === '') {
+                            return '-';
+                        }
+                        return `<a href="/counsel/${row.seq}">${data}</a>`;
+                    }
+                },
+                { data : 'customerPhoneNumber',
+                    render: function (data, type, row, meta) {
+                        if(data === null || data === '') {
+                            return '-';
+                        }
+                        return data;
+                    }
+                },
+                { data : 'counselor',
+                    render: function (data, type, row, meta) {
+                        if(data === null || data === '') {
+                            return '-';
+                        }
+                        return data;
+                    }
+                },
+                { data : 'status',
+                    render: function (data, type, row, meta) {
+                        if (data === 'completed') {
+                            return `<button class="btn btn-sm btn-success">완료</button>`;
+                        } else if (data === 'processing') {
+                            return `<button class="btn btn-sm btn-info">처리중</button>`;
+                        } else if (data === 'ready') {
+                            return `<button class="btn btn-sm btn-warning">준비</button>`;
+                        } else if (data === 'error') {
+                            return `<button class="btn btn-sm btn-danger">에러</button>`;
+                        } else {
+                            return `<button class="btn btn-sm btn-secondary">생성됨</button>`;
+                        }
+                    }
+                },
+                { data : 'counselAt',
+                    render: function (data, type, row, meta) {
+                        if(data !== null) {
+                            return data.replace("T", " ").substring(0, 19);
+                        } else {
+                            return '-';
+                        }
+                    }
+                },
+                { data : 'summary',
+                    render: function (data, type, row, meta) {
+                        if(data === null || data === '') {
+                            return '-';
+                        }
+                        if(data.length > 50) {
+                            return data.substring(0, 50) + '...';
+                        }
+                        return data;
+                    }
+                }
+            ],
+        });
+
+        $('#inputStatus,#inputCounselType').on('change', function () {
+            table.search('markerValue', true, false, true).draw();
+        });
+
+        $('#inputKeyword').on('keyup', function () {
+            table.search('markerValue', true, false, true).draw();
+        });
+
+    });
+</script>
+</body>
+</html>

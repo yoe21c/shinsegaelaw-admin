@@ -138,6 +138,24 @@
             </ul>
           </li>
 
+          <!-- 상위 메뉴: 상담내역 -->
+          <li class="nav-item menu-is-opening menu-open">
+            <a href="#" class="nav-link" th:classappend="${#strings.contains(link, 'counsel')} ? 'active' : ''">
+              <i class="nav-icon fas fa-comments"></i>
+              <p>상담내역 <i class="right fas fa-angle-left"></i></p>
+            </a>
+
+            <!-- 하위 메뉴 -->
+            <ul class="nav nav-treeview" style="padding-left: 10px;">
+              <li class="nav-item">
+                <a href="/counsel_list" class="nav-link" th:classappend="${link == '/counsel_list' ? 'active' : ''}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>상담내역 목록</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <!-- 상위 메뉴: 키워드 검색 -->
           <li class="nav-item menu-is-opening menu-open">
             <a href="#" class="nav-link" th:classappend="${#strings.contains(link, 'search_keyword')} ? 'active' : ''">

@@ -11,6 +11,9 @@ import com.shinsegaelaw.admin.service.thirdparty.WhisperService;
 import com.shinsegaelaw.admin.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -367,4 +370,15 @@ public class CounselService {
         return counselRepository.findByCustomerPhoneNumberOrderByCreatedAtDesc(phoneNumber);
     }
 
+    public Page<Counsel> getCounsels(Specification<Counsel> spec, PageRequest pageable) {
+        return counselRepository.findAll(spec, pageable);
+    }
+
+    public Counsel save(Counsel counsel) {
+        return counselRepository.save(counsel);
+    }
+
+    public Counsel delete(Counsel counsel) {
+        return counselRepository.save(counsel);
+    }
 }
