@@ -1746,6 +1746,2158 @@ WHERE EXPIRY_TIME < 1758505560043
 2025-09-22 10:46:00 [spring-session-1] INFO  p6spy - #1758505560080 | took 28ms | commit | connection 49| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
 
 ;
+2025-09-22 10:47:00 [spring-session-1] INFO  p6spy - #1758505620121 | took 10ms | statement | connection 50| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505620109
+;
+2025-09-22 10:47:00 [spring-session-1] INFO  p6spy - #1758505620140 | took 16ms | commit | connection 50| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:48:00 [spring-session-1] INFO  p6spy - #1758505680068 | took 5ms | statement | connection 51| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505680061
+;
+2025-09-22 10:48:00 [spring-session-1] INFO  p6spy - #1758505680097 | took 26ms | commit | connection 51| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:49:00 [spring-session-1] INFO  p6spy - #1758505740099 | took 23ms | statement | connection 52| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505740073
+;
+2025-09-22 10:49:00 [spring-session-1] INFO  p6spy - #1758505740113 | took 12ms | commit | connection 52| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:50:00 [spring-session-1] INFO  p6spy - #1758505800055 | took 12ms | statement | connection 53| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505800041
+;
+2025-09-22 10:50:00 [spring-session-1] INFO  p6spy - #1758505800113 | took 56ms | commit | connection 53| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:51:00 [spring-session-1] INFO  p6spy - #1758505860140 | took 19ms | statement | connection 54| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505860119
+;
+2025-09-22 10:51:00 [spring-session-1] INFO  p6spy - #1758505860154 | took 9ms | commit | connection 54| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:52:00 [spring-session-1] INFO  p6spy - #1758505920058 | took 7ms | statement | connection 55| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505920050
+;
+2025-09-22 10:52:00 [spring-session-1] INFO  p6spy - #1758505920074 | took 14ms | commit | connection 55| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:53:00 [spring-session-1] INFO  p6spy - #1758505980014 | took 8ms | statement | connection 56| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758505979994
+;
+2025-09-22 10:53:00 [spring-session-1] INFO  p6spy - #1758505980053 | took 37ms | commit | connection 56| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:54:00 [spring-session-1] INFO  p6spy - #1758506040048 | took 9ms | statement | connection 57| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506040038
+;
+2025-09-22 10:54:00 [spring-session-1] INFO  p6spy - #1758506040081 | took 30ms | commit | connection 57| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:55:00 [spring-session-1] INFO  p6spy - #1758506100075 | took 22ms | statement | connection 58| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506100051
+;
+2025-09-22 10:55:00 [spring-session-1] INFO  p6spy - #1758506100088 | took 10ms | commit | connection 58| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:56:00 [spring-session-1] INFO  p6spy - #1758506160077 | took 17ms | statement | connection 59| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506160053
+;
+2025-09-22 10:56:00 [spring-session-1] INFO  p6spy - #1758506160100 | took 17ms | commit | connection 59| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:57:00 [spring-session-1] INFO  p6spy - #1758506220048 | took 8ms | statement | connection 60| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506220037
+;
+2025-09-22 10:57:00 [spring-session-1] INFO  p6spy - #1758506220061 | took 12ms | commit | connection 60| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:58:00 [spring-session-1] INFO  p6spy - #1758506280092 | took 10ms | statement | connection 61| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506280079
+;
+2025-09-22 10:58:00 [spring-session-1] INFO  p6spy - #1758506280104 | took 10ms | commit | connection 61| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 10:59:00 [spring-session-1] INFO  p6spy - #1758506340082 | took 14ms | statement | connection 62| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506340066
+;
+2025-09-22 10:59:00 [spring-session-1] INFO  p6spy - #1758506340104 | took 18ms | commit | connection 62| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:00:00 [spring-session-1] INFO  p6spy - #1758506400067 | took 30ms | statement | connection 63| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506400034
+;
+2025-09-22 11:00:00 [spring-session-1] INFO  p6spy - #1758506400134 | took 65ms | commit | connection 63| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:01:00 [spring-session-1] INFO  p6spy - #1758506460079 | took 22ms | statement | connection 64| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506460054
+;
+2025-09-22 11:01:00 [spring-session-1] INFO  p6spy - #1758506460100 | took 18ms | commit | connection 64| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:02:00 [spring-session-1] INFO  p6spy - #1758506520053 | took 8ms | statement | connection 65| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506520042
+;
+2025-09-22 11:02:00 [spring-session-1] INFO  p6spy - #1758506520066 | took 11ms | commit | connection 65| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:03:00 [spring-session-1] INFO  p6spy - #1758506580049 | took 6ms | statement | connection 66| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506580041
+;
+2025-09-22 11:03:00 [spring-session-1] INFO  p6spy - #1758506580069 | took 16ms | commit | connection 66| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:04:00 [spring-session-1] INFO  p6spy - #1758506640055 | took 6ms | statement | connection 67| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506640047
+;
+2025-09-22 11:04:00 [spring-session-1] INFO  p6spy - #1758506640069 | took 12ms | commit | connection 67| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:05:00 [spring-session-1] INFO  p6spy - #1758506700053 | took 8ms | statement | connection 68| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506700043
+;
+2025-09-22 11:05:00 [spring-session-1] INFO  p6spy - #1758506700068 | took 12ms | commit | connection 68| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:06:00 [spring-session-1] INFO  p6spy - #1758506760037 | took 9ms | statement | connection 69| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506760027
+;
+2025-09-22 11:06:00 [spring-session-1] INFO  p6spy - #1758506760059 | took 10ms | commit | connection 69| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:07:00 [spring-session-1] INFO  p6spy - #1758506820054 | took 6ms | statement | connection 70| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506820046
+;
+2025-09-22 11:07:00 [spring-session-1] INFO  p6spy - #1758506820070 | took 14ms | commit | connection 70| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:08:00 [spring-session-1] INFO  p6spy - #1758506880069 | took 9ms | statement | connection 71| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506880059
+;
+2025-09-22 11:08:00 [spring-session-1] INFO  p6spy - #1758506880088 | took 16ms | commit | connection 71| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:09:00 [spring-session-1] INFO  p6spy - #1758506940039 | took 7ms | statement | connection 72| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758506940026
+;
+2025-09-22 11:09:00 [spring-session-1] INFO  p6spy - #1758506940056 | took 11ms | commit | connection 72| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:10:00 [spring-session-1] INFO  p6spy - #1758507000208 | took 13ms | statement | connection 73| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507000185
+;
+2025-09-22 11:10:00 [spring-session-1] INFO  p6spy - #1758507000234 | took 11ms | commit | connection 73| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:11:00 [spring-session-1] INFO  p6spy - #1758507060048 | took 7ms | statement | connection 74| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507060040
+;
+2025-09-22 11:11:00 [spring-session-1] INFO  p6spy - #1758507060059 | took 9ms | commit | connection 74| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:12:00 [spring-session-1] INFO  p6spy - #1758507120049 | took 8ms | statement | connection 75| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507120039
+;
+2025-09-22 11:12:00 [spring-session-1] INFO  p6spy - #1758507120061 | took 10ms | commit | connection 75| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:13:00 [spring-session-1] INFO  p6spy - #1758507180045 | took 6ms | statement | connection 76| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507180037
+;
+2025-09-22 11:13:00 [spring-session-1] INFO  p6spy - #1758507180055 | took 8ms | commit | connection 76| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:14:00 [spring-session-1] INFO  p6spy - #1758507240054 | took 9ms | statement | connection 77| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507240043
+;
+2025-09-22 11:14:00 [spring-session-1] INFO  p6spy - #1758507240072 | took 14ms | commit | connection 77| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:15:00 [spring-session-1] INFO  p6spy - #1758507300208 | took 7ms | statement | connection 78| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507300195
+;
+2025-09-22 11:15:00 [spring-session-1] INFO  p6spy - #1758507300227 | took 15ms | commit | connection 78| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:16:00 [spring-session-1] INFO  p6spy - #1758507360059 | took 11ms | statement | connection 79| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507360047
+;
+2025-09-22 11:16:00 [spring-session-1] INFO  p6spy - #1758507360071 | took 10ms | commit | connection 79| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:17:00 [spring-session-1] INFO  p6spy - #1758507420039 | took 6ms | statement | connection 80| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507420031
+;
+2025-09-22 11:17:00 [spring-session-1] INFO  p6spy - #1758507420054 | took 13ms | commit | connection 80| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:18:00 [spring-session-1] INFO  p6spy - #1758507480062 | took 9ms | statement | connection 81| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507480050
+;
+2025-09-22 11:18:00 [spring-session-1] INFO  p6spy - #1758507480077 | took 12ms | commit | connection 81| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:19:09 [spring-session-1] INFO  p6spy - #1758507549113 | took 8ms | statement | connection 82| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507549102
+;
+2025-09-22 11:19:09 [spring-session-1] INFO  p6spy - #1758507549130 | took 13ms | commit | connection 82| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:20:02 [spring-session-1] INFO  p6spy - #1758507602158 | took 6ms | statement | connection 83| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507602150
+;
+2025-09-22 11:20:02 [spring-session-1] INFO  p6spy - #1758507602169 | took 9ms | commit | connection 83| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:21:03 [spring-session-1] INFO  p6spy - #1758507663378 | took 7ms | statement | connection 84| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507663368
+;
+2025-09-22 11:21:03 [spring-session-1] INFO  p6spy - #1758507663394 | took 9ms | commit | connection 84| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:22:03 [spring-session-1] INFO  p6spy - #1758507723464 | took 7ms | statement | connection 85| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507723455
+;
+2025-09-22 11:22:03 [spring-session-1] INFO  p6spy - #1758507723477 | took 10ms | commit | connection 85| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:23:03 [spring-session-1] INFO  p6spy - #1758507783501 | took 5ms | statement | connection 86| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507783494
+;
+2025-09-22 11:23:03 [spring-session-1] INFO  p6spy - #1758507783515 | took 9ms | commit | connection 86| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:24:05 [spring-session-1] INFO  p6spy - #1758507845699 | took 6ms | statement | connection 87| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507845690
+;
+2025-09-22 11:24:05 [spring-session-1] INFO  p6spy - #1758507845710 | took 9ms | commit | connection 87| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:25:03 [spring-session-1] INFO  p6spy - #1758507903571 | took 6ms | statement | connection 88| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507903562
+;
+2025-09-22 11:25:03 [spring-session-1] INFO  p6spy - #1758507903584 | took 10ms | commit | connection 88| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:26:03 [spring-session-1] INFO  p6spy - #1758507963811 | took 6ms | statement | connection 89| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758507963803
+;
+2025-09-22 11:26:03 [spring-session-1] INFO  p6spy - #1758507963822 | took 8ms | commit | connection 89| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:27:00 [spring-session-1] INFO  p6spy - #1758508020068 | took 8ms | statement | connection 90| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508020059
+;
+2025-09-22 11:27:00 [spring-session-1] INFO  p6spy - #1758508020080 | took 10ms | commit | connection 90| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:28:00 [spring-session-1] INFO  p6spy - #1758508080151 | took 7ms | statement | connection 91| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508080143
+;
+2025-09-22 11:28:00 [spring-session-1] INFO  p6spy - #1758508080163 | took 10ms | commit | connection 91| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:29:03 [spring-session-1] INFO  p6spy - #1758508143935 | took 6ms | statement | connection 92| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508143926
+;
+2025-09-22 11:29:03 [spring-session-1] INFO  p6spy - #1758508143948 | took 9ms | commit | connection 92| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:30:05 [spring-session-1] INFO  p6spy - #1758508205045 | took 6ms | statement | connection 93| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508205032
+;
+2025-09-22 11:30:05 [spring-session-1] INFO  p6spy - #1758508205526 | took 147ms | commit | connection 93| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:31:00 [spring-session-1] INFO  p6spy - #1758508260042 | took 7ms | statement | connection 94| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508260032
+;
+2025-09-22 11:31:00 [spring-session-1] INFO  p6spy - #1758508260056 | took 11ms | commit | connection 94| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:32:02 [spring-session-1] INFO  p6spy - #1758508322349 | took 6ms | statement | connection 95| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508322341
+;
+2025-09-22 11:32:02 [spring-session-1] INFO  p6spy - #1758508322360 | took 8ms | commit | connection 95| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:33:02 [spring-session-1] INFO  p6spy - #1758508382907 | took 6ms | statement | connection 96| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508382898
+;
+2025-09-22 11:33:02 [spring-session-1] INFO  p6spy - #1758508382925 | took 14ms | commit | connection 96| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:34:02 [spring-session-1] INFO  p6spy - #1758508442915 | took 6ms | statement | connection 97| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508442908
+;
+2025-09-22 11:34:02 [spring-session-1] INFO  p6spy - #1758508442926 | took 9ms | commit | connection 97| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:35:06 [spring-session-1] INFO  p6spy - #1758508506099 | took 7ms | statement | connection 98| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508506090
+;
+2025-09-22 11:35:06 [spring-session-1] INFO  p6spy - #1758508506113 | took 10ms | commit | connection 98| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:36:02 [spring-session-1] INFO  p6spy - #1758508562915 | took 22ms | statement | connection 99| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508562890
+;
+2025-09-22 11:36:02 [spring-session-1] INFO  p6spy - #1758508562932 | took 16ms | commit | connection 99| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:37:02 [spring-session-1] INFO  p6spy - #1758508622617 | took 52ms | statement | connection 100| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508622562
+;
+2025-09-22 11:37:02 [spring-session-1] INFO  p6spy - #1758508622638 | took 16ms | commit | connection 100| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:38:02 [spring-session-1] INFO  p6spy - #1758508682598 | took 6ms | statement | connection 101| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508682589
+;
+2025-09-22 11:38:02 [spring-session-1] INFO  p6spy - #1758508682609 | took 9ms | commit | connection 101| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:39:02 [spring-session-1] INFO  p6spy - #1758508742774 | took 7ms | statement | connection 102| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508742739
+;
+2025-09-22 11:39:02 [spring-session-1] INFO  p6spy - #1758508742792 | took 9ms | commit | connection 102| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:40:03 [spring-session-1] INFO  p6spy - #1758508803205 | took 6ms | statement | connection 103| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758508803198
+;
+2025-09-22 11:40:03 [spring-session-1] INFO  p6spy - #1758508803215 | took 9ms | commit | connection 103| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:55:24 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m43s45ms).
+2025-09-22 11:56:13 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@5124788d (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 11:56:13 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4a637880 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 11:56:13 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7ea217c3 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 11:56:13 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@6df334ad (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 11:56:13 [spring-session-1] INFO  p6spy - #1758509773428 | took 6ms | statement | connection 104| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758509773422
+;
+2025-09-22 11:56:13 [spring-session-1] INFO  p6spy - #1758509773438 | took 8ms | commit | connection 104| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:57:04 [spring-session-1] INFO  p6spy - #1758509824701 | took 9ms | statement | connection 105| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758509824690
+;
+2025-09-22 11:57:04 [spring-session-1] INFO  p6spy - #1758509824715 | took 11ms | commit | connection 105| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 11:58:01 [spring-session-1] INFO  p6spy - #1758509881087 | took 6ms | statement | connection 106| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758509881079
+;
+2025-09-22 11:58:01 [spring-session-1] INFO  p6spy - #1758509881102 | took 9ms | commit | connection 106| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:06:44 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m43s699ms).
+2025-09-22 12:18:35 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4c505d16 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 12:18:36 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@7c5e0693 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 12:18:36 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@4a96d7d4 (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 12:18:36 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@2d83e14c (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 12:18:36 [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m51s748ms).
+2025-09-22 12:18:36 [spring-session-1] WARN  com.zaxxer.hikari.pool.PoolBase - HikariPool-1 - Failed to validate connection com.mysql.cj.jdbc.ConnectionImpl@670e511e (No operations allowed after connection closed.). Possibly consider using a shorter maxLifetime value.
+2025-09-22 12:18:37 [spring-session-1] INFO  p6spy - #1758511117498 | took 223ms | statement | connection 107| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511117271
+;
+2025-09-22 12:18:37 [spring-session-1] INFO  p6spy - #1758511117512 | took 10ms | commit | connection 107| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:19:00 [spring-session-1] INFO  p6spy - #1758511140056 | took 6ms | statement | connection 108| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511140048
+;
+2025-09-22 12:19:00 [spring-session-1] INFO  p6spy - #1758511140075 | took 17ms | commit | connection 108| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:20:00 [spring-session-1] INFO  p6spy - #1758511200075 | took 21ms | statement | connection 109| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511200050
+;
+2025-09-22 12:20:00 [spring-session-1] INFO  p6spy - #1758511200093 | took 16ms | commit | connection 109| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:21:00 [spring-session-1] INFO  p6spy - #1758511260073 | took 12ms | statement | connection 110| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511260059
+;
+2025-09-22 12:21:00 [spring-session-1] INFO  p6spy - #1758511260103 | took 27ms | commit | connection 110| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:22:00 [spring-session-1] INFO  p6spy - #1758511320063 | took 13ms | statement | connection 111| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511320048
+;
+2025-09-22 12:22:00 [spring-session-1] INFO  p6spy - #1758511320073 | took 8ms | commit | connection 111| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:23:00 [spring-session-1] INFO  p6spy - #1758511380133 | took 6ms | statement | connection 112| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511380124
+;
+2025-09-22 12:23:00 [spring-session-1] INFO  p6spy - #1758511380148 | took 11ms | commit | connection 112| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:24:00 [spring-session-1] INFO  p6spy - #1758511440047 | took 10ms | statement | connection 113| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511440034
+;
+2025-09-22 12:24:00 [spring-session-1] INFO  p6spy - #1758511440061 | took 12ms | commit | connection 113| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:25:00 [spring-session-1] INFO  p6spy - #1758511500059 | took 21ms | statement | connection 114| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511500034
+;
+2025-09-22 12:25:00 [spring-session-1] INFO  p6spy - #1758511500091 | took 28ms | commit | connection 114| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:26:00 [spring-session-1] INFO  p6spy - #1758511560037 | took 9ms | statement | connection 115| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511560026
+;
+2025-09-22 12:26:00 [spring-session-1] INFO  p6spy - #1758511560070 | took 31ms | commit | connection 115| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:27:00 [spring-session-1] INFO  p6spy - #1758511620069 | took 6ms | statement | connection 116| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511620057
+;
+2025-09-22 12:27:00 [spring-session-1] INFO  p6spy - #1758511620089 | took 11ms | commit | connection 116| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:28:00 [spring-session-1] INFO  p6spy - #1758511680060 | took 19ms | statement | connection 117| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511680040
+;
+2025-09-22 12:28:00 [spring-session-1] INFO  p6spy - #1758511680078 | took 15ms | commit | connection 117| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:29:00 [spring-session-1] INFO  p6spy - #1758511740439 | took 42ms | statement | connection 118| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511740194
+;
+2025-09-22 12:29:00 [spring-session-1] INFO  p6spy - #1758511740450 | took 8ms | commit | connection 118| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:30:00 [spring-session-1] INFO  p6spy - #1758511800085 | took 10ms | statement | connection 119| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511800072
+;
+2025-09-22 12:30:00 [spring-session-1] INFO  p6spy - #1758511800127 | took 40ms | commit | connection 119| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:31:00 [spring-session-1] INFO  p6spy - #1758511860058 | took 6ms | statement | connection 120| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511860050
+;
+2025-09-22 12:31:00 [spring-session-1] INFO  p6spy - #1758511860076 | took 15ms | commit | connection 120| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:32:00 [spring-session-1] INFO  p6spy - #1758511920035 | took 9ms | statement | connection 121| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511920025
+;
+2025-09-22 12:32:00 [spring-session-1] INFO  p6spy - #1758511920066 | took 30ms | commit | connection 121| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:33:00 [spring-session-1] INFO  p6spy - #1758511980046 | took 9ms | statement | connection 122| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758511980035
+;
+2025-09-22 12:33:00 [spring-session-1] INFO  p6spy - #1758511980061 | took 13ms | commit | connection 122| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:34:00 [spring-session-1] INFO  p6spy - #1758512040078 | took 11ms | statement | connection 123| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512040065
+;
+2025-09-22 12:34:00 [spring-session-1] INFO  p6spy - #1758512040091 | took 10ms | commit | connection 123| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:35:00 [spring-session-1] INFO  p6spy - #1758512100054 | took 9ms | statement | connection 124| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512100039
+;
+2025-09-22 12:35:00 [spring-session-1] INFO  p6spy - #1758512100069 | took 13ms | commit | connection 124| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:36:00 [spring-session-1] INFO  p6spy - #1758512160067 | took 10ms | statement | connection 125| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512160055
+;
+2025-09-22 12:36:00 [spring-session-1] INFO  p6spy - #1758512160083 | took 14ms | commit | connection 125| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:37:00 [spring-session-1] INFO  p6spy - #1758512220060 | took 9ms | statement | connection 126| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512220043
+;
+2025-09-22 12:37:00 [spring-session-1] INFO  p6spy - #1758512220073 | took 11ms | commit | connection 126| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:38:00 [spring-session-1] INFO  p6spy - #1758512280075 | took 7ms | statement | connection 127| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512280066
+;
+2025-09-22 12:38:00 [spring-session-1] INFO  p6spy - #1758512280090 | took 13ms | commit | connection 127| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:39:00 [spring-session-1] INFO  p6spy - #1758512340041 | took 8ms | statement | connection 128| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512340032
+;
+2025-09-22 12:39:00 [spring-session-1] INFO  p6spy - #1758512340056 | took 14ms | commit | connection 128| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:40:00 [spring-session-1] INFO  p6spy - #1758512400074 | took 6ms | statement | connection 129| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512400066
+;
+2025-09-22 12:40:00 [spring-session-1] INFO  p6spy - #1758512400089 | took 13ms | commit | connection 129| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:41:00 [spring-session-1] INFO  p6spy - #1758512460044 | took 11ms | statement | connection 130| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512460032
+;
+2025-09-22 12:41:00 [spring-session-1] INFO  p6spy - #1758512460060 | took 14ms | commit | connection 130| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:42:00 [spring-session-1] INFO  p6spy - #1758512520055 | took 6ms | statement | connection 131| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512520048
+;
+2025-09-22 12:42:00 [spring-session-1] INFO  p6spy - #1758512520065 | took 8ms | commit | connection 131| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:43:00 [spring-session-1] INFO  p6spy - #1758512580059 | took 8ms | statement | connection 132| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512580050
+;
+2025-09-22 12:43:00 [spring-session-1] INFO  p6spy - #1758512580069 | took 8ms | commit | connection 132| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:44:00 [spring-session-1] INFO  p6spy - #1758512640046 | took 8ms | statement | connection 133| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512640035
+;
+2025-09-22 12:44:00 [spring-session-1] INFO  p6spy - #1758512640073 | took 24ms | commit | connection 133| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:45:00 [spring-session-1] INFO  p6spy - #1758512700042 | took 9ms | statement | connection 134| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512700030
+;
+2025-09-22 12:45:00 [spring-session-1] INFO  p6spy - #1758512700074 | took 30ms | commit | connection 134| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:46:00 [spring-session-1] INFO  p6spy - #1758512760070 | took 5ms | statement | connection 135| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512760063
+;
+2025-09-22 12:46:00 [spring-session-1] INFO  p6spy - #1758512760082 | took 11ms | commit | connection 135| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:47:00 [spring-session-1] INFO  p6spy - #1758512820048 | took 9ms | statement | connection 136| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512820037
+;
+2025-09-22 12:47:00 [spring-session-1] INFO  p6spy - #1758512820059 | took 9ms | commit | connection 136| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:48:00 [spring-session-1] INFO  p6spy - #1758512880055 | took 22ms | statement | connection 137| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512880033
+;
+2025-09-22 12:48:00 [spring-session-1] INFO  p6spy - #1758512880072 | took 13ms | commit | connection 137| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:49:00 [spring-session-1] INFO  p6spy - #1758512940046 | took 6ms | statement | connection 138| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758512940036
+;
+2025-09-22 12:49:00 [spring-session-1] INFO  p6spy - #1758512940058 | took 10ms | commit | connection 138| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:50:00 [spring-session-1] INFO  p6spy - #1758513000067 | took 35ms | statement | connection 139| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513000030
+;
+2025-09-22 12:50:00 [spring-session-1] INFO  p6spy - #1758513000086 | took 17ms | commit | connection 139| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:51:00 [spring-session-1] INFO  p6spy - #1758513060054 | took 20ms | statement | connection 140| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513060032
+;
+2025-09-22 12:51:00 [spring-session-1] INFO  p6spy - #1758513060068 | took 11ms | commit | connection 140| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:52:00 [spring-session-1] INFO  p6spy - #1758513120075 | took 7ms | statement | connection 141| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513120067
+;
+2025-09-22 12:52:00 [spring-session-1] INFO  p6spy - #1758513120091 | took 14ms | commit | connection 141| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:53:00 [spring-session-1] INFO  p6spy - #1758513180059 | took 7ms | statement | connection 142| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513180048
+;
+2025-09-22 12:53:00 [spring-session-1] INFO  p6spy - #1758513180071 | took 9ms | commit | connection 142| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:54:00 [spring-session-1] INFO  p6spy - #1758513240062 | took 18ms | statement | connection 143| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513240035
+;
+2025-09-22 12:54:00 [spring-session-1] INFO  p6spy - #1758513240078 | took 10ms | commit | connection 143| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:55:00 [spring-session-1] INFO  p6spy - #1758513300046 | took 8ms | statement | connection 144| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513300034
+;
+2025-09-22 12:55:00 [spring-session-1] INFO  p6spy - #1758513300061 | took 13ms | commit | connection 144| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:56:00 [spring-session-1] INFO  p6spy - #1758513360049 | took 16ms | statement | connection 145| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513360031
+;
+2025-09-22 12:56:00 [spring-session-1] INFO  p6spy - #1758513360085 | took 34ms | commit | connection 145| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:57:00 [spring-session-1] INFO  p6spy - #1758513420064 | took 7ms | statement | connection 146| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513420054
+;
+2025-09-22 12:57:00 [spring-session-1] INFO  p6spy - #1758513420077 | took 9ms | commit | connection 146| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:58:00 [spring-session-1] INFO  p6spy - #1758513480089 | took 17ms | statement | connection 147| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513480070
+;
+2025-09-22 12:58:00 [spring-session-1] INFO  p6spy - #1758513480120 | took 27ms | commit | connection 147| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 12:59:00 [spring-session-1] INFO  p6spy - #1758513540048 | took 8ms | statement | connection 148| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513540038
+;
+2025-09-22 12:59:00 [spring-session-1] INFO  p6spy - #1758513540063 | took 11ms | commit | connection 148| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:00:00 [spring-session-1] INFO  p6spy - #1758513600078 | took 35ms | statement | connection 149| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513600041
+;
+2025-09-22 13:00:00 [spring-session-1] INFO  p6spy - #1758513600142 | took 59ms | commit | connection 149| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:01:00 [spring-session-1] INFO  p6spy - #1758513660055 | took 7ms | statement | connection 150| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513660044
+;
+2025-09-22 13:01:00 [spring-session-1] INFO  p6spy - #1758513660073 | took 15ms | commit | connection 150| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:02:00 [spring-session-1] INFO  p6spy - #1758513720062 | took 7ms | statement | connection 151| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513720053
+;
+2025-09-22 13:02:00 [spring-session-1] INFO  p6spy - #1758513720074 | took 9ms | commit | connection 151| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:03:00 [spring-session-1] INFO  p6spy - #1758513780049 | took 7ms | statement | connection 152| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513780039
+;
+2025-09-22 13:03:00 [spring-session-1] INFO  p6spy - #1758513780061 | took 9ms | commit | connection 152| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:04:00 [spring-session-1] INFO  p6spy - #1758513840038 | took 13ms | statement | connection 153| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513840024
+;
+2025-09-22 13:04:00 [spring-session-1] INFO  p6spy - #1758513840052 | took 11ms | commit | connection 153| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:05:00 [spring-session-1] INFO  p6spy - #1758513900056 | took 19ms | statement | connection 154| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513900034
+;
+2025-09-22 13:05:00 [spring-session-1] INFO  p6spy - #1758513900071 | took 12ms | commit | connection 154| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:06:00 [spring-session-1] INFO  p6spy - #1758513960055 | took 8ms | statement | connection 155| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758513960046
+;
+2025-09-22 13:06:00 [spring-session-1] INFO  p6spy - #1758513960219 | took 162ms | commit | connection 155| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:07:00 [spring-session-1] INFO  p6spy - #1758514020029 | took 9ms | statement | connection 156| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514020019
+;
+2025-09-22 13:07:00 [spring-session-1] INFO  p6spy - #1758514020059 | took 27ms | commit | connection 156| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:08:00 [spring-session-1] INFO  p6spy - #1758514080050 | took 10ms | statement | connection 157| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514080039
+;
+2025-09-22 13:08:00 [spring-session-1] INFO  p6spy - #1758514080062 | took 9ms | commit | connection 157| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:09:00 [spring-session-1] INFO  p6spy - #1758514140045 | took 16ms | statement | connection 158| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514140027
+;
+2025-09-22 13:09:00 [spring-session-1] INFO  p6spy - #1758514140059 | took 11ms | commit | connection 158| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:10:00 [spring-session-1] INFO  p6spy - #1758514200095 | took 7ms | statement | connection 159| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514200086
+;
+2025-09-22 13:10:00 [spring-session-1] INFO  p6spy - #1758514200110 | took 10ms | commit | connection 159| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:11:00 [spring-session-1] INFO  p6spy - #1758514260043 | took 7ms | statement | connection 160| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514260035
+;
+2025-09-22 13:11:00 [spring-session-1] INFO  p6spy - #1758514260057 | took 11ms | commit | connection 160| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:12:00 [spring-session-1] INFO  p6spy - #1758514320053 | took 15ms | statement | connection 161| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514320036
+;
+2025-09-22 13:12:00 [spring-session-1] INFO  p6spy - #1758514320065 | took 9ms | commit | connection 161| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:13:00 [spring-session-1] INFO  p6spy - #1758514380033 | took 8ms | statement | connection 162| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514380023
+;
+2025-09-22 13:13:00 [spring-session-1] INFO  p6spy - #1758514380061 | took 25ms | commit | connection 162| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:14:00 [spring-session-1] INFO  p6spy - #1758514440055 | took 6ms | statement | connection 163| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514440048
+;
+2025-09-22 13:14:00 [spring-session-1] INFO  p6spy - #1758514440074 | took 18ms | commit | connection 163| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:15:00 [spring-session-1] INFO  p6spy - #1758514500054 | took 7ms | statement | connection 164| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514500045
+;
+2025-09-22 13:15:00 [spring-session-1] INFO  p6spy - #1758514500084 | took 28ms | commit | connection 164| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:16:00 [spring-session-1] INFO  p6spy - #1758514560056 | took 17ms | statement | connection 165| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514560035
+;
+2025-09-22 13:16:00 [spring-session-1] INFO  p6spy - #1758514560078 | took 18ms | commit | connection 165| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:17:00 [spring-session-1] INFO  p6spy - #1758514620024 | took 17ms | statement | connection 166| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514620006
+;
+2025-09-22 13:17:00 [spring-session-1] INFO  p6spy - #1758514620036 | took 10ms | commit | connection 166| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:18:00 [spring-session-1] INFO  p6spy - #1758514680040 | took 8ms | statement | connection 167| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514680031
+;
+2025-09-22 13:18:00 [spring-session-1] INFO  p6spy - #1758514680051 | took 9ms | commit | connection 167| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:19:00 [spring-session-1] INFO  p6spy - #1758514740037 | took 7ms | statement | connection 168| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514740028
+;
+2025-09-22 13:19:00 [spring-session-1] INFO  p6spy - #1758514740050 | took 10ms | commit | connection 168| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:20:00 [spring-session-1] INFO  p6spy - #1758514800036 | took 13ms | statement | connection 169| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514800021
+;
+2025-09-22 13:20:00 [spring-session-1] INFO  p6spy - #1758514800052 | took 14ms | commit | connection 169| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:21:00 [spring-session-1] INFO  p6spy - #1758514860042 | took 6ms | statement | connection 170| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514860034
+;
+2025-09-22 13:21:00 [spring-session-1] INFO  p6spy - #1758514860054 | took 10ms | commit | connection 170| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:22:00 [spring-session-1] INFO  p6spy - #1758514920056 | took 11ms | statement | connection 171| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514920043
+;
+2025-09-22 13:22:00 [spring-session-1] INFO  p6spy - #1758514920070 | took 10ms | commit | connection 171| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:23:00 [spring-session-1] INFO  p6spy - #1758514980059 | took 6ms | statement | connection 172| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758514980052
+;
+2025-09-22 13:23:00 [spring-session-1] INFO  p6spy - #1758514980073 | took 12ms | commit | connection 172| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:24:00 [spring-session-1] INFO  p6spy - #1758515040044 | took 6ms | statement | connection 173| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515040036
+;
+2025-09-22 13:24:00 [spring-session-1] INFO  p6spy - #1758515040055 | took 9ms | commit | connection 173| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:25:00 [spring-session-1] INFO  p6spy - #1758515100036 | took 9ms | statement | connection 174| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515100026
+;
+2025-09-22 13:25:00 [spring-session-1] INFO  p6spy - #1758515100048 | took 9ms | commit | connection 174| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:26:00 [spring-session-1] INFO  p6spy - #1758515160057 | took 8ms | statement | connection 175| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515160046
+;
+2025-09-22 13:26:00 [spring-session-1] INFO  p6spy - #1758515160073 | took 13ms | commit | connection 175| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:27:00 [spring-session-1] INFO  p6spy - #1758515220055 | took 8ms | statement | connection 176| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515220044
+;
+2025-09-22 13:27:00 [spring-session-1] INFO  p6spy - #1758515220072 | took 15ms | commit | connection 176| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:28:00 [spring-session-1] INFO  p6spy - #1758515280090 | took 16ms | statement | connection 177| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515280071
+;
+2025-09-22 13:28:00 [spring-session-1] INFO  p6spy - #1758515280118 | took 16ms | commit | connection 177| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:29:00 [spring-session-1] INFO  p6spy - #1758515340058 | took 21ms | statement | connection 178| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515340037
+;
+2025-09-22 13:29:00 [spring-session-1] INFO  p6spy - #1758515340073 | took 13ms | commit | connection 178| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:30:00 [spring-session-1] INFO  p6spy - #1758515400045 | took 17ms | statement | connection 179| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515400027
+;
+2025-09-22 13:30:00 [spring-session-1] INFO  p6spy - #1758515400089 | took 41ms | commit | connection 179| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:31:00 [spring-session-1] INFO  p6spy - #1758515460038 | took 7ms | statement | connection 180| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515460030
+;
+2025-09-22 13:31:00 [spring-session-1] INFO  p6spy - #1758515460053 | took 11ms | commit | connection 180| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:32:00 [spring-session-1] INFO  p6spy - #1758515520025 | took 6ms | statement | connection 181| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515520018
+;
+2025-09-22 13:32:00 [spring-session-1] INFO  p6spy - #1758515520036 | took 9ms | commit | connection 181| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:33:00 [spring-session-1] INFO  p6spy - #1758515580053 | took 10ms | statement | connection 182| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515580041
+;
+2025-09-22 13:33:00 [spring-session-1] INFO  p6spy - #1758515580068 | took 12ms | commit | connection 182| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:34:00 [spring-session-1] INFO  p6spy - #1758515640044 | took 6ms | statement | connection 183| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515640036
+;
+2025-09-22 13:34:00 [spring-session-1] INFO  p6spy - #1758515640054 | took 9ms | commit | connection 183| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:35:00 [spring-session-1] INFO  p6spy - #1758515700046 | took 9ms | statement | connection 184| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515700036
+;
+2025-09-22 13:35:00 [spring-session-1] INFO  p6spy - #1758515700058 | took 9ms | commit | connection 184| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:36:00 [spring-session-1] INFO  p6spy - #1758515760042 | took 8ms | statement | connection 185| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515760032
+;
+2025-09-22 13:36:00 [spring-session-1] INFO  p6spy - #1758515760053 | took 9ms | commit | connection 185| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:37:00 [spring-session-1] INFO  p6spy - #1758515820039 | took 7ms | statement | connection 186| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515820031
+;
+2025-09-22 13:37:00 [spring-session-1] INFO  p6spy - #1758515820051 | took 10ms | commit | connection 186| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:38:00 [spring-session-1] INFO  p6spy - #1758515880057 | took 7ms | statement | connection 187| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515880046
+;
+2025-09-22 13:38:00 [spring-session-1] INFO  p6spy - #1758515880070 | took 11ms | commit | connection 187| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:39:00 [spring-session-1] INFO  p6spy - #1758515940062 | took 10ms | statement | connection 188| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758515940050
+;
+2025-09-22 13:39:00 [spring-session-1] INFO  p6spy - #1758515940077 | took 14ms | commit | connection 188| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:40:00 [spring-session-1] INFO  p6spy - #1758516000061 | took 8ms | statement | connection 189| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516000052
+;
+2025-09-22 13:40:00 [spring-session-1] INFO  p6spy - #1758516000079 | took 16ms | commit | connection 189| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:41:00 [spring-session-1] INFO  p6spy - #1758516060144 | took 26ms | statement | connection 190| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516060115
+;
+2025-09-22 13:41:00 [spring-session-1] INFO  p6spy - #1758516060158 | took 10ms | commit | connection 190| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:42:00 [spring-session-1] INFO  p6spy - #1758516120048 | took 8ms | statement | connection 191| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516120039
+;
+2025-09-22 13:42:00 [spring-session-1] INFO  p6spy - #1758516120060 | took 10ms | commit | connection 191| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:43:00 [spring-session-1] INFO  p6spy - #1758516180046 | took 7ms | statement | connection 192| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516180037
+;
+2025-09-22 13:43:00 [spring-session-1] INFO  p6spy - #1758516180062 | took 15ms | commit | connection 192| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:44:00 [spring-session-1] INFO  p6spy - #1758516240058 | took 9ms | statement | connection 193| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516240047
+;
+2025-09-22 13:44:00 [spring-session-1] INFO  p6spy - #1758516240070 | took 10ms | commit | connection 193| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:45:00 [spring-session-1] INFO  p6spy - #1758516300062 | took 16ms | statement | connection 194| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516300045
+;
+2025-09-22 13:45:00 [spring-session-1] INFO  p6spy - #1758516300075 | took 11ms | commit | connection 194| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:46:00 [spring-session-1] INFO  p6spy - #1758516360130 | took 7ms | statement | connection 195| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516360121
+;
+2025-09-22 13:46:00 [spring-session-1] INFO  p6spy - #1758516360151 | took 17ms | commit | connection 195| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:47:00 [spring-session-1] INFO  p6spy - #1758516420111 | took 29ms | statement | connection 196| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516420079
+;
+2025-09-22 13:47:00 [spring-session-1] INFO  p6spy - #1758516420126 | took 12ms | commit | connection 196| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:48:00 [spring-session-1] INFO  p6spy - #1758516480057 | took 8ms | statement | connection 197| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516480048
+;
+2025-09-22 13:48:00 [spring-session-1] INFO  p6spy - #1758516480069 | took 10ms | commit | connection 197| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:49:00 [spring-session-1] INFO  p6spy - #1758516540044 | took 6ms | statement | connection 198| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516540036
+;
+2025-09-22 13:49:00 [spring-session-1] INFO  p6spy - #1758516540056 | took 10ms | commit | connection 198| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:50:00 [spring-session-1] INFO  p6spy - #1758516600062 | took 11ms | statement | connection 199| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516600049
+;
+2025-09-22 13:50:00 [spring-session-1] INFO  p6spy - #1758516600075 | took 11ms | commit | connection 199| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:51:00 [spring-session-1] INFO  p6spy - #1758516660069 | took 15ms | statement | connection 200| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516660052
+;
+2025-09-22 13:51:00 [spring-session-1] INFO  p6spy - #1758516660082 | took 10ms | commit | connection 200| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:52:00 [spring-session-1] INFO  p6spy - #1758516720150 | took 8ms | statement | connection 201| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516720137
+;
+2025-09-22 13:52:00 [spring-session-1] INFO  p6spy - #1758516720171 | took 9ms | commit | connection 201| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:53:00 [spring-session-1] INFO  p6spy - #1758516780052 | took 6ms | statement | connection 202| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516780045
+;
+2025-09-22 13:53:00 [spring-session-1] INFO  p6spy - #1758516780064 | took 11ms | commit | connection 202| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:54:00 [spring-session-1] INFO  p6spy - #1758516840041 | took 6ms | statement | connection 203| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516840034
+;
+2025-09-22 13:54:00 [spring-session-1] INFO  p6spy - #1758516840053 | took 10ms | commit | connection 203| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:55:00 [spring-session-1] INFO  p6spy - #1758516900062 | took 10ms | statement | connection 204| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516900051
+;
+2025-09-22 13:55:00 [spring-session-1] INFO  p6spy - #1758516900075 | took 11ms | commit | connection 204| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:56:00 [spring-session-1] INFO  p6spy - #1758516960083 | took 15ms | statement | connection 205| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758516960067
+;
+2025-09-22 13:56:00 [spring-session-1] INFO  p6spy - #1758516960102 | took 16ms | commit | connection 205| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:57:00 [spring-session-1] INFO  p6spy - #1758517020055 | took 8ms | statement | connection 206| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517020045
+;
+2025-09-22 13:57:00 [spring-session-1] INFO  p6spy - #1758517020067 | took 10ms | commit | connection 206| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:58:00 [spring-session-1] INFO  p6spy - #1758517080052 | took 8ms | statement | connection 207| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517080042
+;
+2025-09-22 13:58:00 [spring-session-1] INFO  p6spy - #1758517080064 | took 10ms | commit | connection 207| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 13:59:00 [spring-session-1] INFO  p6spy - #1758517140140 | took 8ms | statement | connection 208| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517140129
+;
+2025-09-22 13:59:00 [spring-session-1] INFO  p6spy - #1758517140157 | took 15ms | commit | connection 208| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:00:00 [spring-session-1] INFO  p6spy - #1758517200085 | took 57ms | statement | connection 209| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517200026
+;
+2025-09-22 14:00:00 [spring-session-1] INFO  p6spy - #1758517200205 | took 116ms | commit | connection 209| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:01:00 [spring-session-1] INFO  p6spy - #1758517260054 | took 7ms | statement | connection 210| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517260041
+;
+2025-09-22 14:01:00 [spring-session-1] INFO  p6spy - #1758517260076 | took 19ms | commit | connection 210| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:02:00 [spring-session-1] INFO  p6spy - #1758517320037 | took 7ms | statement | connection 211| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517320029
+;
+2025-09-22 14:02:00 [spring-session-1] INFO  p6spy - #1758517320049 | took 10ms | commit | connection 211| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:03:00 [spring-session-1] INFO  p6spy - #1758517380036 | took 7ms | statement | connection 212| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517380027
+;
+2025-09-22 14:03:00 [spring-session-1] INFO  p6spy - #1758517380047 | took 9ms | commit | connection 212| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:04:00 [spring-session-1] INFO  p6spy - #1758517440066 | took 10ms | statement | connection 213| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517440055
+;
+2025-09-22 14:04:00 [spring-session-1] INFO  p6spy - #1758517440084 | took 16ms | commit | connection 213| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:05:00 [spring-session-1] INFO  p6spy - #1758517500062 | took 7ms | statement | connection 214| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517500053
+;
+2025-09-22 14:05:00 [spring-session-1] INFO  p6spy - #1758517500084 | took 21ms | commit | connection 214| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:06:00 [spring-session-1] INFO  p6spy - #1758517560045 | took 7ms | statement | connection 215| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517560036
+;
+2025-09-22 14:06:00 [spring-session-1] INFO  p6spy - #1758517560057 | took 9ms | commit | connection 215| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:07:00 [spring-session-1] INFO  p6spy - #1758517620052 | took 9ms | statement | connection 216| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517620040
+;
+2025-09-22 14:07:00 [spring-session-1] INFO  p6spy - #1758517620069 | took 14ms | commit | connection 216| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:08:00 [spring-session-1] INFO  p6spy - #1758517680043 | took 11ms | statement | connection 217| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517680030
+;
+2025-09-22 14:08:00 [spring-session-1] INFO  p6spy - #1758517680055 | took 9ms | commit | connection 217| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:09:00 [spring-session-1] INFO  p6spy - #1758517740054 | took 5ms | statement | connection 218| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517740047
+;
+2025-09-22 14:09:00 [spring-session-1] INFO  p6spy - #1758517740073 | took 14ms | commit | connection 218| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:10:00 [spring-session-1] INFO  p6spy - #1758517800040 | took 8ms | statement | connection 219| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517800030
+;
+2025-09-22 14:10:00 [spring-session-1] INFO  p6spy - #1758517800053 | took 10ms | commit | connection 219| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:11:00 [spring-session-1] INFO  p6spy - #1758517860040 | took 6ms | statement | connection 220| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517860033
+;
+2025-09-22 14:11:00 [spring-session-1] INFO  p6spy - #1758517860054 | took 12ms | commit | connection 220| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:12:00 [spring-session-1] INFO  p6spy - #1758517920052 | took 7ms | statement | connection 221| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517920043
+;
+2025-09-22 14:12:00 [spring-session-1] INFO  p6spy - #1758517920066 | took 11ms | commit | connection 221| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:13:00 [spring-session-1] INFO  p6spy - #1758517980034 | took 7ms | statement | connection 222| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758517980025
+;
+2025-09-22 14:13:00 [spring-session-1] INFO  p6spy - #1758517980047 | took 10ms | commit | connection 222| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:14:00 [spring-session-1] INFO  p6spy - #1758518040038 | took 6ms | statement | connection 223| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518040032
+;
+2025-09-22 14:14:00 [spring-session-1] INFO  p6spy - #1758518040049 | took 9ms | commit | connection 223| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:15:00 [spring-session-1] INFO  p6spy - #1758518100206 | took 70ms | statement | connection 224| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518100132
+;
+2025-09-22 14:15:00 [spring-session-1] INFO  p6spy - #1758518100220 | took 12ms | commit | connection 224| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:16:00 [spring-session-1] INFO  p6spy - #1758518160050 | took 11ms | statement | connection 225| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518160039
+;
+2025-09-22 14:16:00 [spring-session-1] INFO  p6spy - #1758518160063 | took 12ms | commit | connection 225| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:17:00 [spring-session-1] INFO  p6spy - #1758518220040 | took 8ms | statement | connection 226| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518220031
+;
+2025-09-22 14:17:00 [spring-session-1] INFO  p6spy - #1758518220053 | took 12ms | commit | connection 226| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:18:00 [spring-session-1] INFO  p6spy - #1758518280036 | took 7ms | statement | connection 227| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518280029
+;
+2025-09-22 14:18:00 [spring-session-1] INFO  p6spy - #1758518280046 | took 9ms | commit | connection 227| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:19:00 [spring-session-1] INFO  p6spy - #1758518340082 | took 8ms | statement | connection 228| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518340071
+;
+2025-09-22 14:19:00 [spring-session-1] INFO  p6spy - #1758518340094 | took 9ms | commit | connection 228| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:20:00 [spring-session-1] INFO  p6spy - #1758518400041 | took 6ms | statement | connection 229| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518400034
+;
+2025-09-22 14:20:00 [spring-session-1] INFO  p6spy - #1758518400053 | took 10ms | commit | connection 229| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:21:00 [spring-session-1] INFO  p6spy - #1758518460064 | took 7ms | statement | connection 230| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518460053
+;
+2025-09-22 14:21:00 [spring-session-1] INFO  p6spy - #1758518460077 | took 10ms | commit | connection 230| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:22:00 [spring-session-1] INFO  p6spy - #1758518520046 | took 7ms | statement | connection 231| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518520036
+;
+2025-09-22 14:22:00 [spring-session-1] INFO  p6spy - #1758518520058 | took 9ms | commit | connection 231| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:23:00 [spring-session-1] INFO  p6spy - #1758518580035 | took 11ms | statement | connection 232| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518580023
+;
+2025-09-22 14:23:00 [spring-session-1] INFO  p6spy - #1758518580045 | took 9ms | commit | connection 232| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:24:00 [spring-session-1] INFO  p6spy - #1758518640046 | took 9ms | statement | connection 233| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518640034
+;
+2025-09-22 14:24:00 [spring-session-1] INFO  p6spy - #1758518640061 | took 13ms | commit | connection 233| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:25:00 [spring-session-1] INFO  p6spy - #1758518700047 | took 6ms | statement | connection 234| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518700039
+;
+2025-09-22 14:25:00 [spring-session-1] INFO  p6spy - #1758518700059 | took 10ms | commit | connection 234| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:26:00 [spring-session-1] INFO  p6spy - #1758518760116 | took 7ms | statement | connection 235| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518760106
+;
+2025-09-22 14:26:00 [spring-session-1] INFO  p6spy - #1758518760143 | took 24ms | commit | connection 235| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:27:00 [spring-session-1] INFO  p6spy - #1758518820168 | took 8ms | statement | connection 236| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518820158
+;
+2025-09-22 14:27:00 [spring-session-1] INFO  p6spy - #1758518820182 | took 11ms | commit | connection 236| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:28:00 [spring-session-1] INFO  p6spy - #1758518880049 | took 9ms | statement | connection 237| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518880038
+;
+2025-09-22 14:28:00 [spring-session-1] INFO  p6spy - #1758518880070 | took 18ms | commit | connection 237| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:29:00 [spring-session-1] INFO  p6spy - #1758518940061 | took 7ms | statement | connection 238| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758518940053
+;
+2025-09-22 14:29:00 [spring-session-1] INFO  p6spy - #1758518940075 | took 12ms | commit | connection 238| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:30:00 [spring-session-1] INFO  p6spy - #1758519000083 | took 35ms | statement | connection 239| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519000046
+;
+2025-09-22 14:30:00 [spring-session-1] INFO  p6spy - #1758519000120 | took 29ms | commit | connection 239| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:31:00 [spring-session-1] INFO  p6spy - #1758519060089 | took 54ms | statement | connection 240| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519060034
+;
+2025-09-22 14:31:00 [spring-session-1] INFO  p6spy - #1758519060104 | took 11ms | commit | connection 240| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:32:00 [spring-session-1] INFO  p6spy - #1758519120057 | took 12ms | statement | connection 241| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519120041
+;
+2025-09-22 14:32:00 [spring-session-1] INFO  p6spy - #1758519120070 | took 11ms | commit | connection 241| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:33:00 [spring-session-1] INFO  p6spy - #1758519180050 | took 11ms | statement | connection 242| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519180038
+;
+2025-09-22 14:33:00 [spring-session-1] INFO  p6spy - #1758519180061 | took 9ms | commit | connection 242| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:34:00 [spring-session-1] INFO  p6spy - #1758519240041 | took 6ms | statement | connection 243| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519240034
+;
+2025-09-22 14:34:00 [spring-session-1] INFO  p6spy - #1758519240073 | took 30ms | commit | connection 243| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:35:00 [spring-session-1] INFO  p6spy - #1758519300082 | took 21ms | statement | connection 244| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519300060
+;
+2025-09-22 14:35:00 [spring-session-1] INFO  p6spy - #1758519300097 | took 12ms | commit | connection 244| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:36:00 [spring-session-1] INFO  p6spy - #1758519360071 | took 29ms | statement | connection 245| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519360040
+;
+2025-09-22 14:36:00 [spring-session-1] INFO  p6spy - #1758519360084 | took 10ms | commit | connection 245| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:37:00 [spring-session-1] INFO  p6spy - #1758519420094 | took 44ms | statement | connection 246| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519420048
+;
+2025-09-22 14:37:00 [spring-session-1] INFO  p6spy - #1758519420105 | took 10ms | commit | connection 246| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:38:00 [spring-session-1] INFO  p6spy - #1758519480080 | took 8ms | statement | connection 247| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519480069
+;
+2025-09-22 14:38:00 [spring-session-1] INFO  p6spy - #1758519480091 | took 8ms | commit | connection 247| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:39:00 [spring-session-1] INFO  p6spy - #1758519540077 | took 32ms | statement | connection 248| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519540043
+;
+2025-09-22 14:39:00 [spring-session-1] INFO  p6spy - #1758519540108 | took 27ms | commit | connection 248| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:40:00 [spring-session-1] INFO  p6spy - #1758519600138 | took 50ms | statement | connection 249| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519600085
+;
+2025-09-22 14:40:00 [spring-session-1] INFO  p6spy - #1758519600189 | took 46ms | commit | connection 249| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:41:00 [spring-session-1] INFO  p6spy - #1758519660037 | took 7ms | statement | connection 250| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519660028
+;
+2025-09-22 14:41:00 [spring-session-1] INFO  p6spy - #1758519660063 | took 23ms | commit | connection 250| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:42:00 [spring-session-1] INFO  p6spy - #1758519720066 | took 38ms | statement | connection 251| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519720027
+;
+2025-09-22 14:42:00 [spring-session-1] INFO  p6spy - #1758519720085 | took 17ms | commit | connection 251| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:43:00 [spring-session-1] INFO  p6spy - #1758519780074 | took 23ms | statement | connection 252| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519780048
+;
+2025-09-22 14:43:00 [spring-session-1] INFO  p6spy - #1758519780086 | took 9ms | commit | connection 252| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:44:00 [spring-session-1] INFO  p6spy - #1758519840044 | took 12ms | statement | connection 253| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519840032
+;
+2025-09-22 14:44:00 [spring-session-1] INFO  p6spy - #1758519840078 | took 32ms | commit | connection 253| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:45:00 [spring-session-1] INFO  p6spy - #1758519900051 | took 14ms | statement | connection 254| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519900036
+;
+2025-09-22 14:45:00 [spring-session-1] INFO  p6spy - #1758519900104 | took 50ms | commit | connection 254| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:46:00 [spring-session-1] INFO  p6spy - #1758519960053 | took 8ms | statement | connection 255| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758519960039
+;
+2025-09-22 14:46:00 [spring-session-1] INFO  p6spy - #1758519960078 | took 23ms | commit | connection 255| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:47:00 [spring-session-1] INFO  p6spy - #1758520020082 | took 31ms | statement | connection 256| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520020049
+;
+2025-09-22 14:47:00 [spring-session-1] INFO  p6spy - #1758520020118 | took 34ms | commit | connection 256| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:48:00 [spring-session-1] INFO  p6spy - #1758520080052 | took 14ms | statement | connection 257| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520080036
+;
+2025-09-22 14:48:00 [spring-session-1] INFO  p6spy - #1758520080071 | took 18ms | commit | connection 257| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:49:00 [spring-session-1] INFO  p6spy - #1758520140066 | took 20ms | statement | connection 258| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520140040
+;
+2025-09-22 14:49:00 [spring-session-1] INFO  p6spy - #1758520140079 | took 11ms | commit | connection 258| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:50:00 [spring-session-1] INFO  p6spy - #1758520200047 | took 10ms | statement | connection 259| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520200035
+;
+2025-09-22 14:50:00 [spring-session-1] INFO  p6spy - #1758520200078 | took 29ms | commit | connection 259| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:51:00 [spring-session-1] INFO  p6spy - #1758520260049 | took 9ms | statement | connection 260| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520260039
+;
+2025-09-22 14:51:00 [spring-session-1] INFO  p6spy - #1758520260081 | took 31ms | commit | connection 260| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:52:00 [spring-session-1] INFO  p6spy - #1758520320061 | took 8ms | statement | connection 261| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520320049
+;
+2025-09-22 14:52:00 [spring-session-1] INFO  p6spy - #1758520320081 | took 18ms | commit | connection 261| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:53:00 [spring-session-1] INFO  p6spy - #1758520380036 | took 6ms | statement | connection 262| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520380029
+;
+2025-09-22 14:53:00 [spring-session-1] INFO  p6spy - #1758520380052 | took 14ms | commit | connection 262| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
+2025-09-22 14:54:00 [spring-session-1] INFO  p6spy - #1758520440167 | took 11ms | statement | connection 263| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < ?
+
+DELETE FROM SPRING_SESSION
+WHERE EXPIRY_TIME < 1758520440154
+;
+2025-09-22 14:54:00 [spring-session-1] INFO  p6spy - #1758520440184 | took 9ms | commit | connection 263| url jdbc:mysql://mbslaw-restored.cszatmtp17tv.ap-northeast-2.rds.amazonaws.com:3306/shinsegaelaw?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+
+;
 2025-09-22 22:38:37 [main] INFO  c.s.a.ShinsegaelawAdminApplication - Starting ShinsegaelawAdminApplication using Java 23.0.1 with PID 96739 (/Users/yoe21c/dev/growpeople/shinsegaelaw-admin/target/classes started by yoe21c in /Users/yoe21c/dev/growpeople/shinsegaelaw-admin)
 2025-09-22 22:38:37 [main] DEBUG c.s.a.ShinsegaelawAdminApplication - Running with Spring Boot v3.2.4, Spring v6.1.5
 2025-09-22 22:38:37 [main] INFO  c.s.a.ShinsegaelawAdminApplication - No active profile set, falling back to 1 default profile: "default"

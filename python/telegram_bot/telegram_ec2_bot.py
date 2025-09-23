@@ -5,6 +5,8 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 import asyncio
 from dotenv import load_dotenv
+import requests
+from datetime import datetime, timedelta
 
 # 환경 변수 로드
 load_dotenv()
@@ -18,9 +20,11 @@ ec2 = boto3.client(
 )
 
 # EC2 인스턴스 ID
+# ai-server: i-064afa675153e9d4c
 INSTANCE_ID = os.getenv('EC2_INSTANCE_ID')
 
 # 텔레그램 봇 토큰
+# shinsegaelaw_bot
 BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 
 # 상태 한글 매핑
@@ -37,8 +41,9 @@ STATUS_KOREAN = {
 # 메뉴 키보드
 def get_main_keyboard():
     keyboard = [
-        [KeyboardButton("🖥️ AI서버상태")],
-        [KeyboardButton("✅ AI서버 켜기"), KeyboardButton("❌ AI서버 끄기")]
+        [KeyboardButton("🖥️ AI서버상태"), KeyboardButton("⏱️ 서버 실행시간")],
+        [KeyboardButton("✅ AI서버 켜기"), KeyboardButton("❌ AI서버 끄기")],
+        [KeyboardButton("🎤 AI음성인식 서버"), KeyboardButton("🔬 AI분석 서버")]
     ]
     return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
@@ -53,12 +58,16 @@ def get_instance_status():
         public_ip = instance.get('PublicIpAddress', 'N/A')
         private_ip = instance.get('PrivateIpAddress', 'N/A')
 
+        # LaunchTime 가져오기
+        launch_time = instance.get('LaunchTime', None)
+
         return {
             'state': state,
             'state_korean': STATUS_KOREAN.get(state, state),
             'public_ip': public_ip,
             'private_ip': private_ip,
-            'instance_type': instance.get('InstanceType', 'N/A')
+            'instance_type': instance.get('InstanceType', 'N/A'),
+            'launch_time': launch_time
         }
     except Exception as e:
         return {'error': str(e)}
@@ -91,6 +100,66 @@ def stop_instance():
     except Exception as e:
         return {'error': str(e)}
 
+# 서버 실행 시간 계산
+def get_uptime(launch_time):
+    if launch_time:
+        try:
+            # launch_time은 이미 datetime 객체임 (AWS SDK가 반환)
+            # 현재 UTC 시간을 가져옴
+            from datetime import timezone
+            now_utc = datetime.now(timezone.utc)
+
+            # launch_time이 timezone aware인지 확인
+            if launch_time.tzinfo is None:
+                # timezone naive인 경우 UTC로 설정
+                launch_time = launch_time.replace(tzinfo=timezone.utc)
+
+            uptime = now_utc - launch_time
+
+            days = uptime.days
+            hours, remainder = divmod(uptime.seconds, 3600)
+            minutes, _ = divmod(remainder, 60)
+
+            if days > 0:
+                return f"{days}일 {hours}시간 {minutes}분"
+            elif hours > 0:
+                return f"{hours}시간 {minutes}분"
+            else:
+                return f"{minutes}분"
+        except Exception as e:
+            return f"계산 오류: {str(e)}"
+    return "N/A"
+
+# AI 음성인식 서버 상태 확인
+def check_voice_server():
+    try:
+        response = requests.get('http://3.38.59.217:5000/api/health', timeout=5)
+        if response.status_code == 200 and response.json().get('result') == 'ok':
+            return {'status': 'running', 'message': '🟢 정상 작동 중'}
+        else:
+            return {'status': 'error', 'message': f'⚠️ 서버 응답 오류 (상태코드: {response.status_code})'}
+    except requests.exceptions.ConnectionError:
+        return {'status': 'stopped', 'message': '🔴 서버가 꺼져 있습니다'}
+    except requests.exceptions.Timeout:
+        return {'status': 'timeout', 'message': '⏱️ 서버 응답 시간 초과'}
+    except Exception as e:
+        return {'status': 'error', 'message': f'❌ 오류: {str(e)}'}
+
+# AI 분석 서버 상태 확인
+def check_analysis_server():
+    try:
+        response = requests.get('http://3.38.59.217:11434/', timeout=5)
+        if response.status_code == 200 and 'Ollama is running' in response.text:
+            return {'status': 'running', 'message': '🟢 정상 작동 중'}
+        else:
+            return {'status': 'error', 'message': f'⚠️ 서버 응답 오류 (상태코드: {response.status_code})'}
+    except requests.exceptions.ConnectionError:
+        return {'status': 'stopped', 'message': '🔴 서버가 꺼져 있습니다'}
+    except requests.exceptions.Timeout:
+        return {'status': 'timeout', 'message': '⏱️ 서버 응답 시간 초과'}
+    except Exception as e:
+        return {'status': 'error', 'message': f'❌ 오류: {str(e)}'}
+
 # /start 명령 핸들러
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
@@ -117,15 +186,95 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             message = (
                 f"📊 **AI 서버 상태**\n\n"
                 f"상태: {status['state_korean']}\n"
-                f"인스턴스 타입: {status['instance_type']}\n"
-                f"Public IP: {status['public_ip']}\n"
-                f"Private IP: {status['private_ip']}\n"
+#                 f"인스턴스 타입: {status['instance_type']}\n"
+#                 f"Public IP: {status['public_ip']}\n"
+#                 f"Private IP: {status['private_ip']}\n"
             )
             await update.message.reply_text(
                 message,
                 parse_mode='Markdown',
                 reply_markup=get_main_keyboard()
             )
+
+    elif text == "⏱️ 서버 실행시간":
+        await update.message.reply_text("⏳ 서버 실행 시간을 확인 중입니다...")
+
+        try:
+            status = get_instance_status()
+
+            if 'error' in status:
+                await update.message.reply_text(
+                    f"❌ 오류가 발생했습니다:\n{status['error']}",
+                    reply_markup=get_main_keyboard()
+                )
+            else:
+                if status['state'] == 'running' and status.get('launch_time'):
+                    uptime = get_uptime(status['launch_time'])
+
+                    # timezone aware datetime 처리
+                    from datetime import timezone
+                    launch_time = status['launch_time']
+                    if launch_time.tzinfo is None:
+                        launch_time = launch_time.replace(tzinfo=timezone.utc)
+
+                    # KST로 변환 (UTC+9)
+                    launch_time_kst = launch_time + timedelta(hours=9)
+
+                    message = (
+                        f"⏱️ **서버 실행 정보**\n\n"
+                        f"현재 상태: {status['state_korean']}\n"
+                        f"시작 시간: {launch_time_kst.strftime('%Y-%m-%d %H:%M:%S')} (KST)\n"
+                        f"실행 시간: {uptime}\n"
+                    )
+                else:
+                    message = (
+                        f"⏱️ **서버 실행 정보**\n\n"
+                        f"현재 상태: {status['state_korean']}\n"
+                        f"서버가 실행 중이 아닙니다."
+                    )
+
+                await update.message.reply_text(
+                    message,
+                    parse_mode='Markdown',
+                    reply_markup=get_main_keyboard()
+                )
+        except Exception as e:
+            await update.message.reply_text(
+                f"❌ 오류가 발생했습니다:\n{str(e)}",
+                reply_markup=get_main_keyboard()
+            )
+
+    elif text == "🎤 AI음성인식 서버":
+        await update.message.reply_text("⏳ AI 음성인식 서버 상태를 확인 중입니다...")
+
+        result = check_voice_server()
+
+        message = (
+            f"🎤 **AI 음성인식 서버 상태**\n\n"
+            f"{result['message']}"
+        )
+
+        await update.message.reply_text(
+            message,
+            parse_mode='Markdown',
+            reply_markup=get_main_keyboard()
+        )
+
+    elif text == "🔬 AI분석 서버":
+        await update.message.reply_text("⏳ AI 분석 서버 상태를 확인 중입니다...")
+
+        result = check_analysis_server()
+
+        message = (
+            f"🔬 **AI 분석 서버 상태 (Ollama)**\n\n"
+            f"{result['message']}"
+        )
+
+        await update.message.reply_text(
+            message,
+            parse_mode='Markdown',
+            reply_markup=get_main_keyboard()
+        )
 
     elif text == "✅ AI서버 켜기":
         await update.message.reply_text("⏳ 서버를 시작하는 중입니다...")
@@ -143,8 +292,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"ℹ️ 서버가 이미 실행 중입니다.\n\n"
                 f"📊 **현재 상태**\n"
                 f"상태: {status['state_korean']}\n"
-                f"Public IP: {status['public_ip']}\n"
-                f"Private IP: {status['private_ip']}"
+#                 f"Public IP: {status['public_ip']}\n"
+#                 f"Private IP: {status['private_ip']}"
             )
             await update.message.reply_text(
                 message,
