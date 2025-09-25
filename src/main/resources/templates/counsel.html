@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{layout/head :: head('상담내역 상세', '')}">
+
+<body class="hold-transition sidebar-mini">
+
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <th:block th:replace="~{layout/navbar :: navbar(${adminMember}, '')}" />
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <th:block th:replace="~{layout/sidebar :: sidebar(${adminMember}, '/counsel_list', '3')}" />
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+<!--                        <button class="btn btn-info" th:utext="|상담번호: ${counsel?.getSeq()}|"></button>-->
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                            <li class="breadcrumb-item active"><a href="/counsel_list">상담내역 목록</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <form id="form">
+
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-6">
+                            <!-- general form elements -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">상담 기본정보</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="col-form-label">상담번호</label>
+                                        <input th:value="${counsel?.getSeq()}" name="seq" type="text" class="form-control" disabled placeholder="상담번호">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">상태</label>
+                                        <div class="form-group">
+                                            <select name="status" class="form-control">
+                                                <option value="created" th:selected="${counsel?.status == 'created'}">생성됨</option>
+                                                <option value="ready" th:selected="${counsel?.status == 'ready'}">준비</option>
+                                                <option value="processing" th:selected="${counsel?.status == 'processing'}">처리중</option>
+                                                <option value="completed" th:selected="${counsel?.status == 'completed'}">완료</option>
+                                                <option value="error" th:selected="${counsel?.status == 'error'}">에러</option>
+                                                <option value="deleted" th:selected="${counsel?.status == 'deleted'}">삭제</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">고객명</label>
+                                        <input th:value="${counsel?.getCustomer()}" name="customer" type="text" class="form-control" placeholder="고객명">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">고객 전화번호</label>
+                                        <input th:value="${counsel?.getCustomerPhoneNumber()}" name="customerPhoneNumber" type="text" class="form-control" placeholder="고객 전화번호">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">상담사명</label>
+                                        <input th:value="${counsel?.getCounselor()}" name="counselor" type="text" class="form-control" placeholder="상담사명">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">상담사 전화번호</label>
+                                        <input th:value="${counsel?.getCounselorPhoneNumber()}" name="counselorPhoneNumber" type="text" class="form-control" placeholder="상담사 전화번호">
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputDescription">메모</label>
+                                        <textarea rows="3" cols="85" th:utext="${counsel?.getDescription()}" name="description" class="form-control" id="inputDescription" placeholder="메모"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label" for="inputCounselAt">상담일시</label>
+                                        <input th:value="${#temporals.format(counsel?.getCounselAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               name="counselAt"
+                                               type="text"
+                                               class="form-control"
+                                               id="inputCounselAt"
+                                               data-inputmask-alias="datetime"
+                                               data-inputmask-inputformat="yyyy-mm-dd HH:MM:ss"
+                                               data-mask>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">생성일시</label>
+                                        <input th:value="${#temporals.format(counsel?.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               type="text"
+                                               class="form-control"
+                                               disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">수정일시</label>
+                                        <input th:value="${#temporals.format(counsel?.getUpdatedAt(), 'yyyy-MM-dd HH:mm:ss')}"
+                                               type="text"
+                                               class="form-control"
+                                               disabled>
+                                    </div>
+
+                                    <input type="hidden" name="seq" id="seq" th:value="${counsel?.getSeq()}">
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button id="btnUpdate" th:if="${counsel?.getSeq() != null}" type="submit" class="btn btn-primary">수정하기</button>
+                                    <button id="btnCreate" th:if="${counsel?.getSeq() == null}"  type="submit" class="btn btn-danger">생성하기</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button th:if="${counsel?.getSeq() != null}" type="button" class="btn btn-danger"
+                                            data-toggle="modal" data-target="#modal-warning">삭제하기</button>
+                                </div>
+
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <!-- 상담 평가 분석 -->
+                            <div class="card card-warning" th:if="${counsel?.getSummary() != null and !counsel?.getSummary().isEmpty()}">
+                                <div class="card-header">
+                                    <h3 class="card-title">상담 평가 분석</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <!-- 상담 시간 표시 -->
+                                    <div class="row mb-3" th:if="${counsel?.getFileDurationMs() != null}">
+                                        <div class="col-md-12">
+                                            <div class="info-box bg-info">
+                                                <span class="info-box-icon"><i class="fas fa-clock"></i></span>
+                                                <div class="info-box-content">
+                                                    <span class="info-box-text">상담 시간</span>
+                                                    <span class="info-box-number"
+                                                          th:text="${(counsel?.getFileDurationMs() / 60000) + '분 ' + ((counsel?.getFileDurationMs() % 60000) / 1000) + '초'}">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 평가 분석 내용 -->
+                                    <div id="summaryAnalysis">
+                                        <!-- JavaScript로 동적 생성 -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI 처리 정보 -->
+                            <div class="card card-success collapsed-card">
+                                <div class="card-header">
+                                    <h3 class="card-title">AI 처리 정보</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="col-form-label">Whisper 처리 상태</label>
+                                        <div>
+                                            <button th:if="${counsel?.getWhisperAt() != null}" class="btn btn-sm btn-success">처리완료</button>
+                                            <button th:if="${counsel?.getWhisperAt() == null}" class="btn btn-sm btn-warning">미처리</button>
+                                            <span th:if="${counsel?.getWhisperAt() != null}"
+                                                  th:text="' (' + ${#temporals.format(counsel?.getWhisperAt(), 'yyyy-MM-dd HH:mm:ss')} + ')'">
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-form-label">요약 처리 상태</label>
+                                        <div>
+                                            <button th:if="${counsel?.getSummaryAt() != null}" class="btn btn-sm btn-success">처리완료</button>
+                                            <button th:if="${counsel?.getSummaryAt() == null}" class="btn btn-sm btn-warning">미처리</button>
+                                            <span th:if="${counsel?.getSummaryAt() != null}"
+                                                  th:text="' (' + ${#temporals.format(counsel?.getSummaryAt(), 'yyyy-MM-dd HH:mm:ss')} + ')'">
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" th:if="${counsel?.getWhisperJson() != null}">
+                                        <label class="col-form-label">Whisper 결과 (JSON)</label>
+                                        <textarea rows="10" class="form-control" disabled th:text="${counsel?.getWhisperJson()}"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+
+                            <!-- Hidden field for summary data -->
+                            <input type="hidden" id="summaryData" th:value="${counsel?.getSummary()}" />
+
+                            <!-- Debug: Check if summary exists -->
+                            <div th:if="${counsel?.getSummary() != null}" style="display: none;">
+                                <span id="hasSummary">true</span>
+                            </div>
+
+                        </div>
+                        <!-- /.col -->
+
+                    </div>
+                    <!-- /.row -->
+
+                </form>
+
+            </div><!-- /.container-fluid -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- modal -->
+    <th:block th:replace="~{layout/modals :: modalDeleteConfirm}" />
+    <!-- /.modal -->
+
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+<th:block th:replace="~{layout/scripts :: scripts_tables('', '')}" />
+
+<script src="/custom/my-script.js"></script>
+
+<script th:inline="javascript">
+
+    const counsel = [[${counsel}]];
+
+    function validationCheck() {
+        // 필수 필드 체크
+        if($( "#form [name='customer']" ).val() == '') {
+            alert('고객명을 입력하세요.');
+            throw 'invalidInput';
+        }
+    }
+
+    function renderSummaryAnalysis() {
+        // 요소 존재 확인
+        const summaryElement = document.getElementById('summaryAnalysis');
+        if (!summaryElement) {
+            console.log('Summary analysis element not found - summary data may be null');
+            return;
+        }
+
+        const summaryData = $('#summaryData').val();
+        console.log('Summary Data:', summaryData);
+        console.log('Summary Data Length:', summaryData ? summaryData.length : 0);
+
+        if (!summaryData || summaryData === '' || summaryData === 'null' || summaryData === 'undefined') {
+            console.log('No valid summary data found');
+            $('#summaryAnalysis').html('<p class="text-muted">평가 데이터가 없습니다.</p>');
+            return;
+        }
+
+        try {
+            const data = JSON.parse(summaryData);
+            console.log('Parsed Data:', data);
+
+            let html = '';
+
+            // 종합 평가
+            if (data.comprehensive_evaluation) {
+                const eval = data.comprehensive_evaluation;
+                html += `
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="text-bold">종합 평가</h5>
+                            <div class="info-box">
+                                <span class="info-box-icon bg-${eval.consultant_rating === 'A' ? 'success' : eval.consultant_rating === 'B' ? 'info' : eval.consultant_rating === 'C' ? 'warning' : 'danger'}">
+                                    <span style="font-size: 2em; font-weight: bold;">${eval.consultant_rating || 'N/A'}</span>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">종합 점수</span>
+                                    <span class="info-box-number">${eval.total_score || 0}점</span>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-${eval.total_score >= 80 ? 'success' : eval.total_score >= 60 ? 'info' : eval.total_score >= 40 ? 'warning' : 'danger'}"
+                                             style="width: ${eval.total_score || 0}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-muted">${eval.executive_summary || ''}</p>
+                        </div>
+                    </div>
+                    <hr>`;
+
+                // 평가 점수
+                if (eval.summary_scores) {
+                    html += `
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label>법률 전문성</label>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" style="width: ${eval.summary_scores.legal_expertise || 0}%">
+                                        ${eval.summary_scores.legal_expertise || 0}점
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>비즈니스 잠재력</label>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: ${eval.summary_scores.business_potential || 0}%">
+                                        ${eval.summary_scores.business_potential || 0}점
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>의사소통 명확성</label>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-info" style="width: ${eval.summary_scores.communication_clarity || 0}%">
+                                        ${eval.summary_scores.communication_clarity || 0}점
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>고객 친화성</label>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: ${eval.summary_scores.customer_friendliness || 0}%">
+                                        ${eval.summary_scores.customer_friendliness || 0}점
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+
+                // 강점과 약점
+                if (eval.strengths && eval.strengths.length > 0) {
+                    html += `
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6 class="text-bold text-success">강점</h6>
+                                <ul class="list-unstyled">`;
+                    eval.strengths.forEach(item => {
+                        html += `<li><i class="fas fa-check text-success"></i> ${item}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+
+                if (eval.weaknesses && eval.weaknesses.length > 0) {
+                    html += `
+                        <div class="col-md-6">
+                            <h6 class="text-bold text-danger">개선점</h6>
+                            <ul class="list-unstyled">`;
+                    eval.weaknesses.forEach(item => {
+                        html += `<li><i class="fas fa-times text-danger"></i> ${item}</li>`;
+                    });
+                    html += `</ul></div></div>`;
+                }
+
+                // 개선 사항
+                if (eval.action_items && eval.action_items.length > 0) {
+                    html += `
+                        <div class="callout callout-info">
+                            <h6 class="text-bold">개선 제안</h6>
+                            <ul class="mb-0">`;
+                    eval.action_items.forEach(item => {
+                        html += `<li>${item}</li>`;
+                    });
+                    html += `</ul></div>`;
+                }
+            }
+
+            // 전문성 평가
+            if (data.expertise) {
+                const exp = data.expertise;
+                html += `
+                    <h5 class="text-bold mt-4">전문성 평가</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3>${exp.expertise_score || 0}점</h3>
+                                    <p>전문성 점수</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <dl class="row">
+                                <dt class="col-sm-3">부족한 부분</dt>
+                                <dd class="col-sm-9">${exp.expertise_gaps || '-'}</dd>
+                                <dt class="col-sm-3">교육 필요</dt>
+                                <dd class="col-sm-9">${exp.training_needs || '-'}</dd>
+                            </dl>
+                        </div>
+                    </div>`;
+            }
+
+            // 의사소통 평가
+            if (data.communication) {
+                const comm = data.communication;
+                html += `
+                    <h5 class="text-bold mt-4">의사소통 평가</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>${comm.communication_score || 0}점</h3>
+                                    <p>의사소통 점수</p>
+                                </div>
+                                <div class="icon"><i class="fas fa-comments"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="callout callout-warning">
+                                <h6>개선 방안</h6>
+                                <p class="mb-0">${comm.communication_improvements || '-'}</p>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+
+            // 비즈니스 잠재력
+            if (data.business_potential) {
+                const biz = data.business_potential;
+                html += `
+                    <h5 class="text-bold mt-4">비즈니스 잠재력</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="row">
+                                <dt class="col-sm-3">비즈니스 점수</dt>
+                                <dd class="col-sm-9">${biz.business_score || 0}점</dd>
+                                <dt class="col-sm-3">예상 수익</dt>
+                                <dd class="col-sm-9"><span class="badge bg-success">${biz.potential_revenue || '0원'}</span></dd>
+                                <dt class="col-sm-3">전환 가능성</dt>
+                                <dd class="col-sm-9">${biz.conversion_probability || 0}%</dd>
+                                <dt class="col-sm-3">권장사항</dt>
+                                <dd class="col-sm-9">${biz.recommendations || '-'}</dd>
+                            </dl>
+                        </div>
+                    </div>`;
+            }
+
+            // 친화성 평가
+            if (data.friendliness) {
+                const friend = data.friendliness;
+                html += `
+                    <h5 class="text-bold mt-4">고객 친화성</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">친화성 점수</dt>
+                        <dd class="col-sm-9">${friend.friendliness_score || 0}점</dd>
+                        <dt class="col-sm-3">관계 잠재력</dt>
+                        <dd class="col-sm-9">${friend.relationship_potential || '-'}</dd>
+                        <dt class="col-sm-3">고객 유지 가능성</dt>
+                        <dd class="col-sm-9">${friend.customer_retention_likelihood || 0}%</dd>
+                    </dl>`;
+            }
+
+            $('#summaryAnalysis').html(html);
+        } catch (e) {
+            console.error('Error parsing summary data:', e);
+            $('#summaryAnalysis').html('<p class="text-danger">평가 데이터를 표시할 수 없습니다.<br><small>오류: ' + e.message + '</small></p>');
+        }
+    }
+
+    $(function () {
+        // 상담 평가 분석 렌더링
+        console.log('Document ready - Rendering summary analysis');
+        console.log('Counsel object:', counsel);
+
+        // 페이지 로드 후 렌더링 (DOM이 완전히 준비된 후)
+        setTimeout(function() {
+            renderSummaryAnalysis();
+        }, 100);
+
+
+        // 1. 생성 버튼
+        $("#btnCreate").click(function (event) {
+            event.preventDefault();
+            validationCheck();
+            myScript.create("#form", "/counsel_update", "/counsel_list");
+        });
+
+        // 2. 업데이트 버튼
+        $("#btnUpdate").click(function (event) {
+            event.preventDefault();
+            validationCheck();
+            myScript.update("#form", "/counsel_update");
+        });
+
+        // 3. 삭제버튼
+        $("#btnDelete").click(function (event) {
+            event.preventDefault();
+            myScript.deletion("/counsel_delete?seq=" + $('#seq').val(), "/counsel_list");
+        });
+
+        // 4. 수정되었다면 is-warning class 를 추가한다.
+        $('input.form-control:not([disabled]), select.form-control, textarea.form-control').on('change', function () {
+            const key = $(this).attr('name');
+            const value = $(this).val();
+            const savedValue = counsel ? counsel[key] : null;
+            console.log(key + ": " +  savedValue + " --> " + value);
+            if(savedValue !== value) {
+                $( this ).addClass( 'is-warning' );
+            }else {
+                $( this ).removeClass( 'is-warning' );
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

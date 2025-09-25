@@ -55,11 +55,11 @@
                             <form class="form-horizontal">
                                 <div class="row">
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="inputStatus" class="col-sm-5 col-form-label">상태</label>
-                                                <div class="col-sm-7">
+                                                <label for="inputStatus" class="col-sm-4 col-form-label">상태</label>
+                                                <div class="col-sm-8">
                                                     <div class="form-group">
                                                         <select name="status" id="inputStatus" class="form-control">
                                                             <option value="all" selected>전체</option>
@@ -75,28 +75,10 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-5">
                                         <div class="card-body">
                                             <div class="form-group row">
-                                                <label for="inputCounselType" class="col-sm-5 col-form-label">상담유형</label>
-                                                <div class="col-sm-7">
-                                                    <div class="form-group">
-                                                        <select name="counselType" id="inputCounselType" class="form-control">
-                                                            <option value="all" selected>전체</option>
-                                                            <option value="general">일반상담</option>
-                                                            <option value="legal">법률상담</option>
-                                                            <option value="repair">수리상담</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="form-group row">
-                                                <label for="inputKeyword" class="col-sm-3 col-form-label">검색 키워드</label>
+                                                <label for="inputKeyword" class="col-sm-3 col-form-label">검색</label>
                                                 <div class="col-sm-9">
                                                     <div class="form-group">
                                                         <input type="text" name="keyword" id="inputKeyword" class="form-control" placeholder="검색어 입력 (고객명, 전화번호, 상담사명)">
@@ -106,7 +88,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="card-body">
                                             <div class="text-right">
                                                 <button class="btn btn-primary" type="button" id="add" onclick="location.href='/counsel_create'">추가</button>
@@ -197,7 +179,6 @@
                 "data": function ( d ) {  // 커스텀 파라미터를 넣을 수 있다.
                     return $.extend( {}, d, {
                         "status": $("#inputStatus option:selected").val(),
-                        "counselType": $("#inputCounselType option:selected").val(),
                         "keyword": $("#inputKeyword").val(),
                     } );
                 },
@@ -230,7 +211,7 @@
                         return data;
                     }
                 },
-                { data : 'counselor',
+                { data : 'counselorPhoneNumber',
                     render: function (data, type, row, meta) {
                         if(data === null || data === '') {
                             return '-';
@@ -264,7 +245,7 @@
                 },
                 { data : 'summary',
                     render: function (data, type, row, meta) {
-                        if(data === null || data === '') {
+                        if(data === null || data === undefined || data === '') {
                             return '-';
                         }
                         if(data.length > 50) {
@@ -276,7 +257,7 @@
             ],
         });
 
-        $('#inputStatus,#inputCounselType').on('change', function () {
+        $('#inputStatus').on('change', function () {
             table.search('markerValue', true, false, true).draw();
         });
 

@@ -37,24 +37,18 @@ public class CounselFrontService {
 
         String keyword = StringUtils.isNotBlank(param.get("keyword").get(0)) ? param.get("keyword").get(0) : "";
         String status = param.get("status").get(0);
-        String counselType = param.get("counselType").get(0);
 
         int pageNumber = (start / length);
         final PageRequest pageable = PageRequest.of(pageNumber, length, Sort.Direction.DESC, "seq");
 
         Specification<Counsel> spec = (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            
-            // 상태 필터링
+
+            // 상태 필터링 (status 필드 사용)
             if (StringUtils.isNotBlank(status) && !"all".equals(status)) {
-                predicates.add(criteriaBuilder.equal(root.get("counselStatus"), status));
+                predicates.add(criteriaBuilder.equal(root.get("status"), status));
             }
-            
-            // 상담유형 필터링
-            if (StringUtils.isNotBlank(counselType) && !"all".equals(counselType)) {
-                predicates.add(criteriaBuilder.equal(root.get("counselType"), counselType));
-            }
-            
+
             // 키워드 검색 (고객명, 고객 전화번호, 상담사명에서 검색)
             if (StringUtils.isNotBlank(keyword)) {
                 Predicate keywordPredicate = criteriaBuilder.or(
@@ -65,7 +59,7 @@ public class CounselFrontService {
                 );
                 predicates.add(keywordPredicate);
             }
-            
+
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
 
