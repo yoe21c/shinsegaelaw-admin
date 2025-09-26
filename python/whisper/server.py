@@ -77,7 +77,12 @@ else:
 def get_file_size_from_url(url):
     """URL로부터 파일 크기 가져오기"""
     try:
-        req = urllib.request.Request(url, method='HEAD')
+        # URL을 안전하게 인코딩
+        from urllib.parse import quote
+        safe_url = quote(url, safe=':/?&=')
+
+        req = urllib.request.Request(safe_url, method='HEAD')
+
         response = urllib.request.urlopen(req)
         file_size = response.headers.get('Content-Length')
         return int(file_size) if file_size else None
@@ -251,6 +256,8 @@ def download_audio_from_url(url, temp_dir):
     logger.info(f"오디오 다운로드 시작: {url}")
 
     try:
+        from urllib.parse import quote
+
         parsed_url = urlparse(url)
         encoded_filename = os.path.basename(parsed_url.path) or "audio.m4a"
 
@@ -262,6 +269,9 @@ def download_audio_from_url(url, temp_dir):
 
         temp_path = os.path.join(temp_dir, filename)
 
+        # URL을 안전하게 인코딩 (스키마, 호스트, 파라미터 등은 그대로 유지)
+        safe_url = quote(url, safe=':/?&=')
+
         # 다운로드 진행상황 표시
         def download_progress(block_num, block_size, total_size):
             if total_size > 0:
@@ -270,7 +280,7 @@ def download_audio_from_url(url, temp_dir):
                 if block_num % 100 == 0:  # 100블록마다 로그
                     logger.info(f"다운로드 진행: {percent:.1f}%")
 
-        urllib.request.urlretrieve(url, temp_path, reporthook=download_progress)
+        urllib.request.urlretrieve(safe_url, temp_path, reporthook=download_progress)
 
         file_size = os.path.getsize(temp_path) / (1024 * 1024)
         logger.info(f"다운로드 완료: {filename} ({file_size:.2f} MB)")

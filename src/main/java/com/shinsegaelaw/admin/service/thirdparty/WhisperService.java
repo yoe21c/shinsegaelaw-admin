@@ -72,7 +72,6 @@ public class WhisperService {
             // 헤더 설정
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-
             HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody, headers);
 
             // API 호출

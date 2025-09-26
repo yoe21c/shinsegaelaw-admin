@@ -50,7 +50,7 @@ public class CounselPage {
     @PostMapping("/counsel_update")
     @ResponseBody
     public RestResult counselUpdate(@Authed AdminMember adminMember, @RequestBody(required = false) MultiValueMap<String, String> param) {
-        log.debug("/counsel_update {}", param);
+        log.info("/counsel_update {}", param);
         counselFrontService.updateCounsel(new StringMultiValueMapAdapter(param));
         return RestResult.success();
     }
@@ -58,7 +58,7 @@ public class CounselPage {
     @PostMapping("/counsel_delete")
     @ResponseBody
     public RestResult counselDelete(@Authed AdminMember adminMember, @RequestParam Long seq) {
-        log.debug("/counsel_delete seq: {}", seq);
+        log.info("/counsel_delete seq: {}", seq);
         counselFrontService.deleteCounsel(seq);
         return RestResult.success();
     }

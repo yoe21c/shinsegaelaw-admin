@@ -93,7 +93,7 @@ public class CounselFrontService {
         counsel.setSummary(param.stringVal("summary"));
         
         if(param.exist("counselAt")) {
-            counsel.setCounselAt(LocalDateTime.parse(param.stringVal("counselAt")));
+            counsel.setCounselAt(param.localDateTimeVal("counselAt"));
         }
 
         counselService.save(counsel);
